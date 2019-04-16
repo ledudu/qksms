@@ -17,21 +17,21 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         style="@style/Toolbar"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.moez.QKSMS.common.widget.QkTextView
+        <org.goodev.rms.common.widget.QkTextView
             android:id="@+id/toolbarTitle"
             style="@style/ToolbarText"
-            tools:text="Notifications" />
+            tools:text="Notifications"/>
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -49,40 +49,40 @@
             android:paddingBottom="8dp"
             android:paddingTop="8dp">
 
-            <com.moez.QKSMS.common.widget.PreferenceView
+            <org.goodev.rms.common.widget.PreferenceView
                 android:id="@+id/notificationsO"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:summary="@string/settings_notifications_o_summary"
                 app:title="@string/settings_notifications_title"
-                tools:visibility="gone" />
+                tools:visibility="gone"/>
 
-            <com.moez.QKSMS.common.widget.PreferenceView
+            <org.goodev.rms.common.widget.PreferenceView
                 android:id="@+id/notifications"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:title="@string/settings_notifications_title"
-                app:widget="@layout/settings_switch_widget" />
+                app:widget="@layout/settings_switch_widget"/>
 
-            <com.moez.QKSMS.common.widget.PreferenceView
+            <org.goodev.rms.common.widget.PreferenceView
                 android:id="@+id/previews"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:title="@string/settings_notification_previews_title"
-                tools:summary="Show name and message" />
+                tools:summary="Show name and message"/>
 
-            <com.moez.QKSMS.common.widget.PreferenceView
+            <org.goodev.rms.common.widget.PreferenceView
                 android:id="@+id/vibration"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:title="@string/settings_vibration_title"
-                app:widget="@layout/settings_switch_widget" />
+                app:widget="@layout/settings_switch_widget"/>
 
-            <com.moez.QKSMS.common.widget.PreferenceView
+            <org.goodev.rms.common.widget.PreferenceView
                 android:id="@+id/ringtone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:title="@string/settings_ringtone_title" />
+                app:title="@string/settings_ringtone_title"/>
 
             <View
                 android:id="@+id/actionsDivider"
@@ -90,33 +90,33 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:background="?android:attr/divider" />
+                android:background="?android:attr/divider"/>
 
-            <com.moez.QKSMS.common.widget.QkTextView
+            <org.goodev.rms.common.widget.QkTextView
                 android:id="@+id/actionsTitle"
                 style="@style/PreferenceCategory"
-                android:text="@string/settings_notification_actions_title" />
+                android:text="@string/settings_notification_actions_title"/>
 
-            <com.moez.QKSMS.common.widget.PreferenceView
+            <org.goodev.rms.common.widget.PreferenceView
                 android:id="@+id/action1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:title="@string/settings_notification_action_1"
-                tools:summary="Mark read" />
+                tools:summary="Mark read"/>
 
-            <com.moez.QKSMS.common.widget.PreferenceView
+            <org.goodev.rms.common.widget.PreferenceView
                 android:id="@+id/action2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:title="@string/settings_notification_action_2"
-                tools:summary="Reply" />
+                tools:summary="Reply"/>
 
-            <com.moez.QKSMS.common.widget.PreferenceView
+            <org.goodev.rms.common.widget.PreferenceView
                 android:id="@+id/action3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:title="@string/settings_notification_action_3"
-                tools:summary="None" />
+                tools:summary="None"/>
 
             <View
                 android:id="@+id/qkreplyDivider"
@@ -124,28 +124,28 @@
                 android:layout_height="1dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:background="?android:attr/divider" />
+                android:background="?android:attr/divider"/>
 
-            <com.moez.QKSMS.common.widget.QkTextView
+            <org.goodev.rms.common.widget.QkTextView
                 android:id="@+id/qkreplyTitle"
                 style="@style/PreferenceCategory"
-                android:text="@string/settings_category_qkreply" />
+                android:text="@string/settings_category_qkreply"/>
 
-            <com.moez.QKSMS.common.widget.PreferenceView
+            <org.goodev.rms.common.widget.PreferenceView
                 android:id="@+id/qkreply"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:summary="@string/settings_qkreply_summary"
                 app:title="@string/settings_qkreply_title"
-                app:widget="@layout/settings_switch_widget" />
+                app:widget="@layout/settings_switch_widget"/>
 
-            <com.moez.QKSMS.common.widget.PreferenceView
+            <org.goodev.rms.common.widget.PreferenceView
                 android:id="@+id/qkreplyTapDismiss"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:summary="@string/settings_qkreply_tap_dismiss_summary"
                 app:title="@string/settings_qkreply_tap_dismiss_title"
-                app:widget="@layout/settings_switch_widget" />
+                app:widget="@layout/settings_switch_widget"/>
 
         </LinearLayout>
 
@@ -155,13 +155,13 @@
         android:layout_width="match_parent"
         android:layout_height="8dp"
         android:background="@drawable/ab_shadow"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_gravity="bottom"
         android:background="?android:attr/divider"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

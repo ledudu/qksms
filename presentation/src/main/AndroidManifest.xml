@@ -17,26 +17,26 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
-<manifest package="com.moez.QKSMS"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest package="org.goodev.rms"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
     <!-- Used for starting foreground service for backup/restore on Android P+ -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.RECEIVE_MMS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-    <uses-permission android:name="android.permission.SEND_SMS" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.RECEIVE_MMS"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_SMS"/>
 
     <application
-        android:name=".common.QKApplication"
+        android:name=".common.RmsApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -47,140 +47,140 @@
             android:name=".feature.main.MainActivity"
             android:launchMode="singleTask">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
             <meta-data
                 android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
+                android:resource="@xml/shortcuts"/>
         </activity>
         <activity
             android:name=".feature.compose.ComposeActivity"
             android:parentActivityName=".feature.main.MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.SEND" />
-                <action android:name="android.intent.action.SENDTO" />
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.SEND"/>
+                <action android:name="android.intent.action.SENDTO"/>
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
 
-                <data android:scheme="sms" />
-                <data android:scheme="smsto" />
-                <data android:scheme="mms" />
-                <data android:scheme="mmsto" />
-                <data android:scheme="sms_body" />
+                <data android:scheme="sms"/>
+                <data android:scheme="smsto"/>
+                <data android:scheme="mms"/>
+                <data android:scheme="mmsto"/>
+                <data android:scheme="sms_body"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.SEND" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" />
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
             </intent-filter>
             <intent-filter>
-                <action android:name="android.intent.action.SEND_MULTIPLE" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="image/*" />
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
             </intent-filter>
 
             <meta-data
                 android:name="android.service.chooser.chooser_target_service"
-                android:value=".common.util.QkChooserTargetService" />
+                android:value=".common.util.QkChooserTargetService"/>
         </activity>
-        <activity android:name=".feature.settings.SettingsActivity" />
-        <activity android:name=".feature.plus.PlusActivity" />
+        <activity android:name=".feature.settings.SettingsActivity"/>
+        <activity android:name=".feature.plus.PlusActivity"/>
         <activity
             android:name=".feature.gallery.GalleryActivity"
-            android:theme="@style/AppThemeBlack" />
-        <activity android:name=".feature.conversationinfo.ConversationInfoActivity" />
-        <activity android:name=".feature.notificationprefs.NotificationPrefsActivity" />
-        <activity android:name=".feature.blocked.BlockedActivity" />
+            android:theme="@style/AppThemeBlack"/>
+        <activity android:name=".feature.conversationinfo.ConversationInfoActivity"/>
+        <activity android:name=".feature.notificationprefs.NotificationPrefsActivity"/>
+        <activity android:name=".feature.blocked.BlockedActivity"/>
         <activity
             android:name=".feature.qkreply.QkReplyActivity"
             android:excludeFromRecents="true"
             android:taskAffinity=""
-            android:theme="@style/AppThemeLightDialog" />
-        <activity android:name=".feature.scheduled.ScheduledActivity" />
-        <activity android:name=".feature.backup.BackupActivity" />
+            android:theme="@style/AppThemeLightDialog"/>
+        <activity android:name=".feature.scheduled.ScheduledActivity"/>
+        <activity android:name=".feature.backup.BackupActivity"/>
 
         <receiver android:name=".receiver.BootReceiver">
             <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
             </intent-filter>
         </receiver>
         <receiver android:name=".receiver.DefaultSmsChangedReceiver">
             <intent-filter>
-                <action android:name="android.provider.action.DEFAULT_SMS_PACKAGE_CHANGED" />
+                <action android:name="android.provider.action.DEFAULT_SMS_PACKAGE_CHANGED"/>
             </intent-filter>
         </receiver>
-        <receiver android:name=".receiver.DeleteMessagesReceiver" />
+        <receiver android:name=".receiver.DeleteMessagesReceiver"/>
         <receiver
             android:name=".receiver.SmsReceiver"
             android:permission="android.permission.BROADCAST_SMS">
             <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_DELIVER" />
+                <action android:name="android.provider.Telephony.SMS_DELIVER"/>
             </intent-filter>
         </receiver>
         <receiver
             android:name=".receiver.MmsReceiver"
             android:permission="android.permission.BROADCAST_WAP_PUSH">
             <intent-filter>
-                <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER" />
-                <data android:mimeType="application/vnd.wap.mms-message" />
+                <action android:name="android.provider.Telephony.WAP_PUSH_DELIVER"/>
+                <data android:mimeType="application/vnd.wap.mms-message"/>
             </intent-filter>
         </receiver>
         <receiver
             android:name=".receiver.MmsSentReceiver"
-            android:taskAffinity="com.moez.QKSMS.MMS_SENT" />
+            android:taskAffinity="org.goodev.rms.MMS_SENT"/>
         <receiver
             android:name=".receiver.MmsUpdatedReceiver"
-            android:taskAffinity="com.moez.QKSMS.MMS_UPDATED" />
+            android:taskAffinity="org.goodev.rms.MMS_UPDATED"/>
         <receiver
             android:name=".receiver.MmsReceivedReceiver"
-            android:taskAffinity="com.klinker.android.messaging.MMS_RECEIVED" />
-        <receiver android:name=".receiver.MarkSeenReceiver" />
-        <receiver android:name=".receiver.MarkReadReceiver" />
-        <receiver android:name=".receiver.RemoteMessagingReceiver" />
-        <receiver android:name=".receiver.NightModeReceiver" />
+            android:taskAffinity="com.klinker.android.messaging.MMS_RECEIVED"/>
+        <receiver android:name=".receiver.MarkSeenReceiver"/>
+        <receiver android:name=".receiver.MarkReadReceiver"/>
+        <receiver android:name=".receiver.RemoteMessagingReceiver"/>
+        <receiver android:name=".receiver.NightModeReceiver"/>
         <receiver android:name=".receiver.SmsProviderChangedReceiver">
             <intent-filter>
-                <action android:name="android.provider.action.EXTERNAL_PROVIDER_CHANGE" />
+                <action android:name="android.provider.action.EXTERNAL_PROVIDER_CHANGE"/>
             </intent-filter>
         </receiver>
-        <receiver android:name=".receiver.SendScheduledMessageReceiver" />
+        <receiver android:name=".receiver.SendScheduledMessageReceiver"/>
         <receiver android:name=".feature.widget.WidgetProvider">
             <intent-filter>
-                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="com.moez.QKSMS.intent.action.ACTION_NOTIFY_DATASET_CHANGED" />
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="org.goodev.rms.intent.action.ACTION_NOTIFY_DATASET_CHANGED"/>
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget_info" />
+                android:resource="@xml/widget_info"/>
         </receiver>
 
-        <service android:name="com.android.mms.transaction.TransactionService" />
-        <service android:name=".feature.backup.RestoreBackupService" />
+        <service android:name="com.android.mms.transaction.TransactionService"/>
+        <service android:name=".feature.backup.RestoreBackupService"/>
         <service
             android:name=".feature.widget.WidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS" />
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
         <service
             android:name=".service.HeadlessSmsSendService"
             android:exported="true"
             android:permission="android.permission.SEND_RESPOND_VIA_MESSAGE">
             <intent-filter>
-                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE" />
-                <category android:name="android.intent.category.DEFAULT" />
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
 
-                <data android:scheme="sms" />
-                <data android:scheme="smsto" />
-                <data android:scheme="mms" />
-                <data android:scheme="mmsto" />
+                <data android:scheme="sms"/>
+                <data android:scheme="smsto"/>
+                <data android:scheme="mms"/>
+                <data android:scheme="mmsto"/>
             </intent-filter>
         </service>
         <service
@@ -188,14 +188,14 @@
             android:label="@string/app_name"
             android:permission="android.permission.BIND_CHOOSER_TARGET_SERVICE">
             <intent-filter>
-                <action android:name="android.service.chooser.ChooserTargetService" />
+                <action android:name="android.service.chooser.ChooserTargetService"/>
             </intent-filter>
         </service>
-        <service android:name=".service.SendSmsService" />
+        <service android:name=".service.SendSmsService"/>
 
         <meta-data
             android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
+            android:resource="@array/preloaded_fonts"/>
 
     </application>
 

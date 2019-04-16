@@ -17,12 +17,12 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
-    android:gravity="center_vertical"
-    android:orientation="horizontal">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="?attr/selectableItemBackground"
+              android:gravity="center_vertical"
+              android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/check"
@@ -30,9 +30,9 @@
         android:layout_height="24dp"
         android:layout_marginStart="24dp"
         android:src="@drawable/radio_button"
-        tools:tint="?android:attr/textColorTertiary" />
+        tools:tint="?android:attr/textColorTertiary"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/title"
         style="@style/TextPrimary"
         android:layout_width="0dp"
@@ -42,6 +42,6 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
         android:paddingTop="12dp"
-        tools:text="Testing" />
+        tools:text="Testing"/>
 
 </LinearLayout>

@@ -31,6 +31,6 @@
         android:gravity="center"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="14sp"
-        tools:text="Loading..." />
+        tools:text="Loading..."/>
 
 </FrameLayout>

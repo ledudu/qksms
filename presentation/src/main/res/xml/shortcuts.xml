@@ -30,9 +30,9 @@
         <intent
             android:action="com.moez.QKSMS.START"
             android:targetClass="com.moez.QKSMS.feature.compose.ComposeActivity"
-            android:targetPackage="com.moez.QKSMS" />
+            android:targetPackage="com.moez.QKSMS"/>
 
-        <categories android:name="android.shortcut.conversation" />
+        <categories android:name="android.shortcut.conversation"/>
 
     </shortcut>
 

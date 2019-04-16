@@ -18,18 +18,18 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="280dp"
-    android:layout_height="280dp"
-    android:layout_marginTop="2dp">
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="280dp"
+             android:layout_height="280dp"
+             android:layout_marginTop="2dp">
 
-    <com.moez.QKSMS.common.widget.BubbleImageView
+    <org.goodev.rms.common.widget.BubbleImageView
         android:id="@+id/thumbnail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:scaleType="centerCrop"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        tools:src="@tools:sample/backgrounds/scenic"/>
 
     <ImageView
         android:id="@+id/video"
@@ -37,6 +37,6 @@
         android:layout_height="24dp"
         android:layout_gravity="top|end"
         android:layout_margin="16dp"
-        android:src="@drawable/ic_play_circle_filled_white_24dp" />
+        android:src="@drawable/ic_play_circle_filled_white_24dp"/>
 
 </FrameLayout>

@@ -18,17 +18,17 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <FrameLayout android:id="@+id/root"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.moez.QKSMS.feature.gallery.GalleryActivity">
+             xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context="org.goodev.rms.feature.gallery.GalleryActivity">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -44,7 +44,7 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <com.moez.QKSMS.common.widget.QkTextView
+            <org.goodev.rms.common.widget.QkTextView
                 android:id="@+id/toolbarTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,16 +54,16 @@
                 android:singleLine="true"
                 android:textColor="@color/textPrimaryDark"
                 app:textSize="toolbar"
-                tools:text="Conversations" />
+                tools:text="Conversations"/>
 
-            <com.moez.QKSMS.common.widget.QkTextView
+            <org.goodev.rms.common.widget.QkTextView
                 android:id="@+id/toolbarSubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:textColor="@color/textTertiaryDark"
                 android:visibility="gone"
-                app:textSize="secondary" />
+                app:textSize="secondary"/>
 
         </LinearLayout>
 

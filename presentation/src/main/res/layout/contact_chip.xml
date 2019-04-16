@@ -18,11 +18,11 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <RelativeLayout android:id="@+id/container"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
     <LinearLayout
         android:id="@+id/content"
@@ -33,12 +33,12 @@
         android:backgroundTint="?attr/composeBackground"
         android:orientation="horizontal">
 
-        <com.moez.QKSMS.common.widget.AvatarView
+        <org.goodev.rms.common.widget.AvatarView
             android:id="@+id/avatar"
             android:layout_width="36dp"
-            android:layout_height="36dp" />
+            android:layout_height="36dp"/>
 
-        <com.moez.QKSMS.common.widget.QkTextView
+        <org.goodev.rms.common.widget.QkTextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
             android:textStyle="bold"
             app:textColor="primary"
             app:textSize="secondary"
-            tools:text="Moez Bhatti" />
+            tools:text="Moez Bhatti"/>
 
     </LinearLayout>
 

@@ -18,21 +18,21 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <merge android:id="@+id/avatar"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:background="@color/tools_theme"
-    tools:parentTag="com.moez.QKSMS.common.widget.AvatarView">
+       xmlns:android="http://schemas.android.com/apk/res/android"
+       xmlns:tools="http://schemas.android.com/tools"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       tools:background="@color/tools_theme"
+       tools:parentTag="org.goodev.rms.common.widget.AvatarView">
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/initial"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:textAllCaps="true"
         android:textSize="20sp"
-        tools:text="M" />
+        tools:text="M"/>
 
     <ImageView
         android:id="@+id/icon"
@@ -40,13 +40,13 @@
         android:layout_height="24dp"
         android:layout_gravity="center"
         android:src="@drawable/ic_person_black_24dp"
-        android:tint="@color/white" />
+        android:tint="@color/white"/>
 
     <ImageView
         android:id="@+id/photo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:src="@tools:sample/avatars"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"/>
 
 </merge>

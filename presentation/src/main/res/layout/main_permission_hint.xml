@@ -18,12 +18,12 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content">
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/snackbarTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -36,9 +36,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:textColor="primary"
         app:textSize="primary"
-        tools:text="Love texting again" />
+        tools:text="Love texting again"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/snackbarMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -51,9 +51,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:textColor="secondary"
         app:textSize="secondary"
-        tools:text="Make QKSMS your default SMS app" />
+        tools:text="Make QKSMS your default SMS app"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/snackbarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,6 +68,6 @@
         app:layout_constraintTop_toTopOf="@id/snackbarTitle"
         app:textColor="theme"
         app:textSize="secondary"
-        tools:text="Change" />
+        tools:text="Change"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

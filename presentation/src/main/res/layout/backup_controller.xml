@@ -18,10 +18,10 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -53,9 +53,9 @@
                     app:layout_constraintBottom_toBottomOf="@id/progressSummary"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/progressTitle"
-                    tools:src="@drawable/ic_file_download_black_24dp" />
+                    tools:src="@drawable/ic_file_download_black_24dp"/>
 
-                <com.moez.QKSMS.common.widget.QkTextView
+                <org.goodev.rms.common.widget.QkTextView
                     android:id="@+id/progressTitle"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -67,9 +67,9 @@
                     app:layout_constraintStart_toEndOf="@id/progressIcon"
                     app:layout_constraintTop_toTopOf="parent"
                     app:textSize="primary"
-                    tools:text="Restoring from backup" />
+                    tools:text="Restoring from backup"/>
 
-                <com.moez.QKSMS.common.widget.QkTextView
+                <org.goodev.rms.common.widget.QkTextView
                     android:id="@+id/progressSummary"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                     app:layout_constraintStart_toStartOf="@id/progressTitle"
                     app:layout_constraintTop_toBottomOf="@id/progressTitle"
                     app:textSize="secondary"
-                    tools:text="8 minutes remaining" />
+                    tools:text="8 minutes remaining"/>
 
                 <ImageView
                     android:id="@+id/progressCancel"
@@ -91,7 +91,7 @@
                     android:tint="?android:attr/textColorSecondary"
                     app:layout_constraintBottom_toBottomOf="@id/progressSummary"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/progressTitle" />
+                    app:layout_constraintTop_toTopOf="@id/progressTitle"/>
 
                 <ProgressBar
                     android:id="@+id/progressBar"
@@ -104,7 +104,7 @@
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/progressTitle"
-                    app:layout_constraintTop_toBottomOf="@id/progressSummary" />
+                    app:layout_constraintTop_toBottomOf="@id/progressSummary"/>
 
                 <View
                     android:layout_width="0dp"
@@ -114,38 +114,38 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/progressBar" />
+                    app:layout_constraintTop_toBottomOf="@id/progressBar"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.moez.QKSMS.common.widget.PreferenceView
+            <org.goodev.rms.common.widget.PreferenceView
                 android:id="@+id/backup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/ic_history_black_24dp"
                 app:title="@string/backup_last"
-                tools:summary="@string/backup_never" />
+                tools:summary="@string/backup_never"/>
 
-            <com.moez.QKSMS.common.widget.PreferenceView
+            <org.goodev.rms.common.widget.PreferenceView
                 android:id="@+id/restore"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:icon="@drawable/ic_file_download_black_24dp"
                 app:summary="@string/backup_restore_summary"
-                app:title="@string/backup_restore_title" />
+                app:title="@string/backup_restore_title"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="?android:attr/divider" />
+                android:background="?android:attr/divider"/>
 
-            <com.moez.QKSMS.common.widget.QkTextView
+            <org.goodev.rms.common.widget.QkTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="24dp"
                 android:text="@string/backup_disclaimer"
                 android:textColor="?android:attr/textColorTertiary"
-                app:textSize="secondary" />
+                app:textSize="secondary"/>
 
         </LinearLayout>
 
@@ -168,9 +168,9 @@
             android:layout_height="24dp"
             android:layout_marginStart="12dp"
             android:src="@drawable/ic_star_black_24dp"
-            tools:tint="@color/textPrimaryDark" />
+            tools:tint="@color/textPrimaryDark"/>
 
-        <com.moez.QKSMS.common.widget.QkTextView
+        <org.goodev.rms.common.widget.QkTextView
             android:id="@+id/fabLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
             android:text="@string/title_qksms_plus"
             android:textColor="@color/textPrimaryDark"
             android:textStyle="bold"
-            app:textSize="primary" />
+            app:textSize="primary"/>
 
     </LinearLayout>
 

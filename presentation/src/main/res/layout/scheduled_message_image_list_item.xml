@@ -18,10 +18,10 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="48dp"
-    android:layout_height="48dp"
-    android:layout_marginEnd="8dp">
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="48dp"
+             android:layout_height="48dp"
+             android:layout_marginEnd="8dp">
 
     <ImageView
         android:id="@+id/thumbnail"
@@ -31,6 +31,6 @@
         android:background="@drawable/rounded_rectangle_4dp"
         android:backgroundTint="?android:attr/divider"
         android:scaleType="centerCrop"
-        tools:src="@tools:sample/backgrounds/scenic" />
+        tools:src="@tools:sample/backgrounds/scenic"/>
 
 </FrameLayout>

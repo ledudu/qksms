@@ -5,13 +5,14 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.util.Log;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public class AnimatedGifEncoder {
     private static final String TAG = "AnimatedGifEncoder";

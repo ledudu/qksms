@@ -33,15 +33,15 @@
     android:paddingTop="8dp"
     tools:backgroundTint="@color/tools_theme">
 
-    <com.moez.QKSMS.common.widget.AvatarView
+    <org.goodev.rms.common.widget.AvatarView
         android:id="@+id/avatar"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -57,9 +57,9 @@
         app:layout_constraintVertical_chainStyle="packed"
         app:textSize="primary"
         tools:text="Moez Bhatti"
-        tools:textColor="@color/textPrimaryDark" />
+        tools:textColor="@color/textPrimaryDark"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/info"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
         app:layout_constraintTop_toBottomOf="@id/name"
         app:textSize="secondary"
         tools:text="(123) 456-7890"
-        tools:textColor="@color/textTertiaryDark" />
+        tools:textColor="@color/textTertiaryDark"/>
 
     <ImageView
         android:id="@+id/delete"
@@ -83,6 +83,6 @@
         android:padding="16dp"
         android:src="@drawable/ic_cancel_black_24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:tint="@color/white" />
+        tools:tint="@color/white"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

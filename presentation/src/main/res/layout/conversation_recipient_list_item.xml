@@ -18,25 +18,25 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
-    android:paddingBottom="8dp"
-    android:paddingEnd="16dp"
-    android:paddingStart="24dp"
-    android:paddingTop="8dp">
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content"
+                                                   android:background="?attr/selectableItemBackground"
+                                                   android:paddingBottom="8dp"
+                                                   android:paddingEnd="16dp"
+                                                   android:paddingStart="24dp"
+                                                   android:paddingTop="8dp">
 
-    <com.moez.QKSMS.common.widget.AvatarView
+    <org.goodev.rms.common.widget.AvatarView
         android:id="@+id/avatar"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/name"
         style="@style/TextPrimary"
         android:layout_width="0dp"
@@ -46,9 +46,9 @@
         app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed"
-        tools:text="Moez Bhatti" />
+        tools:text="Moez Bhatti"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/address"
         style="@style/TextSecondary"
         android:layout_width="0dp"
@@ -56,7 +56,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@id/name"
         app:layout_constraintTop_toBottomOf="@id/name"
-        tools:text="(123) 456-7890" />
+        tools:text="(123) 456-7890"/>
 
     <ImageView
         android:id="@+id/add"
@@ -67,6 +67,6 @@
         android:tint="?android:attr/textColorSecondary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

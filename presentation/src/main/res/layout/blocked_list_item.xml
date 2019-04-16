@@ -18,25 +18,25 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground"
-    android:paddingBottom="8dp"
-    android:paddingEnd="16dp"
-    android:paddingStart="16dp"
-    android:paddingTop="8dp">
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content"
+                                                   android:background="?attr/selectableItemBackground"
+                                                   android:paddingBottom="8dp"
+                                                   android:paddingEnd="16dp"
+                                                   android:paddingStart="16dp"
+                                                   android:paddingTop="8dp">
 
-    <com.moez.QKSMS.common.widget.GroupAvatarView
+    <org.goodev.rms.common.widget.GroupAvatarView
         android:id="@+id/avatars"
         android:layout_width="48dp"
         android:layout_height="48dp"
         app:layout_constraintEnd_toStartOf="@id/title"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/title"
         style="@style/TextPrimary"
         android:layout_width="0dp"
@@ -47,6 +47,6 @@
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/avatars"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="@tools:sample/full_names" />
+        tools:text="@tools:sample/full_names"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

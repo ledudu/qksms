@@ -17,11 +17,11 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    tools:background="?attr/bubbleColor">
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             tools:background="?attr/bubbleColor">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
@@ -42,9 +42,9 @@
             android:tint="?android:attr/textColorSecondary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
-        <com.moez.QKSMS.common.widget.QkTextView
+        <org.goodev.rms.common.widget.QkTextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -58,9 +58,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             app:textSize="primary"
-            tools:text="@tools:sample/full_names" />
+            tools:text="@tools:sample/full_names"/>
 
-        <com.moez.QKSMS.common.widget.QkTextView
+        <org.goodev.rms.common.widget.QkTextView
             android:id="@+id/label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -73,7 +73,7 @@
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toEndOf="@id/vCardAvatar"
             app:layout_constraintTop_toBottomOf="@id/name"
-            app:textSize="secondary" />
+            app:textSize="secondary"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -87,6 +87,6 @@
         android:background="@drawable/circle"
         android:backgroundTint="?attr/bubbleColor"
         android:src="@drawable/ic_cancel_black_24dp"
-        android:tint="?android:attr/textColorSecondary" />
+        android:tint="?android:attr/textColorSecondary"/>
 
 </FrameLayout>

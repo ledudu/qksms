@@ -20,38 +20,38 @@
 <resources>
 
     <attr name="textColor" format="enum">
-        <enum name="primary" value="0" />
-        <enum name="secondary" value="1" />
-        <enum name="tertiary" value="2" />
-        <enum name="primaryOnTheme" value="3" />
-        <enum name="secondaryOnTheme" value="4" />
-        <enum name="tertiaryOnTheme" value="5" />
-        <enum name="theme" value="6" />
+        <enum name="primary" value="0"/>
+        <enum name="secondary" value="1"/>
+        <enum name="tertiary" value="2"/>
+        <enum name="primaryOnTheme" value="3"/>
+        <enum name="secondaryOnTheme" value="4"/>
+        <enum name="tertiaryOnTheme" value="5"/>
+        <enum name="theme" value="6"/>
     </attr>
 
     <attr name="textSize" format="enum">
-        <enum name="primary" value="0" />
-        <enum name="secondary" value="1" />
-        <enum name="tertiary" value="2" />
-        <enum name="toolbar" value="3" />
+        <enum name="primary" value="0"/>
+        <enum name="secondary" value="1"/>
+        <enum name="tertiary" value="2"/>
+        <enum name="toolbar" value="3"/>
     </attr>
 
     <declare-styleable name="QkTextView">
-        <attr name="textColor" />
-        <attr name="textSize" />
+        <attr name="textColor"/>
+        <attr name="textSize"/>
     </declare-styleable>
 
     <declare-styleable name="QkEditText">
-        <attr name="textColor" />
-        <attr name="textSize" />
+        <attr name="textColor"/>
+        <attr name="textSize"/>
     </declare-styleable>
 
     <declare-styleable name="PreferenceView">
-        <attr name="title" format="string" />
-        <attr name="summary" format="string" />
-        <attr name="key" format="string" />
-        <attr name="widget" format="reference" />
-        <attr name="icon" format="reference" />
+        <attr name="title" format="string"/>
+        <attr name="summary" format="string"/>
+        <attr name="key" format="string"/>
+        <attr name="widget" format="reference"/>
+        <attr name="icon" format="reference"/>
     </declare-styleable>
 
 </resources>

@@ -18,14 +18,14 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <androidx.constraintlayout.widget.ConstraintLayout android:id="@+id/contentView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?attr/composeBackground"
-    android:orientation="vertical"
-    tools:context="com.moez.QKSMS.feature.compose.ComposeActivity">
+                                                   xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="match_parent"
+                                                   android:background="?attr/composeBackground"
+                                                   android:orientation="vertical"
+                                                   tools:context="org.goodev.rms.feature.compose.ComposeActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messageList"
@@ -41,9 +41,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:stackFromEnd="true"
-        tools:listitem="@layout/message_list_item_in" />
+        tools:listitem="@layout/message_list_item_in"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/messagesEmpty"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -55,7 +55,7 @@
         android:visibility="gone"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         app:textColor="tertiary"
-        app:textSize="secondary" />
+        app:textSize="secondary"/>
 
     <ProgressBar
         android:id="@+id/loading"
@@ -68,7 +68,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:progress="45"
-        tools:progressTint="@color/tools_theme" />
+        tools:progressTint="@color/tools_theme"/>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/sendAsGroup"
@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="sendAsGroupBackground, sendAsGroupTitle, sendAsGroupSummary, sendAsGroupSwitch, sendAsGroupShadow"
-        tools:visibility="visible" />
+        tools:visibility="visible"/>
 
     <View
         android:id="@+id/sendAsGroupBackground"
@@ -84,9 +84,9 @@
         android:layout_height="0dp"
         android:background="?attr/colorPrimary"
         app:layout_constraintBottom_toBottomOf="@id/sendAsGroupSummary"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/sendAsGroupTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -99,9 +99,9 @@
         app:layout_constraintEnd_toStartOf="@id/sendAsGroupSwitch"
         app:layout_constraintStart_toStartOf="@id/sendAsGroupBackground"
         app:layout_constraintTop_toTopOf="@id/sendAsGroupBackground"
-        app:textSize="primary" />
+        app:textSize="primary"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/sendAsGroupSummary"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -111,9 +111,9 @@
         app:layout_constraintEnd_toEndOf="@id/sendAsGroupTitle"
         app:layout_constraintStart_toStartOf="@id/sendAsGroupTitle"
         app:layout_constraintTop_toBottomOf="@id/sendAsGroupTitle"
-        app:textSize="secondary" />
+        app:textSize="secondary"/>
 
-    <com.moez.QKSMS.common.widget.QkSwitch
+    <org.goodev.rms.common.widget.QkSwitch
         android:id="@+id/sendAsGroupSwitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -122,14 +122,14 @@
         android:clickable="false"
         app:layout_constraintBottom_toBottomOf="@id/sendAsGroupBackground"
         app:layout_constraintEnd_toEndOf="@id/sendAsGroupBackground"
-        app:layout_constraintTop_toTopOf="@id/sendAsGroupBackground" />
+        app:layout_constraintTop_toTopOf="@id/sendAsGroupBackground"/>
 
     <View
         android:id="@+id/sendAsGroupShadow"
         android:layout_width="match_parent"
         android:layout_height="8dp"
         android:background="@drawable/ab_shadow"
-        app:layout_constraintTop_toBottomOf="@id/sendAsGroupBackground" />
+        app:layout_constraintTop_toBottomOf="@id/sendAsGroupBackground"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/contacts"
@@ -146,13 +146,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"
         tools:listitem="@layout/contact_list_item"
-        tools:visibility="gone" />
+        tools:visibility="gone"/>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/composeBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="composeBackground, messageBackground, attachments, attach, message, counter, send" />
+        app:constraint_referenced_ids="composeBackground, messageBackground, attachments, attach, message, counter, send"/>
 
     <View
         android:id="@+id/composeBackground"
@@ -163,7 +163,7 @@
         android:backgroundTint="?attr/composeBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/messageBackground" />
+        app:layout_constraintTop_toTopOf="@id/messageBackground"/>
 
     <View
         android:id="@+id/messageBackground"
@@ -178,16 +178,16 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/attach"
-        app:layout_constraintTop_toTopOf="@id/scheduledCancel" />
+        app:layout_constraintTop_toTopOf="@id/scheduledCancel"/>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/scheduledGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:constraint_referenced_ids="scheduledTitle, scheduledTime, scheduledCancel, scheduledSeparator" />
+        app:constraint_referenced_ids="scheduledTitle, scheduledTime, scheduledCancel, scheduledSeparator"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/scheduledTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -202,9 +202,9 @@
         app:layout_constraintStart_toStartOf="@id/messageBackground"
         app:layout_constraintTop_toTopOf="@id/scheduledCancel"
         app:layout_constraintVertical_chainStyle="packed"
-        app:textSize="secondary" />
+        app:textSize="secondary"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/scheduledTime"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -217,7 +217,7 @@
         app:layout_constraintStart_toStartOf="@id/messageBackground"
         app:layout_constraintTop_toBottomOf="@id/scheduledTitle"
         app:textSize="secondary"
-        tools:text="Decemeber 23rd at 12:00AM" />
+        tools:text="Decemeber 23rd at 12:00AM"/>
 
     <ImageView
         android:id="@+id/scheduledCancel"
@@ -228,7 +228,7 @@
         android:src="@drawable/ic_cancel_black_24dp"
         android:tint="?android:attr/textColorSecondary"
         app:layout_constraintBottom_toTopOf="@id/scheduledSeparator"
-        app:layout_constraintEnd_toEndOf="@id/messageBackground" />
+        app:layout_constraintEnd_toEndOf="@id/messageBackground"/>
 
     <View
         android:id="@+id/scheduledSeparator"
@@ -238,7 +238,7 @@
         android:elevation="4dp"
         app:layout_constraintBottom_toTopOf="@id/attachments"
         app:layout_constraintEnd_toEndOf="@id/messageBackground"
-        app:layout_constraintStart_toStartOf="@id/messageBackground" />
+        app:layout_constraintStart_toStartOf="@id/messageBackground"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/attachments"
@@ -254,9 +254,9 @@
         app:layout_constraintBottom_toTopOf="@id/message"
         app:layout_constraintEnd_toEndOf="@id/messageBackground"
         app:layout_constraintStart_toStartOf="@id/messageBackground"
-        tools:listitem="@layout/attachment_image_list_item" />
+        tools:listitem="@layout/attachment_image_list_item"/>
 
-    <com.moez.QKSMS.common.widget.QkEditText
+    <org.goodev.rms.common.widget.QkEditText
         android:id="@+id/message"
         style="@style/TextPrimary"
         android:layout_width="0dp"
@@ -276,7 +276,7 @@
         android:textColorHint="?android:attr/textColorTertiary"
         app:layout_constraintBottom_toBottomOf="@id/messageBackground"
         app:layout_constraintEnd_toStartOf="@id/sim"
-        app:layout_constraintStart_toStartOf="@id/messageBackground" />
+        app:layout_constraintStart_toStartOf="@id/messageBackground"/>
 
     <ImageView
         android:id="@+id/sim"
@@ -289,9 +289,9 @@
         android:src="@drawable/ic_sim_card_black_24dp"
         android:tint="?android:attr/textColorSecondary"
         app:layout_constraintBottom_toBottomOf="@id/messageBackground"
-        app:layout_constraintEnd_toStartOf="@id/send" />
+        app:layout_constraintEnd_toStartOf="@id/send"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/simIndex"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -305,9 +305,9 @@
         app:layout_constraintStart_toStartOf="@id/sim"
         app:layout_constraintTop_toTopOf="@id/sim"
         tools:ignore="SpUsage"
-        tools:text="1" />
+        tools:text="1"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/counter"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -319,7 +319,7 @@
         app:layout_constraintStart_toStartOf="@id/send"
         app:textColor="secondary"
         app:textSize="tertiary"
-        tools:text="108 / 2" />
+        tools:text="108 / 2"/>
 
     <ImageView
         android:id="@+id/send"
@@ -332,7 +332,7 @@
         android:tint="?android:textColorSecondary"
         app:layout_constraintBottom_toBottomOf="@id/messageBackground"
         app:layout_constraintEnd_toEndOf="@id/messageBackground"
-        tools:backgroundTint="@color/tools_theme" />
+        tools:backgroundTint="@color/tools_theme"/>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -352,19 +352,19 @@
             android:gravity="center_vertical"
             android:orientation="vertical">
 
-            <com.moez.QKSMS.common.widget.QkTextView
+            <org.goodev.rms.common.widget.QkTextView
                 android:id="@+id/toolbarTitle"
                 style="@style/ToolbarText"
                 android:layout_height="wrap_content"
-                tools:text="Moez Bhatti" />
+                tools:text="Moez Bhatti"/>
 
-            <com.moez.QKSMS.common.widget.QkTextView
+            <org.goodev.rms.common.widget.QkTextView
                 android:id="@+id/toolbarSubtitle"
                 style="@style/ToolbarText"
                 android:visibility="gone"
                 app:textColor="tertiary"
                 app:textSize="secondary"
-                tools:text="3 of 9 results" />
+                tools:text="3 of 9 results"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chips"
@@ -373,7 +373,7 @@
                 android:layout_marginBottom="4dp"
                 android:layout_marginTop="4dp"
                 android:scrollbars="vertical"
-                tools:visibility="gone" />
+                tools:visibility="gone"/>
 
         </LinearLayout>
 
@@ -383,13 +383,13 @@
         android:layout_width="match_parent"
         android:layout_height="8dp"
         android:background="@drawable/ab_shadow"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="?android:attr/divider"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/attaching"
@@ -397,7 +397,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone"
         app:constraint_referenced_ids="contact, contactLabel, schedule, scheduleLabel, gallery, galleryLabel, camera,
-         cameraLabel, attachingBackground" />
+         cameraLabel, attachingBackground"/>
 
     <View
         android:id="@+id/attachingBackground"
@@ -408,7 +408,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/contact"
@@ -425,9 +425,9 @@
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@id/schedule"
         app:layout_constraintEnd_toEndOf="@id/attach"
-        app:layout_constraintStart_toStartOf="@id/attach" />
+        app:layout_constraintStart_toStartOf="@id/attach"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/contactLabel"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
@@ -442,7 +442,7 @@
         android:textColor="?android:attr/textColorPrimary"
         app:layout_constraintBottom_toBottomOf="@id/contact"
         app:layout_constraintStart_toEndOf="@id/contact"
-        app:layout_constraintTop_toTopOf="@id/contact" />
+        app:layout_constraintTop_toTopOf="@id/contact"/>
 
     <ImageView
         android:id="@+id/schedule"
@@ -459,9 +459,9 @@
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@id/gallery"
         app:layout_constraintEnd_toEndOf="@id/attach"
-        app:layout_constraintStart_toStartOf="@id/attach" />
+        app:layout_constraintStart_toStartOf="@id/attach"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/scheduleLabel"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
@@ -476,7 +476,7 @@
         android:textColor="?android:attr/textColorPrimary"
         app:layout_constraintBottom_toBottomOf="@id/schedule"
         app:layout_constraintStart_toEndOf="@id/schedule"
-        app:layout_constraintTop_toTopOf="@id/schedule" />
+        app:layout_constraintTop_toTopOf="@id/schedule"/>
 
     <ImageView
         android:id="@+id/gallery"
@@ -493,9 +493,9 @@
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@id/camera"
         app:layout_constraintEnd_toEndOf="@id/attach"
-        app:layout_constraintStart_toStartOf="@id/attach" />
+        app:layout_constraintStart_toStartOf="@id/attach"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/galleryLabel"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
@@ -510,7 +510,7 @@
         android:textColor="?android:attr/textColorPrimary"
         app:layout_constraintBottom_toBottomOf="@id/gallery"
         app:layout_constraintStart_toEndOf="@id/gallery"
-        app:layout_constraintTop_toTopOf="@id/gallery" />
+        app:layout_constraintTop_toTopOf="@id/gallery"/>
 
     <ImageView
         android:id="@+id/camera"
@@ -527,9 +527,9 @@
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@id/attach"
         app:layout_constraintEnd_toEndOf="@id/attach"
-        app:layout_constraintStart_toStartOf="@id/attach" />
+        app:layout_constraintStart_toStartOf="@id/attach"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/cameraLabel"
         android:layout_width="wrap_content"
         android:layout_height="32dp"
@@ -544,7 +544,7 @@
         android:textColor="?android:attr/textColorPrimary"
         app:layout_constraintBottom_toBottomOf="@id/camera"
         app:layout_constraintStart_toEndOf="@id/gallery"
-        app:layout_constraintTop_toTopOf="@id/camera" />
+        app:layout_constraintTop_toTopOf="@id/camera"/>
 
     <ImageView
         android:id="@+id/attach"
@@ -560,6 +560,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:backgroundTint="@color/tools_theme"
-        tools:tint="@color/textPrimaryDark" />
+        tools:tint="@color/textPrimaryDark"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

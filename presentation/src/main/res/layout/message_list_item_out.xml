@@ -18,13 +18,13 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?attr/selectableItemBackground">
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content"
+                                                   android:background="?attr/selectableItemBackground">
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/timestamp"
         style="@style/TextSecondary"
         android:layout_width="wrap_content"
@@ -35,7 +35,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Tue at 11:39pm" />
+        tools:text="Tue at 11:39pm"/>
 
     <ImageView
         android:id="@+id/sim"
@@ -47,9 +47,9 @@
         app:layout_constraintBottom_toBottomOf="@id/timestamp"
         app:layout_constraintEnd_toStartOf="@id/simIndex"
         app:layout_constraintStart_toEndOf="@id/timestamp"
-        app:layout_constraintTop_toTopOf="@id/timestamp" />
+        app:layout_constraintTop_toTopOf="@id/timestamp"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/simIndex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
         app:layout_constraintStart_toEndOf="@id/sim"
         app:layout_constraintTop_toTopOf="@id/timestamp"
         app:textSize="tertiary"
-        tools:text="1" />
+        tools:text="1"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/attachments"
@@ -77,9 +77,9 @@
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintTop_toBottomOf="@id/timestamp"
         tools:itemCount="1"
-        tools:listitem="@layout/mms_preview_list_item" />
+        tools:listitem="@layout/mms_preview_list_item"/>
 
-    <com.moez.QKSMS.common.widget.TightTextView
+    <org.goodev.rms.common.widget.TightTextView
         android:id="@+id/body"
         style="@style/TextPrimary"
         android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/attachments"
         tools:backgroundTint="@color/white"
-        tools:text="Hey! How's it going?" />
+        tools:text="Hey! How's it going?"/>
 
     <ProgressBar
         android:id="@+id/cancel"
@@ -119,7 +119,7 @@
         app:layout_constraintBottom_toBottomOf="@id/body"
         app:layout_constraintEnd_toStartOf="@id/body"
         tools:progress="45"
-        tools:progressTint="@color/tools_theme" />
+        tools:progressTint="@color/tools_theme"/>
 
     <ImageView
         android:id="@+id/cancelIcon"
@@ -132,9 +132,9 @@
         app:layout_constraintEnd_toEndOf="@id/cancel"
         app:layout_constraintStart_toStartOf="@id/cancel"
         app:layout_constraintTop_toTopOf="@id/cancel"
-        tools:tint="@color/tools_theme" />
+        tools:tint="@color/tools_theme"/>
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -147,6 +147,6 @@
         app:layout_constraintTop_toBottomOf="@id/body"
         app:textColor="secondary"
         app:textSize="tertiary"
-        tools:text="Sending..." />
+        tools:text="Sending..."/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

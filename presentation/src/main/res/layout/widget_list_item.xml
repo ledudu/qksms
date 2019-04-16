@@ -47,7 +47,7 @@
             android:textAllCaps="true"
             android:textSize="20sp"
             tools:text="A"
-            tools:textColor="@color/textPrimaryDark" />
+            tools:textColor="@color/textPrimaryDark"/>
 
         <ImageView
             android:id="@+id/icon"
@@ -55,19 +55,19 @@
             android:layout_height="24dp"
             android:layout_gravity="center"
             android:src="@drawable/ic_person_black_24dp"
-            tools:tint="@color/textPrimaryDark" />
+            tools:tint="@color/textPrimaryDark"/>
 
         <ImageView
             android:id="@+id/photo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:src="@tools:sample/avatars" />
+            tools:src="@tools:sample/avatars"/>
 
         <ImageView
             android:id="@+id/avatarMask"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/circle_mask" />
+            android:src="@drawable/circle_mask"/>
 
     </FrameLayout>
 
@@ -83,7 +83,7 @@
             android:layout_toStartOf="@+id/date"
             android:singleLine="true"
             android:textSize="16sp"
-            tools:text="@tools:sample/full_names" />
+            tools:text="@tools:sample/full_names"/>
 
         <TextView
             android:id="@+id/date"
@@ -93,7 +93,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="16dp"
             android:textSize="12sp"
-            tools:text="@tools:sample/date/day_of_week" />
+            tools:text="@tools:sample/date/day_of_week"/>
 
         <TextView
             android:id="@+id/snippet"
@@ -104,7 +104,7 @@
             android:lines="1"
             android:singleLine="true"
             android:textSize="14sp"
-            tools:text="@tools:sample/lorem" />
+            tools:text="@tools:sample/lorem"/>
 
     </RelativeLayout>
 

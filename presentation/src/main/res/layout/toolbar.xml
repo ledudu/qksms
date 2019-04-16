@@ -18,13 +18,13 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <androidx.appcompat.widget.Toolbar android:id="@+id/toolbar"
-    style="@style/Toolbar"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+                                   style="@style/Toolbar"
+                                   xmlns:android="http://schemas.android.com/apk/res/android"
+                                   xmlns:tools="http://schemas.android.com/tools">
 
-    <com.moez.QKSMS.common.widget.QkTextView
+    <org.goodev.rms.common.widget.QkTextView
         android:id="@+id/toolbarTitle"
         style="@style/ToolbarText"
-        tools:text="Conversations" />
+        tools:text="Conversations"/>
 
 </androidx.appcompat.widget.Toolbar>

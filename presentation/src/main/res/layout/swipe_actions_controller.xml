@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground">
 
-            <com.moez.QKSMS.common.widget.QkTextView
+            <org.goodev.rms.common.widget.QkTextView
                 android:id="@+id/rightTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -49,9 +49,9 @@
                 app:layout_constraintEnd_toStartOf="@id/rightChange"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:textSize="primary" />
+                app:textSize="primary"/>
 
-            <com.moez.QKSMS.common.widget.QkTextView
+            <org.goodev.rms.common.widget.QkTextView
                 android:id="@+id/rightLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -61,9 +61,9 @@
                 app:layout_constraintStart_toStartOf="@id/rightTitle"
                 app:layout_constraintTop_toBottomOf="@id/rightTitle"
                 app:textSize="secondary"
-                tools:text="Archive" />
+                tools:text="Archive"/>
 
-            <com.moez.QKSMS.common.widget.QkTextView
+            <org.goodev.rms.common.widget.QkTextView
                 android:id="@+id/rightChange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/rightTitle"
-                app:textSize="secondary" />
+                app:textSize="secondary"/>
 
             <View
                 android:id="@+id/rightBackground"
@@ -90,7 +90,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rightLabel" />
+                app:layout_constraintTop_toBottomOf="@id/rightLabel"/>
 
             <ImageView
                 android:id="@+id/rightIcon"
@@ -106,7 +106,7 @@
                 app:layout_constraintTop_toTopOf="@id/rightBackground"
                 tools:backgroundTint="@color/tools_theme"
                 tools:src="@drawable/ic_archive_black_24dp"
-                tools:tint="@color/textPrimaryDark" />
+                tools:tint="@color/textPrimaryDark"/>
 
             <ImageView
                 android:id="@+id/rightAvatar"
@@ -120,7 +120,7 @@
                 android:tint="?android:attr/textColorTertiary"
                 app:layout_constraintBottom_toBottomOf="@id/rightBackground"
                 app:layout_constraintStart_toEndOf="@id/rightIcon"
-                app:layout_constraintTop_toTopOf="@id/rightBackground" />
+                app:layout_constraintTop_toTopOf="@id/rightBackground"/>
 
             <View
                 android:id="@+id/rightTitleRect"
@@ -132,7 +132,7 @@
                 app:layout_constraintBottom_toTopOf="@id/rightSummaryRect"
                 app:layout_constraintStart_toEndOf="@id/rightAvatar"
                 app:layout_constraintTop_toTopOf="@id/rightBackground"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintVertical_chainStyle="packed"/>
 
             <View
                 android:id="@+id/rightSummaryRect"
@@ -143,14 +143,14 @@
                 android:backgroundTint="?android:attr/divider"
                 app:layout_constraintBottom_toBottomOf="@id/rightBackground"
                 app:layout_constraintStart_toStartOf="@id/rightTitleRect"
-                app:layout_constraintTop_toBottomOf="@id/rightTitleRect" />
+                app:layout_constraintTop_toBottomOf="@id/rightTitleRect"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?android:attr/divider" />
+            android:background="?android:attr/divider"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/left"
@@ -158,7 +158,7 @@
             android:layout_height="wrap_content"
             android:foreground="?attr/selectableItemBackground">
 
-            <com.moez.QKSMS.common.widget.QkTextView
+            <org.goodev.rms.common.widget.QkTextView
                 android:id="@+id/leftTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -170,9 +170,9 @@
                 app:layout_constraintEnd_toStartOf="@id/leftChange"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:textSize="primary" />
+                app:textSize="primary"/>
 
-            <com.moez.QKSMS.common.widget.QkTextView
+            <org.goodev.rms.common.widget.QkTextView
                 android:id="@+id/leftLabel"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -182,9 +182,9 @@
                 app:layout_constraintStart_toStartOf="@id/leftTitle"
                 app:layout_constraintTop_toBottomOf="@id/leftTitle"
                 app:textSize="secondary"
-                tools:text="Archive" />
+                tools:text="Archive"/>
 
-            <com.moez.QKSMS.common.widget.QkTextView
+            <org.goodev.rms.common.widget.QkTextView
                 android:id="@+id/leftChange"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -195,7 +195,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/leftTitle"
-                app:textSize="secondary" />
+                app:textSize="secondary"/>
 
             <View
                 android:id="@+id/leftBackground"
@@ -211,7 +211,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/leftLabel" />
+                app:layout_constraintTop_toBottomOf="@id/leftLabel"/>
 
             <ImageView
                 android:id="@+id/leftIcon"
@@ -227,7 +227,7 @@
                 app:layout_constraintTop_toTopOf="@id/leftBackground"
                 tools:backgroundTint="@color/tools_theme"
                 tools:src="@drawable/ic_archive_black_24dp"
-                tools:tint="@color/textPrimaryDark" />
+                tools:tint="@color/textPrimaryDark"/>
 
             <ImageView
                 android:id="@+id/leftAvatar"
@@ -241,7 +241,7 @@
                 android:tint="?android:attr/textColorTertiary"
                 app:layout_constraintBottom_toBottomOf="@id/leftBackground"
                 app:layout_constraintStart_toStartOf="@id/leftBackground"
-                app:layout_constraintTop_toTopOf="@id/leftBackground" />
+                app:layout_constraintTop_toTopOf="@id/leftBackground"/>
 
             <View
                 android:id="@+id/leftTitleRect"
@@ -253,7 +253,7 @@
                 app:layout_constraintBottom_toTopOf="@id/leftSummaryRect"
                 app:layout_constraintStart_toEndOf="@id/leftAvatar"
                 app:layout_constraintTop_toTopOf="@id/leftBackground"
-                app:layout_constraintVertical_chainStyle="packed" />
+                app:layout_constraintVertical_chainStyle="packed"/>
 
             <View
                 android:id="@+id/leftSummaryRect"
@@ -264,7 +264,7 @@
                 android:backgroundTint="?android:attr/divider"
                 app:layout_constraintBottom_toBottomOf="@id/leftBackground"
                 app:layout_constraintStart_toStartOf="@id/leftTitleRect"
-                app:layout_constraintTop_toBottomOf="@id/leftTitleRect" />
+                app:layout_constraintTop_toBottomOf="@id/leftTitleRect"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

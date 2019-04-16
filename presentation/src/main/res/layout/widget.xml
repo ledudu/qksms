@@ -28,14 +28,14 @@
         android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/rounded_rectangle_4dp" />
+        android:src="@drawable/rounded_rectangle_4dp"/>
 
     <!-- Apply the background card -->
     <ImageView
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:src="@drawable/rounded_rectangle_top_4dp" />
+        android:src="@drawable/rounded_rectangle_top_4dp"/>
 
     <TextView
         android:id="@+id/title"
@@ -51,7 +51,7 @@
         android:paddingStart="16dp"
         android:text="@string/app_name"
         android:textSize="18sp"
-        tools:textColor="@color/textPrimary" />
+        tools:textColor="@color/textPrimary"/>
 
     <ImageView
         android:id="@+id/compose"
@@ -63,7 +63,7 @@
         android:background="@drawable/ripple"
         android:padding="12dp"
         android:src="@drawable/ic_add_black_24dp"
-        tools:tint="@color/tools_theme" />
+        tools:tint="@color/tools_theme"/>
 
     <ListView
         android:id="@+id/conversations"
@@ -78,13 +78,13 @@
         android:dividerHeight="0dp"
         android:paddingBottom="8dp"
         android:paddingTop="8dp"
-        tools:listitem="@layout/widget_list_item" />
+        tools:listitem="@layout/widget_list_item"/>
 
     <!-- This needs to be a FrameLayout, since Views are not supported-->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="8dp"
         android:layout_below="@id/toolbar"
-        android:background="@drawable/ab_shadow" />
+        android:background="@drawable/ab_shadow"/>
 
 </RelativeLayout>

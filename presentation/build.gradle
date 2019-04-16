@@ -28,13 +28,13 @@ android {
     flavorDimensions "analytics"
 
     defaultConfig {
-        applicationId "com.moez.QKSMS"
+        applicationId "org.goodev.rms"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 193
         versionName "3.6.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        resConfigs "zh-rCN","zh-rTW","en"
+        resConfigs "zh-rCN", "zh-rTW", "en"
 
         buildConfigField "String", "BUGSNAG_API_KEY", "\"${System.getenv("BUGSNAG_API_KEY")}\""
     }
