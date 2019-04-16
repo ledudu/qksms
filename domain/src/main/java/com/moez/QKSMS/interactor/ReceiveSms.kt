@@ -29,12 +29,12 @@ import io.reactivex.Flowable
 import javax.inject.Inject
 
 class ReceiveSms @Inject constructor(
-    private val conversationRepo: ConversationRepository,
-    private val externalBlockingManager: ExternalBlockingManager,
-    private val messageRepo: MessageRepository,
-    private val notificationManager: NotificationManager,
-    private val updateBadge: UpdateBadge,
-    private val shortcutManager: ShortcutManager
+        private val conversationRepo: ConversationRepository,
+        private val externalBlockingManager: ExternalBlockingManager,
+        private val messageRepo: MessageRepository,
+        private val notificationManager: NotificationManager,
+        private val updateBadge: UpdateBadge,
+        private val shortcutManager: ShortcutManager
 ) : Interactor<ReceiveSms.Params>() {
 
     class Params(val subId: Int, val messages: Array<SmsMessage>)
@@ -45,7 +45,7 @@ class ReceiveSms @Inject constructor(
                 .filter {
                     // Don't continue if the sender is blocked
                     val address = it.messages[0].displayOriginatingAddress
-                    !externalBlockingManager.shouldBlock(address).blockingGet()
+                    return@filter !externalBlockingManager.shouldBlock(address).blockingGet()
                 }
                 .map {
                     val messages = it.messages
