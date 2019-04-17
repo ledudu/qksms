@@ -22,7 +22,6 @@ import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
 import android.preference.PreferenceManager
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.f2prateek.rx.preferences2.RxSharedPreferences
 import com.squareup.moshi.Moshi
@@ -38,7 +37,6 @@ import org.goodev.rms.listener.ContactAddedListenerImpl
 import org.goodev.rms.manager.*
 import org.goodev.rms.mapper.*
 import org.goodev.rms.repository.*
-import javax.inject.Provider
 import javax.inject.Singleton
 
 @Module(subcomponents = [
@@ -49,9 +47,6 @@ class AppModule(private var application: Application) {
     @Provides
     @Singleton
     fun provideContext(): Context = application
-
-    @Provides
-    fun provideViewModelMap(): MutableMap<Class<out ViewModel>, Provider<ViewModel>> = HashMap()
 
     @Provides
     fun provideContentResolver(context: Context): ContentResolver = context.contentResolver
