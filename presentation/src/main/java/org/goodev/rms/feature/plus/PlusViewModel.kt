@@ -38,17 +38,17 @@ class PlusViewModel @Inject constructor(
         disposables += billingManager.upgradeStatus
                 .subscribe { upgraded -> newState { copy(upgraded = upgraded) } }
 
-        disposables += billingManager.products
-                .subscribe { products ->
-                    newState {
-                        val upgrade = products.firstOrNull { it.sku == BillingManager.SKU_PLUS }
-                        val upgradeDonate = products.firstOrNull { it.sku == BillingManager.SKU_PLUS_DONATE }
-                        copy(upgradePrice = upgrade?.price
-                                ?: "", upgradeDonatePrice = upgradeDonate?.price ?: "",
-                                currency = upgrade?.priceCurrencyCode
-                                        ?: upgradeDonate?.priceCurrencyCode ?: "")
-                    }
-                }
+//        disposables += billingManager.products
+//                .subscribe { products ->
+//                    newState {
+//                        val upgrade = products.firstOrNull { it.sku == BillingManager.SKU_PLUS }
+//                        val upgradeDonate = products.firstOrNull { it.sku == BillingManager.SKU_PLUS_DONATE }
+//                        copy(upgradePrice = upgrade?.price
+//                                ?: "", upgradeDonatePrice = upgradeDonate?.price ?: "",
+//                                currency = upgrade?.priceCurrencyCode
+//                                        ?: upgradeDonate?.priceCurrencyCode ?: "")
+//                    }
+//                }
     }
 
     override fun bindView(view: PlusView) {

@@ -18,7 +18,6 @@
  */
 package org.goodev.rms.common
 
-import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -26,10 +25,16 @@ import android.os.Build
 import android.provider.ContactsContract
 import android.provider.Settings
 import android.provider.Telephony
+import androidx.appcompat.app.AlertDialog
 import org.goodev.rms.BuildConfig
+import org.goodev.rms.R
 import org.goodev.rms.common.util.BillingManager
+import org.goodev.rms.common.util.ClipboardUtils
+import org.goodev.rms.common.util.extensions.makeToast
 import org.goodev.rms.feature.backup.BackupActivity
 import org.goodev.rms.feature.blocked.BlockedActivity
+import org.goodev.rms.feature.blocked.BlockedNumberSettingsActivity
+import org.goodev.rms.feature.blocked.BlockedSettingsActivity
 import org.goodev.rms.feature.compose.ComposeActivity
 import org.goodev.rms.feature.conversationinfo.ConversationInfoActivity
 import org.goodev.rms.feature.gallery.GalleryActivity
@@ -168,16 +173,17 @@ class Navigator @Inject constructor(
 
 
     fun showRating() {
-        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.moez.QKSMS"))
-                .addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY
-                        or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
-                        or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+        startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(BuildConfig.DOWNLOAD_URL)))
 
-        try {
-            startActivity(intent)
-        } catch (e: ActivityNotFoundException) {
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.moez.QKSMS")))
-        }
+//        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=org.goodev.rms"))
+//                .addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY
+//                        or Intent.FLAG_ACTIVITY_NEW_DOCUMENT
+//                        or Intent.FLAG_ACTIVITY_MULTIPLE_TASK)
+//        try {
+//            startActivity(intent)
+//        } catch (e: ActivityNotFoundException) {
+//            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse("https://android.myapp.com/myapp/detail.htm?apkName=org.goodev.rms")))
+//        }
     }
 
     /**
@@ -189,29 +195,43 @@ class Navigator @Inject constructor(
         startActivity(intent)
     }
 
+    fun copyQuote() {
+        ClipboardUtils.copy(context, ClipboardUtils.quoteText(context))
+        context.makeToast(R.string.toast_copied)
+    }
+
     fun showSupport() {
-        val intent = Intent(Intent.ACTION_SENDTO)
-        intent.data = Uri.parse("mailto:")
-        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("moez@qklabs.com"))
-        intent.putExtra(Intent.EXTRA_SUBJECT, "QKSMS Support")
-        intent.putExtra(Intent.EXTRA_TEXT, StringBuilder("\n\n")
-                .append("\n\n--- Please write your message above this line ---\n\n")
-                .append("Package: ${context.packageName}\n")
-                .append("Version: ${BuildConfig.VERSION_NAME}\n")
-                .append("Device: ${Build.BRAND} ${Build.MODEL}\n")
-                .append("SDK: ${Build.VERSION.SDK_INT}\n")
-                .append("Upgraded"
-                        .takeIf { BuildConfig.FLAVOR != "noAnalytics" }
-                        .takeIf { billingManager.upgradeStatus.blockingFirst() } ?: "")
-                .toString())
-        startActivityExternal(intent)
+        AlertDialog.Builder(context)
+                .setTitle(R.string.drawer_help)
+                .setMessage(R.string.drawer_help_message)
+                .setPositiveButton(R.string.rate_okay) { _, _ ->
+                    ClipboardUtils.copy(context, "ddpxha") // 微信号
+                    context.makeToast(R.string.toast_copied)
+                }
+                .create().show()
+
+//        val intent = Intent(Intent.ACTION_SENDTO)
+//        intent.data = Uri.parse("mailto:")
+//        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf("moez@qklabs.com"))
+//        intent.putExtra(Intent.EXTRA_SUBJECT, "QKSMS Support")
+//        intent.putExtra(Intent.EXTRA_TEXT, StringBuilder("\n\n")
+//                .append("\n\n--- Please write your message above this line ---\n\n")
+//                .append("Package: ${context.packageName}\n")
+//                .append("Version: ${BuildConfig.VERSION_NAME}\n")
+//                .append("Device: ${Build.BRAND} ${Build.MODEL}\n")
+//                .append("SDK: ${Build.VERSION.SDK_INT}\n")
+//                .append("Upgraded"
+//                        .takeIf { BuildConfig.FLAVOR != "noAnalytics" }
+//                        .takeIf { billingManager.upgradeStatus.blockingFirst() } ?: "")
+//                .toString())
+//        startActivityExternal(intent)
     }
 
     fun showInvite() {
         analyticsManager.track("Clicked Invite")
         Intent(Intent.ACTION_SEND)
                 .setType("text/plain")
-                .putExtra(Intent.EXTRA_TEXT, "http://qklabs.com/download")
+                .putExtra(Intent.EXTRA_TEXT, BuildConfig.INVITE_URL)
                 .let { Intent.createChooser(it, null) }
                 .let(this::startActivityExternal)
     }
@@ -239,6 +259,16 @@ class Navigator @Inject constructor(
     fun showNotificationSettings(threadId: Long = 0) {
         val intent = Intent(context, NotificationPrefsActivity::class.java)
         intent.putExtra("threadId", threadId)
+        startActivity(intent)
+    }
+
+    fun showBlockedSettings() {
+        val intent = Intent(context, BlockedSettingsActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun showBlockedNumberSettings() {
+        val intent = Intent(context, BlockedNumberSettingsActivity::class.java)
         startActivity(intent)
     }
 

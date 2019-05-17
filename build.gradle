@@ -35,10 +35,11 @@ buildscript {
         maven { url 'https://maven.google.com' }
         jcenter()
         google()
+        maven { url 'https://dl.bintray.com/umsdk/release' }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.2'
+        classpath 'com.android.tools.build:gradle:3.4.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "io.realm:realm-gradle-plugin:$realm_version"
     }
@@ -54,6 +55,7 @@ allprojects {
             name 'glide-snapshot'
             url 'http://oss.sonatype.org/content/repositories/snapshots'
         }
+        maven { url 'https://dl.bintray.com/umsdk/release' }
         mavenCentral()
     }
 }

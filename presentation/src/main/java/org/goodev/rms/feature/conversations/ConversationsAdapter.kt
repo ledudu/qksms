@@ -54,6 +54,8 @@ class ConversationsAdapter @Inject constructor(
 
             view.snippet.setTypeface(view.snippet.typeface, Typeface.BOLD)
             view.snippet.setTextColor(textColorPrimary)
+            view.snippet.setSingleLine(false)
+            view.snippet.ellipsize = null
             view.snippet.maxLines = 5
 
             view.date.setTypeface(view.date.typeface, Typeface.BOLD)

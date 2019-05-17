@@ -30,14 +30,7 @@ import com.android.mms.util.RateController
 import com.google.android.mms.ContentType
 import com.google.android.mms.InvalidHeaderValueException
 import com.google.android.mms.MMSPart
-import com.google.android.mms.pdu_alt.CharacterSets
-import com.google.android.mms.pdu_alt.EncodedStringValue
-import com.google.android.mms.pdu_alt.PduBody
-import com.google.android.mms.pdu_alt.PduComposer
-import com.google.android.mms.pdu_alt.PduHeaders
-import com.google.android.mms.pdu_alt.PduPart
-import com.google.android.mms.pdu_alt.PduPersister
-import com.google.android.mms.pdu_alt.SendReq
+import com.google.android.mms.pdu_alt.*
 import com.google.android.mms.smil.SmilHelper
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
@@ -56,12 +49,12 @@ class Transaction @JvmOverloads constructor(private val context: Context, settin
     companion object {
         var settings: Settings = Settings()
 
-        const val MMS_SENT = "com.moez.QKSMS.MMS_SENT"
+        const val MMS_SENT = "org.goodev.rms.MMS_SENT"
         const val EXTRA_CONTENT_URI = "content_uri"
         const val EXTRA_FILE_PATH = "file_path"
 
-        const val NOTIFY_SMS_FAILURE = "com.moez.QKSMS.NOTIFY_SMS_FAILURE"
-        const val MMS_UPDATED = "com.moez.QKSMS.MMS_UPDATED"
+        const val NOTIFY_SMS_FAILURE = "org.goodev.rms.NOTIFY_SMS_FAILURE"
+        const val MMS_UPDATED = "org.goodev.rms.MMS_UPDATED"
         const val MMS_ERROR = "com.klinker.android.send_message.MMS_ERROR"
         const val REFRESH = "com.klinker.android.send_message.REFRESH"
         const val MMS_PROGRESS = "com.klinker.android.send_message.MMS_PROGRESS"

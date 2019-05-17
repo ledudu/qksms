@@ -55,3 +55,10 @@ data class Archived(
         val data: RealmResults<Conversation>? = null,
         val selected: Int = 0
 ) : MainPage()
+
+data class OneZeroSix(
+        val markPinned: Boolean = false,
+        val markRead: Boolean = false,
+        val data: RealmResults<Conversation>? = null,
+        val selected: Int = 0
+) : MainPage()

@@ -71,7 +71,8 @@ class ComposeActivityModule {
     @Provides
     @Named("text")
     fun provideSharedText(activity: ComposeActivity): String {
-        return activity.intent.extras?.getString(Intent.EXTRA_TEXT) ?: ""
+        return activity.intent.extras?.getString("sms_body")
+                ?: activity.intent.extras?.getString(Intent.EXTRA_TEXT) ?: ""
     }
 
     @Provides

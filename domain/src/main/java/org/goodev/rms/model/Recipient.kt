@@ -33,8 +33,16 @@ open class Recipient(
     /**
      * Return a string that can be displayed to represent the name of this contact
      */
-    fun getDisplayName(): String = contact?.name?.takeIf { it.isNotBlank() }
-            ?: PhoneNumberUtils.formatNumber(address, Locale.getDefault().country)
-            ?: address
+    fun getDisplayName(): String {
+        if (contact == null || contact?.name == null) {
+            val name = CommonNumbers.numberMap[address]
+            if (!name.isNullOrEmpty()) {
+                return name
+            }
+        }
+        return contact?.name?.takeIf { it.isNotBlank() }
+                ?: PhoneNumberUtils.formatNumber(address, Locale.getDefault().country)
+                ?: address
 
+    }
 }

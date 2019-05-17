@@ -50,4 +50,8 @@
         android:id="@+id/view"
         android:title="@string/qkreply_menu_view"/>
 
+    <item
+        android:id="@+id/disable"
+        android:title="@string/qkreply_menu_disable"/>
+
 </menu>

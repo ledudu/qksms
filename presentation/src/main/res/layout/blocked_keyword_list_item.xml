@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:background="?attr/selectableItemBackground"
+              android:orientation="horizontal">
+
+    <org.goodev.rms.common.widget.QkTextView
+        android:id="@+id/text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:minHeight="48dp"
+        android:padding="16dp"
+        app:textColor="primary"
+        app:textSize="primary"
+        tools:text="销售"
+        tools:textColor="@color/textSecondary"/>
+
+    <ImageButton
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="@string/button_delete"
+        android:minWidth="56dp"
+        android:scaleType="center"
+        android:src="@drawable/ic_delete_white_24dp"
+        android:tint="?android:textColorPrimary"/>
+</LinearLayout>

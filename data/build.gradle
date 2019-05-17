@@ -23,20 +23,17 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
-    flavorDimensions "analytics"
+    //flavorDimensions "analytics"
 
     defaultConfig {
         minSdkVersion 21
         targetSdkVersion 28
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField "String", "AMPLITUDE_API_KEY", "\"${System.getenv("AMPLITUDE_API_KEY")}\""
-        buildConfigField "String", "MIXPANEL_API_KEY", "\"${System.getenv("MIXPANEL_API_KEY")}\""
     }
 
     productFlavors {
-        withAnalytics { dimension "analytics" }
-        noAnalytics { dimension "analytics" }
+//        withAnalytics { dimension "analytics" }
+//        noAnalytics { dimension "analytics" }
     }
 }
 
@@ -79,8 +76,8 @@ dependencies {
     implementation project(":android-smsmms")
     implementation project(':common')
     implementation project(':domain')
-    withAnalyticsImplementation "com.amplitude:android-sdk:2.16.0"
-    withAnalyticsImplementation "com.mixpanel.android:mixpanel-android:5.2.1"
+//    withAnalyticsImplementation 'com.umeng.umsdk:analytics:8.0.2'
+//    withAnalyticsImplementation 'com.umeng.umsdk:common:2.0.2'
 }
 
 repositories {

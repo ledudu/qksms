@@ -38,7 +38,7 @@ import javax.inject.Inject
 
 data class MenuItem(val title: String, val actionId: Int)
 
-class MenuItemAdapter @Inject constructor(private val context: Context, private val colors: Colors) : QkAdapter<org.goodev.rms.common.MenuItem>() {
+class MenuItemAdapter @Inject constructor(private val context: Context, private val colors: Colors) : QkAdapter<MenuItem>() {
 
     val menuItemClicks: Subject<Int> = PublishSubject.create()
 

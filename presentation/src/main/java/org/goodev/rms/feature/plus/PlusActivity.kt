@@ -103,7 +103,7 @@ class PlusActivity : QkThemedActivity(), PlusView {
     }
 
     override fun initiatePurchaseFlow(billingManager: BillingManager, sku: String) {
-        billingManager.initiatePurchaseFlow(this, sku)
+//        billingManager.initiatePurchaseFlow(this, sku)
     }
 
 }

@@ -87,6 +87,12 @@ class SettingsPresenter @Inject constructor(
         disposables += prefs.delivery.asObservable()
                 .subscribe { enabled -> newState { copy(deliveryEnabled = enabled) } }
 
+        disposables += prefs.insertToProvider.asObservable()
+                .subscribe { enabled -> newState { copy(insertToProvider = enabled) } }
+
+        disposables += prefs.oneZeroSix.asObservable()
+                .subscribe { enabled -> newState { copy(oneZeroSix = enabled) } }
+
         val textSizeLabels = context.resources.getStringArray(R.array.text_sizes)
         disposables += prefs.textSize.asObservable()
                 .subscribe { textSize ->
@@ -147,17 +153,32 @@ class SettingsPresenter @Inject constructor(
 
                         R.id.notifications -> navigator.showNotificationSettings()
 
+                        R.id.blockedNumber -> navigator.showBlockedNumberSettings()
+
+                        R.id.blocked -> navigator.showBlockedSettings()
+
                         R.id.swipeActions -> view.showSwipeActions()
 
                         R.id.delayed -> view.showDelayDurationDialog()
 
                         R.id.delivery -> prefs.delivery.set(!prefs.delivery.get())
 
+                        R.id.insertProvider -> prefs.insertToProvider.set(!prefs.insertToProvider.get())
+
+                        R.id.oneZeroSix -> {
+                            if (!prefs.oneZeroSixSynced.get()) {
+                                prefs.oneZeroSixSynced.set(true)
+                                syncMessages.execute(Unit)
+                            }
+                            prefs.oneZeroSix.set(!prefs.oneZeroSix.get())
+                            context.makeToast(R.string.quite_to_enable_106_message)
+                        }
+
                         R.id.textSize -> view.showTextSizePicker()
 
                         R.id.systemFont -> prefs.systemFont.set(!prefs.systemFont.get())
 
-                        R.id.unicode -> prefs.unicode.set(!prefs.unicode.get())
+                        //R.id.unicode -> prefs.unicode.set(!prefs.unicode.get())
 
                         R.id.mobileOnly -> prefs.mobileOnly.set(!prefs.mobileOnly.get())
 

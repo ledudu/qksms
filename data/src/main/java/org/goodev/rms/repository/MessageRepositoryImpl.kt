@@ -21,6 +21,7 @@ package org.goodev.rms.repository
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.*
+import android.net.Uri
 import android.os.Build
 import android.provider.Telephony
 import android.telephony.PhoneNumberUtils
@@ -54,13 +55,22 @@ import javax.inject.Singleton
 
 @Singleton
 class MessageRepositoryImpl @Inject constructor(
-    private val activeConversationManager: ActiveConversationManager,
-    private val context: Context,
-    private val messageIds: KeyManager,
-    private val imageRepository: ImageRepository,
-    private val prefs: Preferences,
-    private val syncRepository: SyncRepository
+        private val activeConversationManager: ActiveConversationManager,
+        private val context: Context,
+        private val messageIds: KeyManager,
+        private val imageRepository: ImageRepository,
+        private val prefs: Preferences,
+        private val syncRepository: SyncRepository
 ) : MessageRepository {
+
+    override fun takeLastMessages(threadId: Long, count: Long): RealmResults<Message> {
+        return Realm.getDefaultInstance()
+                .where(Message::class.java)
+                .equalTo("threadId", threadId)
+                .sort("date", Sort.DESCENDING)
+                .limit(count)
+                .findAll()
+    }
 
     override fun getMessages(threadId: Long, query: String): RealmResults<Message> {
         return Realm.getDefaultInstance()
@@ -207,12 +217,12 @@ class MessageRepositoryImpl @Inject constructor(
     }
 
     override fun sendMessage(
-        subId: Int,
-        threadId: Long,
-        addresses: List<String>,
-        body: String,
-        attachments: List<Attachment>,
-        delay: Int
+            subId: Int,
+            threadId: Long,
+            addresses: List<String>,
+            body: String,
+            attachments: List<Attachment>,
+            delay: Int
     ) {
         if (addresses.size == 1 && attachments.isEmpty()) { // SMS
             if (delay > 0) { // With delay
@@ -332,32 +342,33 @@ class MessageRepositoryImpl @Inject constructor(
         val realm = Realm.getDefaultInstance()
         var managedMessage: Message? = null
         realm.executeTransaction { managedMessage = realm.copyToRealmOrUpdate(message) }
-
-        // Insert the message to the native content provider
-        val values = ContentValues().apply {
-            put(Telephony.Sms.ADDRESS, address)
-            put(Telephony.Sms.BODY, body)
-            put(Telephony.Sms.DATE, System.currentTimeMillis())
-            put(Telephony.Sms.READ, true)
-            put(Telephony.Sms.SEEN, true)
-            put(Telephony.Sms.TYPE, Telephony.Sms.MESSAGE_TYPE_OUTBOX)
-            put(Telephony.Sms.THREAD_ID, threadId)
-            put(Telephony.Sms.SUBSCRIPTION_ID, subId)
+        var uri: Uri? = null
+        if (prefs.insertToProvider.get()) {
+            // Insert the message to the native content provider
+            val values = ContentValues().apply {
+                put(Telephony.Sms.ADDRESS, address)
+                put(Telephony.Sms.BODY, body)
+                put(Telephony.Sms.DATE, System.currentTimeMillis())
+                put(Telephony.Sms.READ, true)
+                put(Telephony.Sms.SEEN, true)
+                put(Telephony.Sms.TYPE, Telephony.Sms.MESSAGE_TYPE_OUTBOX)
+                put(Telephony.Sms.THREAD_ID, threadId)
+                put(Telephony.Sms.SUBSCRIPTION_ID, subId)
+            }
+            uri = context.contentResolver.insert(Telephony.Sms.CONTENT_URI, values)
+            // Update the contentId after the message has been inserted to the content provider
+            // The message might have been deleted by now, so only proceed if it's valid
+            //
+            // We do this after inserting the message because it might be slow, and we want the message
+            // to be inserted into Realm immediately. We don't need to do this after receiving one
+            realm.executeTransaction { managedMessage?.takeIf { it.isValid }?.contentId = uri.lastPathSegment.toLong() }
         }
-        val uri = context.contentResolver.insert(Telephony.Sms.CONTENT_URI, values)
-
-        // Update the contentId after the message has been inserted to the content provider
-        // The message might have been deleted by now, so only proceed if it's valid
-        //
-        // We do this after inserting the message because it might be slow, and we want the message
-        // to be inserted into Realm immediately. We don't need to do this after receiving one
-        realm.executeTransaction { managedMessage?.takeIf { it.isValid }?.contentId = uri.lastPathSegment.toLong() }
         realm.close()
 
         // On some devices, we can't obtain a threadId until after the first message is sent in a
         // conversation. In this case, we need to update the message's threadId after it gets added
         // to the native ContentProvider
-        if (threadId == 0L) {
+        if (threadId == 0L && prefs.insertToProvider.get()) {
             uri?.let(syncRepository::syncMessage)
         }
 
@@ -384,17 +395,19 @@ class MessageRepositoryImpl @Inject constructor(
         var managedMessage: Message? = null
         realm.executeTransaction { managedMessage = realm.copyToRealmOrUpdate(message) }
 
-        // Insert the message to the native content provider
-        val values = ContentValues().apply {
-            put(Telephony.Sms.ADDRESS, address)
-            put(Telephony.Sms.BODY, body)
-            put(Telephony.Sms.DATE_SENT, sentTime)
-            put(Telephony.Sms.SUBSCRIPTION_ID, subId)
-        }
+        if (prefs.insertToProvider.get()) {
+            // Insert the message to the native content provider
+            val values = ContentValues().apply {
+                put(Telephony.Sms.ADDRESS, address)
+                put(Telephony.Sms.BODY, body)
+                put(Telephony.Sms.DATE_SENT, sentTime)
+                put(Telephony.Sms.SUBSCRIPTION_ID, subId)
+            }
 
-        context.contentResolver.insert(Telephony.Sms.Inbox.CONTENT_URI, values)?.let { uri ->
-            // Update the contentId after the message has been inserted to the content provider
-            realm.executeTransaction { managedMessage?.contentId = uri.lastPathSegment.toLong() }
+            context.contentResolver.insert(Telephony.Sms.Inbox.CONTENT_URI, values)?.let { uri ->
+                // Update the contentId after the message has been inserted to the content provider
+                realm.executeTransaction { managedMessage?.contentId = uri.lastPathSegment.toLong() }
+            }
         }
 
         realm.close()

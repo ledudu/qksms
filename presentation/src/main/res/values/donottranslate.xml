@@ -23,11 +23,16 @@
     <string name="qksms_plus_upgrade_c">Unlock forever for %1$s %2$s</string>
     <string name="qksms_plus_upgrade_d">One-time purchase of %1$s %2$s</string>
 
-    <string name="about_developer">Moez Bhatti</string>
-    <string name="about_source">https://github.com/moezbhatti/qksms</string>
-    <string name="about_changelog">https://github.com/moezbhatti/qksms/releases</string>
-    <string name="about_contact">team@qklabs.com</string>
-    <string name="about_license">GNU General Public License v3.0</string>
-    <string name="about_copyright">© 2014–2018</string>
+    <string name="drawer_help_message">如果您在使用过程中遇到问题，或者您有好的想法，请添加微信：ddpxha 和开发者交流。\n点击下方按钮即可复制微信号。</string>
+    <string name="about_summary"><![CDATA[
+        <b>短信精灵(短信精灵)</b>让你再次爱上发短信，本应用和系统自带的短信应用相比具有如下特点：<br/>
+        <li>短信通知增强，可以在通知栏直接操作短信而无需进入应用</li>
+        <li>智能手表支持，完美适配安卓智能手表系统，在手表上可以方便的查看回复短信</li>
+        <li>验证码提取，收到验证码可以在通知栏直接查看，无需进入应用</li>
+        <li>更多精彩等您发现</li><br/>
+        短信精灵基于开源的 QKSMS 应用开发，针对国人操作做了优化。如果您在使用过程中遇到任何问题或者
+        您有任何好的想法，欢迎告诉我们。添加开发者微信：<b>ddpxha</b> 和广大的短信精灵用户一起交流。
+
+     ]]></string>
 
 </resources>

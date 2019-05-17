@@ -26,6 +26,7 @@ import dagger.android.AndroidInjection
 import org.goodev.rms.compat.SubscriptionManagerCompat
 import org.goodev.rms.interactor.MarkRead
 import org.goodev.rms.interactor.SendMessage
+import org.goodev.rms.manager.NotificationManager
 import org.goodev.rms.repository.ConversationRepository
 import org.goodev.rms.repository.MessageRepository
 import javax.inject.Inject
@@ -42,6 +43,8 @@ class RemoteMessagingReceiver : BroadcastReceiver() {
     lateinit var sendMessage: SendMessage
     @Inject
     lateinit var subscriptionManager: SubscriptionManagerCompat
+    @Inject
+    lateinit var notificationManager: NotificationManager
 
     override fun onReceive(context: Context, intent: Intent) {
         AndroidInjection.inject(this, context)
@@ -51,6 +54,7 @@ class RemoteMessagingReceiver : BroadcastReceiver() {
 
         val threadId = bundle.getLong("threadId")
         val body = remoteInput.getCharSequence("body")?.toString() ?: ""
+        markRead.skipUpdateNotification = true
         markRead.execute(listOf(threadId))
 
         val lastMessage = messageRepo.getMessages(threadId).lastOrNull()
@@ -61,6 +65,9 @@ class RemoteMessagingReceiver : BroadcastReceiver() {
                 ?: return
 
         val pendingRepository = goAsync()
-        sendMessage.execute(SendMessage.Params(subId, threadId, addresses, body)) { pendingRepository.finish() }
+        sendMessage.execute(SendMessage.Params(subId, threadId, addresses, body)) {
+            notificationManager.update(threadId, true)
+            pendingRepository.finish()
+        }
     }
 }

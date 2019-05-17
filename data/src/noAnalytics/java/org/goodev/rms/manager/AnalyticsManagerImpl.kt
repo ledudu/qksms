@@ -25,9 +25,12 @@ import javax.inject.Singleton
 
 @Singleton
 class AnalyticsManagerImpl @Inject constructor() : AnalyticsManager {
+    override fun init() {
+        //Do nothing
+    }
 
     override fun track(event: String, vararg properties: Pair<String, Any>) {
-
+        Timber.d("$event: $properties")
         // Log the event, but don't do anything else
         JSONObject(properties
                 .associateBy { pair -> pair.first }

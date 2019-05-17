@@ -61,7 +61,7 @@ class MainViewModel @Inject constructor(
         private val prefs: Preferences,
         private val ratingManager: RatingManager,
         private val syncMessages: SyncMessages
-) : QkViewModel<MainView, MainState>(MainState(page = Inbox(data = conversationRepo.getConversations()))) {
+) : QkViewModel<MainView, MainState>(MainState(page = Inbox(data = conversationRepo.getConversations(false, prefs.oneZeroSix.get())))) {
 
     init {
         disposables += deleteConversations
@@ -165,6 +165,7 @@ class MainViewModel @Inject constructor(
                         state.page is Searching -> view.clearSearch()
                         state.page is Inbox && state.page.selected > 0 -> view.clearSelection()
                         state.page is Archived && state.page.selected > 0 -> view.clearSelection()
+                        state.page is OneZeroSix && state.page.selected > 0 -> view.clearSelection()
 
                         else -> newState { copy(drawerOpen = true) }
                     }
@@ -177,18 +178,25 @@ class MainViewModel @Inject constructor(
                 .subscribe { open -> newState { copy(drawerOpen = open) } }
 
         view.drawerItemIntent
-                .doOnNext { newState { copy(drawerOpen = false) } }
+                .doOnNext { if (it != DrawerItem.HEADER) newState { copy(drawerOpen = false) } }
                 .doOnNext { if (it == DrawerItem.BACKUP) navigator.showBackup() }
                 .doOnNext { if (it == DrawerItem.SCHEDULED) navigator.showScheduled() }
                 .doOnNext { if (it == DrawerItem.BLOCKING) navigator.showBlockedConversations() }
                 .doOnNext { if (it == DrawerItem.SETTINGS) navigator.showSettings() }
                 .doOnNext { if (it == DrawerItem.PLUS) navigator.showQksmsPlusActivity("main_menu") }
-                .doOnNext { if (it == DrawerItem.HELP) navigator.showSupport() }
+                .doOnNext { if (it == DrawerItem.HELP) view.showHelpDialog() }
                 .doOnNext { if (it == DrawerItem.INVITE) navigator.showInvite() }
-                .distinctUntilChanged()
+                .doOnNext { if (it == DrawerItem.HEADER) navigator.copyQuote() }
+                //.distinctUntilChanged()
+                .filter {
+                    (it == DrawerItem.INBOX && (state.value?.page !is Inbox)) ||
+                            (it == DrawerItem.ONE_ZERO_SIX && (state.value?.page !is OneZeroSix)) ||
+                            (it == DrawerItem.ARCHIVED && (state.value?.page !is Archived))
+                }
                 .doOnNext {
                     when (it) {
-                        DrawerItem.INBOX -> newState { copy(page = Inbox(data = conversationRepo.getConversations())) }
+                        DrawerItem.INBOX -> newState { copy(page = Inbox(data = conversationRepo.getConversations(false, prefs.oneZeroSix.get()))) }
+                        DrawerItem.ONE_ZERO_SIX -> newState { copy(page = OneZeroSix(data = conversationRepo.get106Conversations())) }
                         DrawerItem.ARCHIVED -> newState { copy(page = Archived(data = conversationRepo.getConversations(true))) }
                         else -> {
                         } // Do nothing
@@ -241,12 +249,12 @@ class MainViewModel @Inject constructor(
                 .autoDisposable(view.scope())
                 .subscribe()
 
-        view.plusBannerIntent
-                .autoDisposable(view.scope())
-                .subscribe {
-                    newState { copy(drawerOpen = false) }
-                    navigator.showQksmsPlusActivity("main_banner")
-                }
+//        view.plusBannerIntent
+//                .autoDisposable(view.scope())
+//                .subscribe {
+//                    newState { copy(drawerOpen = false) }
+//                    navigator.showQksmsPlusActivity("main_banner")
+//                }
 
         view.rateIntent
                 .autoDisposable(view.scope())
@@ -276,6 +284,11 @@ class MainViewModel @Inject constructor(
                         }
 
                         is Archived -> {
+                            val page = state.page.copy(markPinned = pin, markRead = read, selected = selected)
+                            newState { copy(page = page) }
+                        }
+
+                        is OneZeroSix -> {
                             val page = state.page.copy(markPinned = pin, markRead = read, selected = selected)
                             newState { copy(page = page) }
                         }
@@ -331,7 +344,9 @@ class MainViewModel @Inject constructor(
 
                         state.page is Archived && state.page.selected > 0 -> view.clearSelection()
 
-                        state.page !is Inbox -> newState { copy(page = Inbox(data = conversationRepo.getConversations())) }
+                        state.page is OneZeroSix && state.page.selected > 0 -> view.clearSelection()
+
+                        state.page !is Inbox -> newState { copy(page = Inbox(data = conversationRepo.getConversations(false, prefs.oneZeroSix.get()))) }
 
                         else -> newState { copy(hasError = true) }
                     }

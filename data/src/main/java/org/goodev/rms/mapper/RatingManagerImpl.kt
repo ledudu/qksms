@@ -30,7 +30,7 @@ class RatingManagerImpl @Inject constructor(
 ) : RatingManager {
 
     companion object {
-        private const val RATING_THRESHOLD = 10
+        private const val RATING_THRESHOLD = 15
     }
 
     private val sessions = rxPrefs.getInteger("sessions", 0)

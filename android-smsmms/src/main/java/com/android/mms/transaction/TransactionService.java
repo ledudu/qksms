@@ -574,14 +574,16 @@ public class TransactionService extends Service implements Observer {
             }
         }
 
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            NetworkRequest.Builder builder = new NetworkRequest.Builder();
+            builder.addCapability(NetworkCapabilities.NET_CAPABILITY_MMS);
+            builder.addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
 
-        NetworkRequest.Builder builder = new NetworkRequest.Builder();
-        builder.addCapability(NetworkCapabilities.NET_CAPABILITY_MMS);
-        builder.addTransportType(NetworkCapabilities.TRANSPORT_CELLULAR);
+            NetworkRequest networkRequest = builder.build();
+            mConnMgr.requestNetwork(networkRequest, mNetworkCallback);
+            return 1;
+//        }
 
-        NetworkRequest networkRequest = builder.build();
-        mConnMgr.requestNetwork(networkRequest, mNetworkCallback);
-        return 1;
 //        int result = mConnMgr.startUsingNetworkFeature(
 //                ConnectivityManager.TYPE_MOBILE, "enableMMS");
 //

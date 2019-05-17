@@ -25,6 +25,8 @@ import org.goodev.rms.model.MmsPart
 
 interface MessageRepository {
 
+    fun takeLastMessages(threadId: Long, count:Long): RealmResults<Message>
+
     fun getMessages(threadId: Long, query: String = ""): RealmResults<Message>
 
     fun getMessage(id: Long): Message?

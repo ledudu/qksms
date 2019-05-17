@@ -41,19 +41,52 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class ConversationRepositoryImpl @Inject constructor(
-    private val context: Context,
-    private val conversationFilter: ConversationFilter,
-    private val cursorToConversation: CursorToConversation,
-    private val cursorToRecipient: CursorToRecipient
+        private val context: Context,
+        private val conversationFilter: ConversationFilter,
+        private val cursorToConversation: CursorToConversation,
+        private val cursorToRecipient: CursorToRecipient
 ) : ConversationRepository {
 
-    override fun getConversations(archived: Boolean): RealmResults<Conversation> {
+    override fun getConversations(archived: Boolean, enable106: Boolean): RealmResults<Conversation> {
+        if (enable106) {
+            return getConversationsWithout106(archived)
+        } else {
+            return getConversationsWith106(archived)
+        }
+    }
+
+    private fun getConversationsWithout106(archived: Boolean = false): RealmResults<Conversation> {
         return Realm.getDefaultInstance()
                 .where(Conversation::class.java)
                 .notEqualTo("id", 0L)
                 .greaterThan("count", 0)
                 .equalTo("archived", archived)
                 .equalTo("blocked", false)
+                .equalTo("oneZeroSix", false)
+                .isNotEmpty("recipients")
+                .sort("pinned", Sort.DESCENDING, "date", Sort.DESCENDING)
+                .findAllAsync()
+    }
+
+    private fun getConversationsWith106(archived: Boolean = false): RealmResults<Conversation> {
+        return Realm.getDefaultInstance()
+                .where(Conversation::class.java)
+                .notEqualTo("id", 0L)
+                .greaterThan("count", 0)
+                .equalTo("archived", archived)
+                .equalTo("blocked", false)
+                .isNotEmpty("recipients")
+                .sort("pinned", Sort.DESCENDING, "date", Sort.DESCENDING)
+                .findAllAsync()
+    }
+
+    override fun get106Conversations(): RealmResults<Conversation> {
+        return Realm.getDefaultInstance()
+                .where(Conversation::class.java)
+                .notEqualTo("id", 0L)
+                .greaterThan("count", 0)
+                .equalTo("blocked", false)
+                .equalTo("oneZeroSix", true)
                 .isNotEmpty("recipients")
                 .sort("pinned", Sort.DESCENDING, "date", Sort.DESCENDING)
                 .findAllAsync()
@@ -213,6 +246,7 @@ class ConversationRepositoryImpl @Inject constructor(
                     conversation.snippet = message?.getSummary() ?: ""
                     conversation.read = message?.read ?: true
                     conversation.me = message?.isMe() ?: false
+                    conversation.oneZeroSix = conversation.recipients[0]?.address?.startsWith("106") ?: false
                 }
             }
         }
@@ -340,6 +374,7 @@ class ConversationRepositoryImpl @Inject constructor(
 
                     conversation.recipients.clear()
                     conversation.recipients.addAll(recipients)
+                    conversation.oneZeroSix = conversation.recipients[0]?.address?.startsWith("106") ?: false
                     realm.executeTransaction { it.insertOrUpdate(conversation) }
                     realm.close()
 

@@ -17,10 +17,11 @@
   ~ You should have received a copy of the GNU General Public License
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
-<manifest package="org.goodev.rms"
-          xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="org.goodev.rms">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <!-- Used for starting foreground service for backup/restore on Android P+ -->
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
@@ -32,8 +33,11 @@
     <uses-permission android:name="android.permission.RECEIVE_SMS"/>
     <uses-permission android:name="android.permission.SEND_SMS"/>
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_SMS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:name=".common.RmsApplication"
@@ -100,6 +104,8 @@
         <activity android:name=".feature.conversationinfo.ConversationInfoActivity"/>
         <activity android:name=".feature.notificationprefs.NotificationPrefsActivity"/>
         <activity android:name=".feature.blocked.BlockedActivity"/>
+        <activity android:name=".feature.blocked.BlockedSettingsActivity"/>
+        <activity android:name=".feature.blocked.BlockedNumberSettingsActivity"/>
         <activity
             android:name=".feature.qkreply.QkReplyActivity"
             android:excludeFromRecents="true"
@@ -122,8 +128,12 @@
         <receiver
             android:name=".receiver.SmsReceiver"
             android:permission="android.permission.BROADCAST_SMS">
-            <intent-filter>
+            <intent-filter android:priority="999">
                 <action android:name="android.provider.Telephony.SMS_DELIVER"/>
+            </intent-filter>
+            <intent-filter android:priority="999">
+                <!-- 锤子手机不添加这个收不到短信 -->
+                <action android:name="android.provider.Telephony.SMS_RECEIVED"/>
             </intent-filter>
         </receiver>
         <receiver
@@ -144,6 +154,7 @@
             android:name=".receiver.MmsReceivedReceiver"
             android:taskAffinity="com.klinker.android.messaging.MMS_RECEIVED"/>
         <receiver android:name=".receiver.MarkSeenReceiver"/>
+        <receiver android:name=".common.CopyReceiver"/>
         <receiver android:name=".receiver.MarkReadReceiver"/>
         <receiver android:name=".receiver.RemoteMessagingReceiver"/>
         <receiver android:name=".receiver.NightModeReceiver"/>

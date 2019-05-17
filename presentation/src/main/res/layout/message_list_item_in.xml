@@ -95,6 +95,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginTop="2dp"
         android:autoLink="email|phone|web"
+        android:textIsSelectable="true"
         android:background="@drawable/message_only"
         android:gravity="start|center_vertical"
         android:minHeight="36dp"

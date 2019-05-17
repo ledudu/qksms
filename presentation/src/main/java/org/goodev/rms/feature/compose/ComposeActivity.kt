@@ -51,6 +51,7 @@ import kotlinx.android.synthetic.main.compose_activity.*
 import org.goodev.rms.R
 import org.goodev.rms.common.androidxcompat.scope
 import org.goodev.rms.common.base.QkThemedActivity
+import org.goodev.rms.common.util.ClipboardUtils
 import org.goodev.rms.common.util.DateFormatter
 import org.goodev.rms.common.util.extensions.*
 import org.goodev.rms.model.Attachment
@@ -113,6 +114,7 @@ class ComposeActivity : QkThemedActivity(), ComposeView {
     private val viewModel by lazy { ViewModelProviders.of(this, viewModelFactory)[ComposeViewModel::class.java] }
 
     private var cameraDestination: Uri? = null
+    private var tId: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
@@ -156,6 +158,12 @@ class ComposeActivity : QkThemedActivity(), ComposeView {
             messageBackground.setBackgroundTint(resolveThemeColor(R.attr.bubbleColor))
             composeBackground.setBackgroundTint(resolveThemeColor(R.attr.composeBackground))
         }
+
+        tId = intent.extras?.getLong("threadId") ?: 0L
+        val code = intent.extras?.getString("verifyCode")
+        if (!code.isNullOrEmpty()) {
+            showCopyVerifyCodeDialog(code)
+        }
     }
 
     override fun onStart() {
@@ -170,7 +178,11 @@ class ComposeActivity : QkThemedActivity(), ComposeView {
 
     override fun render(state: ComposeState) {
         if (state.hasError) {
-            finish()
+            if (tId == 0L && message.text.toString().isNotEmpty()) {
+                showFinishWarningDialog()
+            } else {
+                finish()
+            }
             return
         }
 
@@ -343,4 +355,29 @@ class ComposeActivity : QkThemedActivity(), ComposeView {
 
     override fun onBackPressed() = backPressedIntent.onNext(Unit)
 
+    private fun showCopyVerifyCodeDialog(code: String) {
+        if (!ClipboardUtils.hasPrimaryClip(this)) {
+            ClipboardUtils.copy(this, code)
+            this.makeToast(R.string.toast_verify_code_copied)
+            return
+        }
+        AlertDialog.Builder(this)
+                .setMessage(R.string.verify_code_copy_title)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.copy) { _, _ ->
+                    ClipboardUtils.copy(this, code)
+                    this.makeToast(R.string.toast_verify_code_copied)
+                }
+                .create().show()
+    }
+
+    private fun showFinishWarningDialog() {
+        AlertDialog.Builder(this)
+                .setMessage(R.string.quite_warning_message)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setPositiveButton(android.R.string.ok) { _, _ ->
+                    finish()
+                }
+                .create().show()
+    }
 }

@@ -21,7 +21,6 @@ package org.goodev.rms.feature.blocked
 import android.content.Context
 import com.uber.autodispose.kotlin.autoDisposable
 import io.reactivex.rxkotlin.plusAssign
-import io.reactivex.rxkotlin.withLatestFrom
 import org.goodev.rms.common.Navigator
 import org.goodev.rms.common.androidxcompat.scope
 import org.goodev.rms.common.base.QkViewModel
@@ -29,7 +28,6 @@ import org.goodev.rms.interactor.MarkUnblocked
 import org.goodev.rms.manager.AnalyticsManager
 import org.goodev.rms.repository.ConversationRepository
 import org.goodev.rms.util.Preferences
-import org.goodev.rms.util.tryOrNull
 import javax.inject.Inject
 
 class BlockedViewModel @Inject constructor(
@@ -51,19 +49,19 @@ class BlockedViewModel @Inject constructor(
     override fun bindView(view: BlockedView) {
         super.bindView(view)
 
-        view.siaClickedIntent
-                .map {
-                    tryOrNull(false) { context.packageManager.getApplicationInfo("org.mistergroup.shouldianswerpersonal", 0).enabled }
-                            ?: tryOrNull(false) { context.packageManager.getApplicationInfo("org.mistergroup.muzutozvednout", 0).enabled }
-                            ?: false
-                }
-                .doOnNext { installed -> if (!installed) navigator.showSia() }
-                .withLatestFrom(prefs.sia.asObservable()) { installed, enabled ->
-                    analytics.track("Clicked SIA", Pair("enable", !enabled), Pair("installed", installed))
-                    installed && !enabled
-                }
-                .autoDisposable(view.scope())
-                .subscribe { shouldEnable -> prefs.sia.set(shouldEnable) }
+//        view.siaClickedIntent
+//                .map {
+//                    tryOrNull(false) { context.packageManager.getApplicationInfo("org.mistergroup.shouldianswerpersonal", 0).enabled }
+//                            ?: tryOrNull(false) { context.packageManager.getApplicationInfo("org.mistergroup.muzutozvednout", 0).enabled }
+//                            ?: false
+//                }
+//                .doOnNext { installed -> if (!installed) navigator.showSia() }
+//                .withLatestFrom(prefs.sia.asObservable()) { installed, enabled ->
+//                    analytics.track("Clicked SIA", Pair("enable", !enabled), Pair("installed", installed))
+//                    installed && !enabled
+//                }
+//                .autoDisposable(view.scope())
+//                .subscribe { shouldEnable -> prefs.sia.set(shouldEnable) }
 
         // Show confirm unblock conversation dialog
         view.unblockIntent

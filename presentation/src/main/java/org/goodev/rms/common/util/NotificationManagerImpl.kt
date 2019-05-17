@@ -33,12 +33,15 @@ import android.telephony.PhoneNumberUtils
 import androidx.core.app.*
 import androidx.core.graphics.drawable.IconCompat
 import org.goodev.rms.R
+import org.goodev.rms.common.CopyReceiver
 import org.goodev.rms.common.util.extensions.dpToPx
 import org.goodev.rms.extensions.isImage
 import org.goodev.rms.feature.compose.ComposeActivity
 import org.goodev.rms.feature.qkreply.QkReplyActivity
 import org.goodev.rms.manager.PermissionManager
 import org.goodev.rms.mapper.CursorToPartImpl
+import org.goodev.rms.model.Message
+import org.goodev.rms.model.VerificationCode
 import org.goodev.rms.receiver.DeleteMessagesReceiver
 import org.goodev.rms.receiver.MarkReadReceiver
 import org.goodev.rms.receiver.MarkSeenReceiver
@@ -48,6 +51,7 @@ import org.goodev.rms.repository.MessageRepository
 import org.goodev.rms.util.GlideApp
 import org.goodev.rms.util.Preferences
 import org.goodev.rms.util.tryOrNull
+import java.util.regex.Pattern
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -62,6 +66,9 @@ class NotificationManagerImpl @Inject constructor(
 ) : org.goodev.rms.manager.NotificationManager {
 
     companion object {
+        const val TAG = "TAG"
+        val CARRIER_NUMBERS = arrayListOf("10010", "10086", "10000", "10001")
+        val CARRIER_REPLY_PATTERN = Pattern.compile("([A-Za-z0-9]{1,5})：");
         const val DEFAULT_CHANNEL_ID = "notifications_default"
         const val BACKUP_RESTORE_CHANNEL_ID = "notifications_backup_restore"
 
@@ -87,29 +94,43 @@ class NotificationManagerImpl @Inject constructor(
     }
 
     /**
-     * Updates the notification for a particular conversation
+     * 在通知栏直接回复短信后，调用这个更新通知
      */
     override fun update(threadId: Long) {
+        update(threadId, false)
+    }
+
+    /**
+     * Updates the notification for a particular conversation
+     */
+    override fun update(threadId: Long, fromReplay: Boolean) {
         // If notifications are disabled, don't do anything
         if (!prefs.notifications(threadId).get()) {
             return
         }
 
-        val messages = messageRepo.getUnreadUnseenMessages(threadId)
+        val realmMessages = if (fromReplay) {
+            messageRepo.takeLastMessages(threadId, 2)
+        } else {
+            messageRepo.getUnreadUnseenMessages(threadId)
 
+        }
         // If there are no messages to be displayed, make sure that the notification is dismissed
-        if (messages.isEmpty()) {
+        if (realmMessages.isEmpty()) {
             notificationManager.cancel(threadId.toInt())
             return
+        }
+
+        val messages = arrayListOf<Message>()
+        if (fromReplay) { // 逆序排列一下
+            realmMessages.forEach { messages.add(0, it) }
+        } else {
+            messages.addAll(realmMessages)
         }
 
         val conversation = conversationRepo.getConversation(threadId) ?: return
 
         val contentIntent = Intent(context, ComposeActivity::class.java).putExtra("threadId", threadId)
-        val taskStackBuilder = TaskStackBuilder.create(context)
-        taskStackBuilder.addParentStack(ComposeActivity::class.java)
-        taskStackBuilder.addNextIntent(contentIntent)
-        val contentPI = taskStackBuilder.getPendingIntent(threadId.toInt() + 10000, PendingIntent.FLAG_UPDATE_CURRENT)
 
         val seenIntent = Intent(context, MarkSeenReceiver::class.java).putExtra("threadId", threadId)
         val seenPI = PendingIntent.getBroadcast(context, threadId.toInt() + 20000, seenIntent, PendingIntent.FLAG_UPDATE_CURRENT)
@@ -126,25 +147,34 @@ class NotificationManagerImpl @Inject constructor(
                 .setSmallIcon(R.drawable.ic_notification)
                 .setNumber(messages.size)
                 .setAutoCancel(true)
-                .setContentIntent(contentPI)
+//                .setContentIntent(contentPI)
                 .setDeleteIntent(seenPI)
                 .setSound(ringtone)
                 .setLights(Color.WHITE, 500, 2000)
                 .setVibrate(if (prefs.vibration(threadId).get()) VIBRATE_PATTERN else longArrayOf(0))
 
         // Tell the notification if it's a group message
-        val personMe = Person.Builder().setName("Me").build()
+        val personMe = Person.Builder()
+                .setName(context.getString(R.string.notification_message_me))
+                .build()
         val messagingStyle = NotificationCompat.MessagingStyle(personMe)
         if (conversation.recipients.size >= 2) {
             messagingStyle.isGroupConversation = true
             messagingStyle.conversationTitle = conversation.getTitle()
         }
 
+        var messageBody: String = ""
+        var messageAddress: String = ""
+        var isVerifyCode = false
+        var verifyCode = ""
         // Add the messages to the notification
         messages.forEach { message ->
-            val person = Person.Builder()
+            var person: Person.Builder? = null
 
             if (!message.isMe()) {
+                person = Person.Builder()
+                messageBody = message.getSummary()
+                messageAddress = PhoneNumberUtils.stripSeparators(message.address)
                 val recipient = conversation.recipients
                         .firstOrNull { PhoneNumberUtils.compare(it.address, message.address) }
 
@@ -153,7 +183,7 @@ class NotificationManagerImpl @Inject constructor(
                 person.setIcon(GlideApp.with(context)
                         .asBitmap()
                         .circleCrop()
-                        .load(PhoneNumberUtils.stripSeparators(message.address))
+                        .load(messageAddress)
                         .submit(64.dpToPx(context), 64.dpToPx(context))
                         .let { futureGet -> tryOrNull(false) { futureGet.get() } }
                         ?.let(IconCompat::createWithBitmap))
@@ -163,12 +193,16 @@ class NotificationManagerImpl @Inject constructor(
                         ?.let(person::setUri)
             }
 
-            NotificationCompat.MessagingStyle.Message(message.getSummary(), message.date, person.build()).apply {
-                message.parts.firstOrNull { it.isImage() }?.let { part ->
-                    setData(part.type, ContentUris.withAppendedId(CursorToPartImpl.CONTENT_URI, part.id))
-                }
-                messagingStyle.addMessage(this)
+            val summary = message.getSummary();
+            val verify = VerificationCode(summary, colors.theme(threadId).theme)
+            isVerifyCode = verify.isVerifyCode
+            verifyCode = verify.verifyCode
+            val messageText: CharSequence = if (verify.isVerifyCode) verify.summary else summary
+            val message1 = NotificationCompat.MessagingStyle.Message(messageText, message.date, person?.build())
+            message.parts.firstOrNull { it.isImage() }?.let { part ->
+                message1.setData(part.type, ContentUris.withAppendedId(CursorToPartImpl.CONTENT_URI, part.id))
             }
+            messagingStyle.addMessage(message1)
         }
 
         // Set the large icon
@@ -213,7 +247,7 @@ class NotificationManagerImpl @Inject constructor(
 
         // Add the action buttons
         val actionLabels = context.resources.getStringArray(R.array.notification_actions)
-        listOf(prefs.notifAction1, prefs.notifAction2, prefs.notifAction3)
+        val actions = listOf(prefs.notifAction1, prefs.notifAction2, prefs.notifAction3)
                 .map { preference -> preference.get() }
                 .distinct()
                 .mapNotNull { action ->
@@ -226,14 +260,9 @@ class NotificationManagerImpl @Inject constructor(
                         }
 
                         Preferences.NOTIFICATION_ACTION_REPLY -> {
-                            if (Build.VERSION.SDK_INT >= 24) {
-                                getReplyAction(threadId)
-                            } else {
-                                val intent = Intent(context, QkReplyActivity::class.java).putExtra("threadId", threadId)
-                                val pi = PendingIntent.getActivity(context, threadId.toInt() + 40000, intent, PendingIntent.FLAG_UPDATE_CURRENT)
-                                NotificationCompat.Action.Builder(R.drawable.ic_reply_white_24dp, actionLabels[action], pi)
-                                        .setSemanticAction(NotificationCompat.Action.SEMANTIC_ACTION_REPLY).build()
-                            }
+                            val replyAction = getReplyAction(threadId, messageBody, messageAddress, isVerifyCode)
+//                            notification.extend(NotificationCompat.WearableExtender().addAction(replyAction))
+                            replyAction
                         }
 
                         Preferences.NOTIFICATION_ACTION_CALL -> {
@@ -255,8 +284,35 @@ class NotificationManagerImpl @Inject constructor(
 
                         else -> null
                     }
+                }.toMutableList()
+
+        if (isVerifyCode) {
+            if (actions.size < 3) {
+                actions.add(copyAction(verifyCode, threadId))
+            } else {
+                for (action in actions) {
+                    if (NotificationCompat.Action.SEMANTIC_ACTION_REPLY == action.semanticAction
+                            || NotificationCompat.Action.SEMANTIC_ACTION_CALL == action.semanticAction) {
+                        actions.remove(action)
+                        break
+                    }
                 }
-                .forEach { notification.addAction(it) }
+                actions.add(copyAction(verifyCode, threadId))
+            }
+
+            contentIntent.putExtra("verifyCode", verifyCode)
+        }
+
+        val taskStackBuilder = TaskStackBuilder.create(context)
+        taskStackBuilder.addParentStack(ComposeActivity::class.java)
+        taskStackBuilder.addNextIntent(contentIntent)
+        val contentPI = taskStackBuilder.getPendingIntent(threadId.toInt() + 10000, PendingIntent.FLAG_UPDATE_CURRENT)
+        notification.setContentIntent(contentPI)
+
+        notification.extend(NotificationCompat.WearableExtender().addActions(actions))
+        actions.forEach {
+            notification.addAction(it)
+        }
 
         if (prefs.qkreply.get()) {
             notification.priority = NotificationCompat.PRIORITY_DEFAULT
@@ -269,6 +325,13 @@ class NotificationManagerImpl @Inject constructor(
         }
 
         notificationManager.notify(threadId.toInt(), notification.build())
+    }
+
+    private fun copyAction(verifyCode: String, threadId: Long): NotificationCompat.Action {
+        val intent = Intent(context, CopyReceiver::class.java).putExtra("verifyCode", verifyCode)
+        val pi = PendingIntent.getBroadcast(context, threadId.toInt() + 70000, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        return NotificationCompat.Action.Builder(R.drawable.ic_content_copy_black_24dp, context.resources.getString(R.string.compose_menu_copy), pi)
+                .setSemanticAction(NotificationCompat.Action.SEMANTIC_ACTION_NONE).build()
     }
 
     override fun notifyFailed(msgId: Long) {
@@ -302,23 +365,65 @@ class NotificationManagerImpl @Inject constructor(
         notificationManager.notify(threadId.toInt() + 50000, notification.build())
     }
 
-    private fun getReplyAction(threadId: Long): NotificationCompat.Action {
+    private fun getReplyAction(threadId: Long, body: String, address: String, verifyCode: Boolean): NotificationCompat.Action {
+        val title = context.resources.getStringArray(R.array.notification_actions)[Preferences.NOTIFICATION_ACTION_REPLY]
+        val remoteInput = RemoteInput.Builder("body").setLabel(title)
+        var allowGenerateReplies = false
+        if (!verifyCode) {
+            val choices = processChoices(body, address)
+            val responseSet = choices ?: context.resources.getStringArray(R.array.qk_responses)
+            remoteInput.setChoices(responseSet)
+            allowGenerateReplies = choices.isNullOrEmpty()
+        }
+
         val replyIntent = Intent(context, RemoteMessagingReceiver::class.java).putExtra("threadId", threadId)
         val replyPI = PendingIntent.getBroadcast(context, threadId.toInt() + 40000, replyIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-
-        val title = context.resources.getStringArray(R.array.notification_actions)[Preferences.NOTIFICATION_ACTION_REPLY]
-        val responseSet = context.resources.getStringArray(R.array.qk_responses)
-        val remoteInput = RemoteInput.Builder("body")
-                .setLabel(title)
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) {
-            remoteInput.setChoices(responseSet)
-        }
 
         return NotificationCompat.Action.Builder(R.drawable.ic_reply_white_24dp, title, replyPI)
                 .setSemanticAction(NotificationCompat.Action.SEMANTIC_ACTION_REPLY)
                 .addRemoteInput(remoteInput.build())
+                .setAllowGeneratedReplies(allowGenerateReplies)
                 .build()
+    }
+
+    private fun processChoices(body: String, address: String): Array<out CharSequence>? {
+        if (!CARRIER_NUMBERS.contains(address)) {
+            return null
+        }
+        val result = arrayListOf<CharSequence>()
+        if (body.contains("回复") && body.contains("编码|指令".toRegex())) {
+            body.lines().forEach {
+                val matcher = CARRIER_REPLY_PATTERN.matcher(it);
+                if (matcher.find()) {
+                    result.add(matcher.group(1))
+                }
+            }
+            if (result.isNotEmpty()) {
+                return result.toTypedArray()
+            }
+        }
+        if ("10010".equals(address)) {
+            result.add("CXLL") //查询流量
+            result.add("CXHF") //当月话费
+            result.add("CXYE") //余额
+            result.add("CXJF") //积分查询
+        } else if ("10086".equals(address)) {
+            result.add("CXYYSJLL") // 已使用流量
+            result.add("CXHF") //当月话费
+            result.add("CXYE") //余额
+            result.add("CXJF") //积分查询
+        } else if ("10001".equals(address)) {
+            result.add("SSHF") //(101)(SSHF)	实时话费
+            result.add("ZHYE") //(102)(ZHYE)	帐户余额
+            result.add("SYZD") //(103)(SYZD)	上月帐单
+            result.add("LSZD") //(104)(LSZD)	历史帐单
+            result.add("SYDXCX") //(106)(SYDXCX)	剩余短信查询
+            result.add("TCXF") //(108)(TCXF)	套餐使用情况
+        }
+        if (result.isNotEmpty()) {
+            return result.toTypedArray()
+        }
+        return null
     }
 
     /**

@@ -21,6 +21,8 @@ package org.goodev.rms.receiver
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.os.Build
+import android.provider.Telephony
 import android.provider.Telephony.Sms
 import dagger.android.AndroidInjection
 import org.goodev.rms.interactor.ReceiveSms
@@ -29,9 +31,16 @@ import javax.inject.Inject
 
 class SmsReceiver : BroadcastReceiver() {
 
-    @Inject lateinit var receiveMessage: ReceiveSms
+    @Inject
+    lateinit var receiveMessage: ReceiveSms
 
     override fun onReceive(context: Context, intent: Intent) {
+        if (Build.VERSION.SDK_INT >= 24) {
+            // TODO 测试更多手机
+            if (Telephony.Sms.Intents.SMS_RECEIVED_ACTION.equals(intent.action)) {
+                return
+            }
+        }
         AndroidInjection.inject(this, context)
         Timber.v("onReceive")
 

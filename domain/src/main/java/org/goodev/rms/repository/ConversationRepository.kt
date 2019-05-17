@@ -24,7 +24,9 @@ import org.goodev.rms.model.SearchResult
 
 interface ConversationRepository {
 
-    fun getConversations(archived: Boolean = false): RealmResults<Conversation>
+    fun getConversations(archived: Boolean = false, enable106: Boolean = false): RealmResults<Conversation>
+
+    fun get106Conversations(): RealmResults<Conversation>
 
     fun getConversationsSnapshot(): List<Conversation>
 

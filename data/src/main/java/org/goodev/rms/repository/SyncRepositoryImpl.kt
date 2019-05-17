@@ -42,25 +42,25 @@ import javax.inject.Singleton
 
 @Singleton
 class SyncRepositoryImpl @Inject constructor(
-    private val contentResolver: ContentResolver,
-    private val conversationRepo: ConversationRepository,
-    private val cursorToConversation: CursorToConversation,
-    private val cursorToMessage: CursorToMessage,
-    private val cursorToRecipient: CursorToRecipient,
-    private val cursorToContact: CursorToContact,
-    private val keys: KeyManager,
-    private val rxPrefs: RxSharedPreferences
+        private val contentResolver: ContentResolver,
+        private val conversationRepo: ConversationRepository,
+        private val cursorToConversation: CursorToConversation,
+        private val cursorToMessage: CursorToMessage,
+        private val cursorToRecipient: CursorToRecipient,
+        private val cursorToContact: CursorToContact,
+        private val keys: KeyManager,
+        private val rxPrefs: RxSharedPreferences
 ) : SyncRepository {
 
     /**
      * Holds data that should be persisted across full syncs
      */
     private data class PersistedData(
-        val id: Long,
-        val archived: Boolean,
-        val blocked: Boolean,
-        val pinned: Boolean,
-        val name: String
+            val id: Long,
+            val archived: Boolean,
+            val blocked: Boolean,
+            val pinned: Boolean,
+            val name: String
     )
 
     override val syncProgress: Subject<SyncRepository.SyncProgress> =
@@ -176,6 +176,18 @@ class SyncRepositoryImpl @Inject constructor(
 
 
         realm.insert(SyncLog())
+        realm.commitTransaction()
+
+        realm.beginTransaction()
+        val conversations = realm.where(Conversation::class.java)
+                .notEqualTo("id", 0L)
+                .greaterThan("count", 0)
+                .isNotEmpty("recipients")
+                .findAll()
+        conversations.forEach {
+            it.oneZeroSix = it.recipients[0]?.address?.startsWith("106") ?: false
+        }
+        realm.insertOrUpdate(conversations)
         realm.commitTransaction()
         realm.close()
 

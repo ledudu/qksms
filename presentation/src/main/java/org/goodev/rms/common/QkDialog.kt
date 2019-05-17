@@ -32,7 +32,7 @@ import javax.inject.Inject
 /**
  * Wrapper around AlertDialog which makes it easier to display lists that use our UI
  */
-class QkDialog @Inject constructor(private val context: Context, val adapter: org.goodev.rms.common.MenuItemAdapter) {
+class QkDialog @Inject constructor(private val context: Context, val adapter: MenuItemAdapter) {
 
     var title: String? = null
 

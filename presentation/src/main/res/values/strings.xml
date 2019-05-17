@@ -18,19 +18,18 @@
   -->
 <resources>
 
-    <string name="app_name">Message</string>
-
     <string name="shortcut_compose_long_label">New conversation</string>
     <string name="shortcut_compose_short_label">Compose</string>
     <string name="shortcut_compose_disabled_message">Shortcut disabled</string>
 
+    <string name="title_106">106 Messages</string>
     <string name="title_archived">Archived</string>
     <string name="title_settings">Settings</string>
     <string name="title_notification_prefs">Notifications</string>
     <string name="title_theme">Theme</string>
     <string name="title_conversations">Search inbox…</string>
     <string name="title_compose">Type a name or number</string>
-    <string name="title_qksms_plus" translatable="false">QKSMS+</string>
+    <string name="title_qksms_plus" translatable="false">CoolMessage Pro</string>
 
     <string name="setup_skip">Skip</string>
     <string name="setup_next">Continue</string>
@@ -57,29 +56,31 @@
     <string name="inbox_empty_text">Your conversations will appear here</string>
     <string name="inbox_search_empty_text">No results</string>
     <string name="archived_empty_text">Your archived conversations will appear here</string>
+    <string name="onezerosix_empty_text">Your 106 conversations will appear here</string>
     <string name="main_fab_cd">Start new conversation</string>
     <string name="main_default_sms_title">Love texting again</string>
-    <string name="main_default_sms_message">Make QKSMS your default SMS app</string>
+    <string name="main_default_sms_message">Make CoolMessage your default SMS app</string>
     <string name="main_default_sms_change">Change</string>
     <string name="main_permission_required">Permission required</string>
-    <string name="main_permission_sms">QKSMS needs permission to send and view SMS messages</string>
-    <string name="main_permission_contacts">QKSMS needs permission to view your contacts</string>
+    <string name="main_permission_sms">CoolMessage needs permission to send and view SMS messages</string>
+    <string name="main_permission_contacts">CoolMessage needs permission to view your contacts</string>
     <string name="main_permission_allow">Allow</string>
 
     <string name="drawer_inbox">Inbox</string>
     <string name="drawer_archived">Archived</string>
+    <string name="drawer_106">106</string>
     <string name="drawer_scheduled">Scheduled</string>
     <string name="drawer_blocking">Blocking</string>
     <string name="drawer_more">More</string>
     <string name="drawer_settings">Settings</string>
-    <string name="drawer_plus">QKSMS+</string>
+    <string name="drawer_plus">Pro</string>
     <string name="drawer_help">Help &amp; feedback</string>
     <string name="drawer_invite">Invite friends</string>
-    <string name="drawer_plus_banner_title">QKSMS+</string>
+    <string name="drawer_plus_banner_title">Pro</string>
     <string name="drawer_plus_banner_summary">Unlock amazing new features, and support development</string>
 
-    <string name="rate_title">Enjoying QKSMS?</string>
-    <string name="rate_summary">Share some love and rate us on Google Play!</string>
+    <string name="rate_title">Enjoying Message?</string>
+    <string name="rate_summary">Share some love and rate us on app store!</string>
     <string name="rate_okay">OKAY!</string>
     <string name="rate_dismiss">DISMISS</string>
 
@@ -103,7 +104,7 @@
     <string name="compose_vcard_label">Contact card</string>
     <string name="compose_scheduled_for">Scheduled for</string>
     <string name="compose_scheduled_future">Selected time must be in the future!</string>
-    <string name="compose_scheduled_plus">You must unlock QKSMS+ to use scheduled messaging</string>
+    <string name="compose_scheduled_plus">You must unlock Pro version to use scheduled messaging</string>
     <string name="compose_scheduled_toast">Added to scheduled messages</string>
     <string name="compose_hint">Write a message…</string>
     <string name="compose_menu_copy">Copy text</string>
@@ -158,7 +159,7 @@
     <string name="backup_never">Never</string>
     <string name="backup_restore_title">Restore</string>
     <string name="backup_restore_summary">Select a backup</string>
-    <string name="backup_restore_error_plus">Please unlock QKSMS+ to use backup and restore</string>
+    <string name="backup_restore_error_plus">Please unlock Pro version to use backup and restore</string>
     <string name="backup_restore_error_backup">Backup in progress…</string>
     <string name="backup_restore_error_restore">Restore in progress…</string>
     <string name="backup_restore_confirm_title">Restore from backup</string>
@@ -166,14 +167,14 @@
     <string name="backup_restore_stop_title">Stop restore</string>
     <string name="backup_restore_stop_message">Messages that have already been restored will remain on your device</string>
     <string name="backup_restore_dialog_title">Backups</string>
-    <string name="backup_restore_dialog_summary" translatable="false">/QKSMS/Backups</string>
+    <string name="backup_restore_dialog_summary" translatable="false">/SMS/Backups</string>
     <string name="backup_restore_dialog_empty">No backups found</string>
     <plurals name="backup_message_count">
         <item quantity="zero">No messages</item>
         <item quantity="one">%d message</item>
         <item quantity="other">%d messages</item>
     </plurals>
-    <string name="backup_disclaimer">Currently, only SMS is supported by Backup and Restore. MMS support and scheduled backups will be coming soon!</string>
+    <string name="backup_disclaimer">Notice: only SMS is supported by Backup and Restore!</string>
     <string name="backup_now">Backup now</string>
     <string name="backup_progress_parsing">Parsing backup…</string>
     <string name="backup_progress_running">%d/%d messages</string>
@@ -221,7 +222,17 @@
     <string name="settings_qkreply_summary">Popup for new messages</string>
     <string name="settings_qkreply_tap_dismiss_title">Tap to dismiss</string>
     <string name="settings_qkreply_tap_dismiss_summary">Tap outside of the popup to close it</string>
-    <string name="settings_blocking_title">Blocking</string>
+    <string name="keyword_empty_tips">Please input block content</string>
+    <string name="keyword_add">ADD</string>
+    <string name="keyword_hint">Input Keywords</string>
+    <string name="block_num_hint">Input Numbers</string>
+    <string name="settings_blocking_title">Blocking Keywords</string>
+    <string name="settings_blocking_title_summary">Configure keywords to block SMS</string>
+    <string name="settings_blocking_num_title">Blocking Numbers</string>
+    <string name="settings_blocking_num_title_summary">Configure phone numbers to block SMS</string>
+    <string name="blocked_num_settings_empty">Configure phone numbers to block SMS</string>
+    <string name="blocked_settings_empty">Configure keywords to block SMS</string>
+
     <!-- Do not translate -->
     <string name="settings_should_i_answer_title">Should I Answer?</string>
     <string name="settings_should_i_answer_summary">Automatically filter messages from unsolicited numbers by using the \"Should I Answer\" app</string>
@@ -240,6 +251,10 @@
     </string-array>
     <string name="settings_delivery_title">Delivery confirmations</string>
     <string name="settings_delivery_summary">Confirm that messages were sent successfully</string>
+    <string name="settings_106_title">Show 106 messages separately</string>
+    <string name="settings_106_summary">Check this item to stop displaying 106 messages in your inbox</string>
+    <string name="settings_insert_provider_title">Insert sms to system database</string>
+    <string name="settings_insert_provider_summary">Uncheck this if send sms twice every time</string>
     <string name="settings_unicode_title">Strip accents</string>
     <string name="settings_unicode_summary">Remove accents from characters in outgoing SMS messages</string>
     <string name="settings_mobile_title">Mobile numbers only</string>
@@ -247,7 +262,7 @@
     <string name="settings_mms_size_title">Auto-compress MMS attachments</string>
     <string name="settings_sync_title">Sync messages</string>
     <string name="settings_sync_summary">Re-sync your messages with the native Android SMS database</string>
-    <string name="settings_about_title">About QKSMS</string>
+    <string name="settings_about_title">About Message</string>
     <string name="settings_version">Version %s</string>
     <string name="settings_logging_enabled">Debug logging enabled</string>
     <string name="settings_logging_disabled">Debug logging disabled</string>
@@ -260,7 +275,7 @@
     <string name="blocked_unblock_dialog_message">Would you like to unblock this conversation?</string>
 
     <string name="about_title">About</string>
-    <string name="about_version_title">Version</string>
+    <string name="about_version_title">Version  %1$s</string>
     <string name="about_developer_title">Developer</string>
     <string name="about_source_title">Source code</string>
     <string name="about_changelog_title">Changelog</string>
@@ -272,9 +287,9 @@
     <string name="qksms_plus_description_summary">You can save a starving developer for just %s</string>
     <string name="qksms_plus_upgrade">Lifetime upgrade for %1$s %2$s</string>
     <string name="qksms_plus_upgrade_donate">Unlock + donate for %1$s %2$s</string>
-    <string name="qksms_plus_thanks_title">Thank you for supporting QKSMS!</string>
-    <string name="qksms_plus_thanks_summary">You now have access to all QKSMS+ features</string>
-    <string name="qksms_plus_free_title">QKSMS+ is free for F-Droid users! If you\'d like to support development, feel free to make a donation.</string>
+    <string name="qksms_plus_thanks_title">Thank you for supporting Message!</string>
+    <string name="qksms_plus_thanks_summary">You now have access to all Pro features</string>
+    <string name="qksms_plus_free_title">Pro feature is free for F-Droid users! If you\'d like to support development, feel free to make a donation.</string>
     <string name="qksms_plus_donate">Donate via PayPal</string>
     <string name="qksms_plus_coming_soon">Coming soon</string>
     <string name="qksms_plus_themes_title">Premium themes</string>
@@ -296,7 +311,7 @@
     <string name="qksms_plus_respond_title">Auto-respond</string>
     <string name="qksms_plus_respond_summary">Automatically respond to incoming messages with a preset response</string>
     <string name="qksms_plus_more_title">More</string>
-    <string name="qksms_plus_more_summary">QKSMS is under active development, and your purchase will include all future QKSMS+ features!</string>
+    <string name="qksms_plus_more_summary">Message is under active development, and your purchase will include all future Pro features!</string>
 
     <string name="widget_loading">Loading…</string>
     <string name="widget_more">View more conversations</string>
@@ -307,9 +322,10 @@
     <string name="qkreply_menu_expand">Show more</string>
     <string name="qkreply_menu_collapse">Show less</string>
     <string name="qkreply_menu_view">Open conversation</string>
+    <string name="qkreply_menu_disable">Disable quick reply</string>
 
     <string name="theme_material">Material</string>
-    <string name="theme_plus">QKSMS+</string>
+    <string name="theme_plus">Colors</string>
     <string name="theme_hex">HEX</string>
     <string name="theme_apply">Apply</string>
 
@@ -332,8 +348,9 @@
 
     <string name="toast_copied">Copied</string>
     <string name="toast_archived">Archived conversation</string>
-    <string name="toast_qksms_plus">You must unlock QKSMS+ to use this</string>
+    <string name="toast_qksms_plus">You must unlock Pro feature to use this</string>
 
+    <string name="notification_message_me">Me</string>
     <plurals name="notification_new_messages">
         <item quantity="one">New message</item>
         <item quantity="other">%s new messages</item>
@@ -402,4 +419,240 @@
         <item>That\'s okay</item>
     </string-array>
 
+    <!-- 229 -->
+    <string-array name="quotes">
+        <item>积极思考造成积极人生，消极思考造成消极人生。</item>
+        <item>人生中屡次的失败是成功的根基，而屡次的成功是失败的前兆。</item>
+        <item>再凶猛的海浪，也会归服大海；再热烈的爱情，也会归于平静。</item>
+        <item>经历过；才会明白；有付出才有回报。</item>
+        <item>生活就像一辆变速自行车，有的档很多人从来没用过。</item>
+        <item>生命不是要超越别人，而是要超越自己。</item>
+        <item>山顶对我们半山腰的人来说并不遥远。</item>
+        <item>要战胜恐惧，\n而不是退缩。</item>
+        <item>跟着理智走，要有勇气；跟着感觉走，就要有倾其所有的决心。</item>
+        <item>苦难是人生的老师。</item>
+        <item>在家里看到永远是家，走出去看到的是世界。</item>
+        <item>健康的身体是实现目标的基石。</item>
+        <item>梦是心灵的思想，\n是我们的秘密真情。</item>
+        <item>瀑布对悬崖无可畏惧，所以唱出气势磅礴的生命之歌。</item>
+        <item>我们有时从错误中学到的东西，可能比从美德中学到的还要多。</item>
+        <item>最清晰的脚印留在最泥泞的路上。</item>
+        <item>意志坚强的人，他的世界充满着无限的可能性。</item>
+        <item>终点回到原点享受那走不完的路。</item>
+        <item>如果你觉得现在走的辛苦，那就证明你在走上坡路！</item>
+        <item>认真是成功的秘诀，粗心是失败的伴侣。</item>
+        <item>失败也是我需要的，它和成功对我一样有价值。</item>
+        <item>克服困难，勇敢者自有千方百计，怯懦者只感到万般无奈。</item>
+        <item>心清如水即是佛，\n了无牵挂佛无边。</item>
+        <item>莫找借口失败，\n只找理由成功。</item>
+        <item>任何业绩的质变，都来自于量变的积累。</item>
+        <item>给人金钱是下策，给人能力是中策，给人观念是上策。</item>
+        <item>有钱的人更有钱，这往往是一种必然。</item>
+        <item>如果我们想要更多的玫瑰花，就必须种植更多的玫瑰树。</item>
+        <item>学会宽容，要有一颗宽容的爱心！</item>
+        <item>自我要求是迈向成功的捷径，恒心是离成功最短的路。</item>
+        <item>天才就是无止境刻苦勤奋的能力。</item>
+        <item>人生重要的不是所站的位置，而是所朝的方向。</item>
+        <item>机不可失，\n时不再来。</item>
+        <item>望远镜可以望见远的目标，却不能代替你走半步。</item>
+        <item>只要目标向前，你可以到任何的地方。</item>
+        <item>善于利用时间的人，永远找得到充裕的时间。</item>
+        <item>最困难之时，就是我们离成功不远之日。</item>
+        <item>人最大的缺点就是记性太好。</item>
+        <item>不为模糊不清的未来担忧，只为清清楚楚的现在努力。</item>
+        <item>停下休息的时候不要忘记别人还在奔跑。</item>
+        <item>成功者绝不放弃，放弃者绝不会成功。</item>
+        <item>自卑心最伤害自己，是最大的障碍。</item>
+        <item>做对的事情比把事情做对重要。</item>
+        <item>自信的生命最美丽！</item>
+        <item>我要努力，以最好姿态出现在当初否定我的人面前。</item>
+        <item>我会用我的行动，来证明我三年后的结果。</item>
+        <item>每一种创伤，\n都是一种成熟。</item>
+        <item>人生之要事在于确立伟大的目标与实现这目标的决心。</item>
+        <item>没有退路的时候，正是潜力发挥最大的时候。</item>
+        <item>成长，就是逼着你一个人，踉踉跄跄的受伤，跌跌撞撞的坚强。</item>
+        <item>最热烈的火焰，冰封在最沉默的火山深处。</item>
+        <item>没有失败，只有暂时停止成功！</item>
+        <item>用笑脸来迎接悲惨的厄运，用百倍的勇气来应付一切的不幸。</item>
+        <item>天天晨练不仅为了健身，也为了体现生命的倔强。</item>
+        <item>有志之人立长志，\n无志之人长立志。</item>
+        <item>如果要挖井，就要挖到水出为止。</item>
+        <item>不要沉沦，在任何环境中你都可以选择奋起。</item>
+        <item>赚钱之道很多，但是找不到赚钱的种子，便成不了事业家。</item>
+        <item>别人怎么评价你都不重要，最重要的是自己得看的起自己。</item>
+        <item>如果爱，请深爱；如不爱，请离开。</item>
+        <item>命运掌握在自己手里，命运的好坏由自己去创造。</item>
+        <item>求人不如求己这句话永远是不会错的。</item>
+        <item>通过辛勤工作获得财富才是人生的大快事。</item>
+        <item>任何道路都是靠自己走出来的，而不是靠自己在梦中等来的。</item>
+        <item>爱情就像俩个拉着橡皮筋的人，受伤的总是不愿意放手的那一个。</item>
+        <item>成功者绝不放弃。</item>
+        <item>一觉醒来，开始憧憬爱情，而爱情刚好做了场诡异的梦。</item>
+        <item>只对攀登它而不是仰望它的人来说才有真正意义。</item>
+        <item>世间成事，不求其绝对圆满，留一份不足，可得无限美好。</item>
+        <item>男人最大的武器是眼神，女人最大的武器是眼泪。</item>
+        <item>不保护就是一种保护，过度保护反而是一种伤害。</item>
+        <item>真理，在婴儿的沉默中，不在聪明人的辩论里。</item>
+        <item>一无所有是一种财富，它让穷人产生改变命运的冲动。</item>
+        <item>平安是幸，知足是福，清心是禄，寡欲是寿。</item>
+        <item>直如朱丝绳，\n清如玉壶冰。</item>
+        <item>烈火试真金，\n逆境试强者。</item>
+        <item>只会在水泥地上走路的人，永远不会留下深深的脚印。</item>
+        <item>人各有志，\n自己的路自己走。</item>
+        <item>站得更高才能看得更远。</item>
+        <item>不是成功离我们太远，而是我们坚持的太少。</item>
+        <item>你蕴含着无限的潜力，发掘它会得到意想不到的结果。</item>
+        <item>改变自己会痛苦，但不改变自己会吃苦。</item>
+        <item>自己打败自己的，远远多于比别人打败的。</item>
+        <item>有些东西当你不能在拥有的时候，你唯一可以做的就是不要忘记。</item>
+        <item>小鸟只有展翅才能飞翔，孩子多动脑的同时还要多动手。</item>
+        <item>每天告诉自己一次，『我真的很不错』。</item>
+        <item>彩虹总在风雨后，阳光总在乌云后，成功总在失败后。</item>
+        <item>工作就是人生的价值，人生的欢乐，也是幸福之所在。</item>
+        <item>我的人生我做主，命运由己不由人。</item>
+        <item>观察与反思无法完全靠传授而获得，您必须亲自实践。</item>
+        <item>放弃时间的人，时间也放弃他。</item>
+        <item>有勇气并不表示恐惧不存在，而是敢面对恐惧克服恐惧。</item>
+        <item>追求自己的梦想，坚持到底！</item>
+        <item>每一种创伤，\n都是一种成熟。</item>
+        <item>事实上，成功仅代表了你工作的1%，成功是99%失败的结果。</item>
+        <item>现在很痛苦，等过阵子回头看看，会发现其实那都不算事。</item>
+        <item>你没有摘到的，只是春天里的一朵花，整个春天还是你的。</item>
+        <item>为学正如撑上船，一篙不可放缓。</item>
+        <item>笑，全世界便与你同声笑，哭，你便独自哭。</item>
+        <item>积极向上的心态，是成功者的最基本要素。</item>
+        <item>你的想法真有创意，你愿意进一步谈谈你的构思吗？</item>
+        <item>不要做金钱、权利的奴隶；应学会做“金钱、权利”的主人。</item>
+        <item>生命没有完结，\n生命只有前进。</item>
+        <item>浪花愈大，凝立的磐石在沉默的持守里，快乐也愈大。</item>
+        <item>不为模糊不清的未来担忧，只为清清楚楚的现在努力。</item>
+        <item>谁能定我去或留，定我心中的宇宙，只想靠两手，和理想挥手。</item>
+        <item>不要因一场薄雾，便认定前面没有什么景物。</item>
+        <item>不要为已消逝之年华叹息，须正视欲匆匆溜走的时光。</item>
+        <item>不知道明天干什么的人是不幸的！</item>
+        <item>沙漠之所以美丽，是因为在不远处有一片绿洲。</item>
+        <item>常求有利别人，\n不求有利自己。</item>
+        <item>对时间的价值没有没有深切认识的人，决不会坚韧勤勉。</item>
+        <item>你的字如果再大点会更漂亮！</item>
+        <item>你要相信，总有一天你会找到那个适合你的人。</item>
+        <item>一个人如果做事没有恒心，他是任何事也做不成功的。</item>
+        <item>忍让，第一次叫气度，第二次是宽容，第三次就变成了软弱。</item>
+        <item>对真理的追求比对真理的占有更为可贵。</item>
+        <item>克服困难，勇敢者自有千方百计，怯懦者只感到万般无奈。</item>
+        <item>山峰，只有对攀登它而不是仰视它的人来说才有真正意义。</item>
+        <item>一个好的假期，是与对时间的观念比你更模糊的人一起度过。</item>
+        <item>人，记事不能记仇，记事可以增长知识；记仇可以增加烦恼。</item>
+        <item>重复别人走过的路，是因为忽视了自己的双脚。</item>
+        <item>你什么时候放下，什么时候就没有烦恼。</item>
+        <item>人生就像一面镜子，你笑它也笑，你哭它也哭。</item>
+        <item>性命有如铁砧，愈被敲打，愈能发出火花。</item>
+        <item>无论如何，“流言”总不能吓哑我的。</item>
+        <item>只要站起来的次数比倒下去的次数多，那就是成功。</item>
+        <item>行动是治愈恐惧的良药，而犹豫拖延将不断滋养恐惧。</item>
+        <item>环境不会改变，解决之道在于改变自己。</item>
+        <item>学的到东西的事情是锻炼，学不到的是磨练。</item>
+        <item>未来美不美取决于你现在拼不拼。</item>
+        <item>古之立大事者，不惟有超世之才，亦必有坚忍不拔之志。</item>
+        <item>时间是小偷，他来时悄无声息，走后损失惨重，机会也是如此。</item>
+        <item>放弃谁都可以，千万不要放弃自己！</item>
+        <item>以诚感人者，人亦诚而应。</item>
+        <item>最困难的时候，也就是离成功不远的时候。</item>
+        <item>这个世界上朋友很多，可以用一生托付的朋友很少。</item>
+        <item>真坏人并不可怕，可怕的是假好人。</item>
+        <item>只要拥有无限的热情，一个人几乎可以在任何事情上取得成功。</item>
+        <item>记住：你是你生命的船长，走自己的路，何必在乎其它。</item>
+        <item>困难像弹簧，看你强不强；你强他就弱，你弱他就强。</item>
+        <item>聪明在于勤奋，\n天才在于积累。</item>
+        <item>管理追求的是：\n无为而至，大智若愚。</item>
+        <item>相信自己奋斗一生只为自己努力拼搏。</item>
+        <item>成功是一种观念，致富是一种义务，快乐是一种权力。</item>
+        <item>有志者自有千方百计，无志者只感千难万难。</item>
+        <item>一个人几乎可在任何他怀有无限热忱的事情上成功。</item>
+        <item>不会生气的人是愚者，不生气的人乃真正的智者。</item>
+        <item>不要灰心，不要绝望，对一切都要乐观，需要有决心。</item>
+        <item>你热爱生命吗？那么别浪费时间，因为时间是组成生命的材料。</item>
+        <item>推销员之所以有较高的薪水，就是因为被人拒绝。</item>
+        <item>得意时应善待他人，因为你失意时会需要他们。</item>
+        <item>也许我不是最优秀的，但我是最努力的。</item>
+        <item>不管我们踩什么样的高跷，没有自己的脚是不行的。</item>
+        <item>如要挖井，就要挖到水出为止。</item>
+        <item>当你得不到你想的到的东西时，你会得到经验。</item>
+        <item>工作的质量，决定生活的质量，能力比金钱重要万倍。</item>
+        <item>奋斗没有终点，任何时候都是一个起点。</item>
+        <item>势不可使尽，福不可享尽，便宜不可占尽，聪明不可用尽。</item>
+        <item>推销并不存在于真空状态中，事实可能会超乎想象。</item>
+        <item>要怪就怪自己。有本事喜欢上别人，没本事让人家喜欢你。</item>
+        <item>竞争颇似打网球，与球艺胜过你的对手比赛，可以提高你的水平。</item>
+        <item>学会安静。学会理智。学会坚强。学会努力。</item>
+        <item>百世修来同渡船，千世修来共枕眠。</item>
+        <item>善恶随人作，\n祸福自己招。</item>
+        <item>妻贤夫祸少，\n子孝父心宽。</item>
+        <item>守口如瓶，防意如诚；宁可负我，切莫负人。</item>
+        <item>爽口食多偏生病，快心事过恐生殃。</item>
+        <item>静坐常思己过，\n闲谈莫论人非。</item>
+        <item>书山有路勤为径，\n学海无涯苦作舟。</item>
+        <item>至乐莫如读书，\n至要莫如教子。</item>
+        <item>责人之心责己，\n恕己之心恕人。</item>
+        <item>一寸光阴一寸金，\n寸金难买寸光阴。</item>
+        <item>千经万典，\n孝悌为先。</item>
+        <item>有意栽花花不发，无心插柳柳成荫。</item>
+        <item>流水下滩非有意，白云出岫本无心。</item>
+        <item>当时若不登高望，谁识东流海洋深。</item>
+        <item>路遥知马力，\n事久见人心。</item>
+        <item>马行无力皆因瘦，\n人不风流只为贫。</item>
+        <item>饶人不是痴汉，\n痴汉不会饶人。</item>
+        <item>是亲不是亲，\n非亲却是亲。</item>
+        <item>美不美，乡中水，\n亲不亲，故乡人。</item>
+        <item>相逢不饮空归去，\n洞口桃花也笑人。</item>
+        <item>贫居闹市无人问，\n富在深山有远亲。</item>
+        <item>谁人背后无人说，\n那个人前不说人。</item>
+        <item>有钱道真语，\n无钱语不真。</item>
+        <item>不信但看筵中酒，\n杯杯先劝有钱人。</item>
+        <item>闹里有钱，\n静外安身。</item>
+        <item>来如风雨，\n去似微尘。</item>
+        <item>长江后浪催前浪，\n世上新人赶旧人。</item>
+        <item>近水楼台先得月，\n向阳花木早逢春。</item>
+        <item>古人不见今时月，\n今月曾经照古人。</item>
+        <item>先到为君，\n后到为臣。</item>
+        <item>莫道君行早，\n更有早行人。</item>
+        <item>莫信直中直，\n须防仁不仁。</item>
+        <item>山中有直树，\n世上无直人。</item>
+        <item>自恨枝无叶，\n莫怨太阳倾。</item>
+        <item>一年之计在于春，\n一日之计在于寅；</item>
+        <item>一家之计在于和，\n一生之计在于勤。</item>
+        <item>力微休负重，\n言轻莫劝人。</item>
+        <item>无钱休入众，\n遭难莫寻亲。</item>
+        <item>平生莫作皱眉事，\n世上应无切齿人。</item>
+        <item>士者国之宝，\n儒为席上珍。</item>
+        <item>若要断酒法，\n醒眼看醉人。</item>
+        <item>求人须求大丈夫，\n济人须济急时无。</item>
+        <item>久住令人贱，\n频来亲也疏。</item>
+        <item>酒中不语真君子，\n财上分明大丈夫。</item>
+        <item>积金千两，\n不如多买经书。</item>
+        <item>养子不教如养驴，\n养女不教如养猪。</item>
+        <item>有田不耕仓廪虚，\n有书不读子孙愚。</item>
+        <item>仓廪虚兮岁月乏，\n子孙愚兮礼义疏。</item>
+        <item>同君一席话，\n胜读十年书。</item>
+        <item>人不通古今，\n吗牛而襟裾。</item>
+        <item>茫茫四海人无数，\n哪个男儿是丈夫！</item>
+        <item>美酒酿成缘好客，\n黄金散尽为收书。</item>
+        <item>救人一命，\n胜造七级浮屠。</item>
+        <item>城门失火，\n殃及池鱼。</item>
+        <item>庭前生瑞草，\n好事不如无。</item>
+        <item>欲求生富贵，\n须下死功夫。</item>
+        <item>百年成之不足，\n一旦败之有馀。</item>
+        <item>人心似铁，\n官法如炉。</item>
+        <item>善化不足，\n恶化有馀。</item>
+        <item>水太清则无鱼，\n人太察则无谋。</item>
+        <item>知者减半，\n愚者全无。</item>
+        <item>痴人畏妇，\n贤女敬夫。</item>
+        <item>是非终日有，\n不听自然无。</item>
+        <item>宁可正而不足，\n不可邪而有馀。</item>
+        <item>宁可信其有，\n不可信其无。</item>
+        <item>猪篱茅舍风光好，\n道院僧房总不如。</item>
+    </string-array>
+    <string name="verify_code_copy_title">Copy verification code?</string>
+    <string name="toast_verify_code_copied">Verification code has copied</string>
+    <string name="quite_warning_message">Sms content after exit will be lost, confirm exit ?</string>
+    <string name="quite_to_enable_106_message">Exit and reopen app to take effect</string>
 </resources>

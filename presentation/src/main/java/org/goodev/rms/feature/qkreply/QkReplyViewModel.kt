@@ -41,6 +41,7 @@ import org.goodev.rms.model.Message
 import org.goodev.rms.repository.ConversationRepository
 import org.goodev.rms.repository.MessageRepository
 import org.goodev.rms.util.ActiveSubscriptionObservable
+import org.goodev.rms.util.Preferences
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Named
@@ -53,6 +54,7 @@ class QkReplyViewModel @Inject constructor(
         private val messageRepo: MessageRepository,
         private val navigator: Navigator,
         private val sendMessage: SendMessage,
+        private val prefs: Preferences,
         private val subscriptionManager: SubscriptionManagerCompat
 ) : QkViewModel<QkReplyView, QkReplyState>(QkReplyState(selectedConversation = threadId)) {
 
@@ -156,6 +158,13 @@ class QkReplyViewModel @Inject constructor(
         view.menuItemIntent
                 .filter { id -> id == R.id.view }
                 .doOnNext { navigator.showConversation(threadId) }
+                .autoDisposable(view.scope())
+                .subscribe { newState { copy(hasError = true) } }
+
+        // disable
+        view.menuItemIntent
+                .filter { id -> id == R.id.disable }
+                .doOnNext { prefs.qkreply.set(false) }
                 .autoDisposable(view.scope())
                 .subscribe { newState { copy(hasError = true) } }
 

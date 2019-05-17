@@ -28,6 +28,7 @@ open class Conversation(
         @Index var archived: Boolean = false,
         @Index var blocked: Boolean = false,
         @Index var pinned: Boolean = false,
+        @Index var oneZeroSix: Boolean = false,// 是否为106开头短信
         var recipients: RealmList<Recipient> = RealmList(),
         var count: Int = 0,
         var date: Long = 0,

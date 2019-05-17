@@ -28,8 +28,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp">
+        android:paddingBottom="8dp">
+
+        <LinearLayout
+            android:id="@+id/drawerHeader"
+            android:layout_width="match_parent"
+            android:layout_height="168dp"
+            android:background="@color/tools_theme"
+            android:orientation="vertical">
+
+            <org.goodev.rms.common.widget.QkTextView
+                android:id="@+id/quotes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="16dp"
+                android:breakStrategy="simple"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="22dp"
+                tools:ignore="SpUsage,UnusedAttribute"/>
+        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/inbox"
@@ -44,6 +62,22 @@
             <org.goodev.rms.common.widget.QkTextView
                 style="@style/DrawerText"
                 android:text="@string/drawer_inbox"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/oneZeroSix"
+            style="@style/DrawerRow">
+
+            <ImageView
+                android:id="@+id/oneZeroSixIcon"
+                style="@style/DrawerIcon"
+                android:src="@drawable/ic_one_black_24dp"
+                tools:tint="?android:attr/textColorSecondary"/>
+
+            <org.goodev.rms.common.widget.QkTextView
+                style="@style/DrawerText"
+                android:text="@string/drawer_106"/>
 
         </LinearLayout>
 
@@ -66,8 +100,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="?android:attr/divider"/>
 
         <LinearLayout
@@ -123,7 +157,7 @@
                 tools:textColor="@color/textPrimaryDark"/>
 
         </LinearLayout>
-
+        <!---->
         <LinearLayout
             android:id="@+id/blocking"
             style="@style/DrawerRow">
@@ -142,8 +176,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
             android:background="?android:attr/divider"/>
 
         <LinearLayout
@@ -161,6 +195,7 @@
 
         </LinearLayout>
 
+        <!--
         <LinearLayout
             android:id="@+id/plus"
             style="@style/DrawerRow">
@@ -175,7 +210,7 @@
                 android:text="@string/drawer_plus"/>
 
         </LinearLayout>
-
+        -->
         <LinearLayout
             android:id="@+id/help"
             style="@style/DrawerRow">
@@ -205,7 +240,7 @@
                 android:text="@string/drawer_invite"/>
 
         </LinearLayout>
-
+        <!--
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/plusBanner"
             android:layout_width="match_parent"
@@ -265,14 +300,14 @@
                 app:layout_constraintTop_toTopOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/rateLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/rounded_rectangle_outline_2dp"
             android:backgroundTint="?android:attr/divider">
 
@@ -291,9 +326,9 @@
                 android:id="@+id/rateTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/rate_title"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -306,8 +341,8 @@
                 android:id="@+id/rateSummary"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
                 android:layout_marginTop="2dp"
+                android:layout_marginEnd="16dp"
                 android:text="@string/rate_summary"
                 app:layout_constraintEnd_toEndOf="@id/rateTitle"
                 app:layout_constraintStart_toStartOf="@id/rateTitle"
@@ -321,9 +356,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:paddingBottom="16dp"
                 android:paddingStart="16dp"
                 android:paddingTop="16dp"
+                android:paddingBottom="16dp"
                 android:text="@string/rate_dismiss"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@id/rateOkay"
@@ -335,8 +370,8 @@
                 android:id="@+id/rateOkay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:background="?attr/selectableItemBackground"
                 android:padding="16dp"
                 android:text="@string/rate_okay"

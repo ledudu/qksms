@@ -31,11 +31,18 @@ class MarkRead @Inject constructor(
         private val updateBadge: UpdateBadge
 ) : Interactor<List<Long>>() {
 
+    /// 如果是在通知栏发送消息，标记为已读，这个时候不需要更新通知
+    var skipUpdateNotification: Boolean = false
+
     override fun buildObservable(params: List<Long>): Flowable<*> {
         return Flowable.just(params.toLongArray())
                 .doOnNext { threadIds -> messageRepo.markRead(*threadIds) }
                 .doOnNext { threadIds -> conversationRepo.updateConversations(*threadIds) } // Update the conversation
-                .doOnNext { threadIds -> threadIds.forEach(notificationManager::update) }
+                .doOnNext { threadIds ->
+                    if (!skipUpdateNotification) {
+                        threadIds.forEach(notificationManager::update)
+                    }
+                }
                 .flatMap { updateBadge.buildObservable(Unit) } // Update the badge
     }
 

@@ -26,18 +26,15 @@ import androidx.core.provider.FontRequest
 import androidx.emoji.text.EmojiCompat
 import androidx.emoji.text.FontRequestEmojiCompatConfig
 import com.akaita.java.rxjava2debug.RxJava2Debug
-import com.bugsnag.android.Bugsnag
-import com.bugsnag.android.Configuration
 import dagger.android.*
 import io.realm.Realm
 import io.realm.RealmConfiguration
-import org.goodev.rms.BuildConfig
 import org.goodev.rms.R
-import org.goodev.rms.common.util.BugsnagTree
 import org.goodev.rms.common.util.FileLoggingTree
 import org.goodev.rms.injection.AppComponentManager
 import org.goodev.rms.injection.appComponent
 import org.goodev.rms.manager.AnalyticsManager
+import org.goodev.rms.manager.CrashReportingTree
 import org.goodev.rms.migration.QkRealmMigration
 import org.goodev.rms.util.NightModeManager
 import timber.log.Timber
@@ -68,12 +65,9 @@ class RmsApplication : Application(), HasActivityInjector, HasBroadcastReceiverI
     override fun onCreate() {
         super.onCreate()
 
-        Bugsnag.init(this, Configuration(BuildConfig.BUGSNAG_API_KEY).apply {
-            appVersion = BuildConfig.VERSION_NAME
-            projectPackages = packages
-        })
-
-        RxJava2Debug.enableRxJava2AssemblyTracking()
+        if (BuildConfig.DEBUG) {
+            RxJava2Debug.enableRxJava2AssemblyTracking()
+        }
 
         Realm.init(this)
         Realm.setDefaultConfiguration(RealmConfiguration.Builder()
@@ -89,6 +83,7 @@ class RmsApplication : Application(), HasActivityInjector, HasBroadcastReceiverI
             analyticsManager.setUserProperty("Installer", installer)
         }
 
+        analyticsManager.init()
         nightModeManager.updateCurrentTheme()
 
         val fontRequest = FontRequest(
@@ -99,7 +94,7 @@ class RmsApplication : Application(), HasActivityInjector, HasBroadcastReceiverI
 
         EmojiCompat.init(FontRequestEmojiCompatConfig(this, fontRequest))
 
-        Timber.plant(Timber.DebugTree(), BugsnagTree(), fileLoggingTree)
+        Timber.plant(Timber.DebugTree(), CrashReportingTree(this), fileLoggingTree)
     }
 
     override fun activityInjector(): AndroidInjector<Activity> {

@@ -20,14 +20,13 @@ package org.goodev.rms.feature.main
 
 import android.Manifest
 import android.animation.ObjectAnimator
-import android.app.AlertDialog
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
-import androidx.core.view.accessibility.AccessibilityEventCompat.setAction
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
@@ -51,6 +50,7 @@ import org.goodev.rms.common.Navigator
 import org.goodev.rms.common.androidxcompat.drawerOpen
 import org.goodev.rms.common.androidxcompat.scope
 import org.goodev.rms.common.base.QkThemedActivity
+import org.goodev.rms.common.util.ClipboardUtils
 import org.goodev.rms.common.util.extensions.*
 import org.goodev.rms.feature.conversations.ConversationItemTouchCallback
 import org.goodev.rms.feature.conversations.ConversationsAdapter
@@ -85,18 +85,20 @@ class MainActivity : QkThemedActivity(), MainView {
     override val homeIntent: Subject<Unit> = PublishSubject.create()
     override val drawerItemIntent: Observable<DrawerItem> by lazy {
         Observable.merge(listOf(
+                drawerHeader.clicks().map { DrawerItem.HEADER },
                 inbox.clicks().map { DrawerItem.INBOX },
+                oneZeroSix.clicks().map { DrawerItem.ONE_ZERO_SIX },
                 archived.clicks().map { DrawerItem.ARCHIVED },
                 backup.clicks().map { DrawerItem.BACKUP },
                 scheduled.clicks().map { DrawerItem.SCHEDULED },
                 blocking.clicks().map { DrawerItem.BLOCKING },
                 settings.clicks().map { DrawerItem.SETTINGS },
-                plus.clicks().map { DrawerItem.PLUS },
+                //plus.clicks().map { DrawerItem.PLUS },
                 help.clicks().map { DrawerItem.HELP },
                 invite.clicks().map { DrawerItem.INVITE }))
     }
     override val optionsItemIntent: Subject<Int> = PublishSubject.create()
-    override val plusBannerIntent by lazy { plusBanner.clicks() }
+    //    override val plusBannerIntent by lazy { plusBanner.clicks() }
     override val dismissRatingIntent by lazy { rateDismiss.clicks() }
     override val rateIntent by lazy { rateOkay.clicks() }
     override val conversationsSelectedIntent by lazy { conversationsAdapter.selectionChanges }
@@ -157,6 +159,7 @@ class MainActivity : QkThemedActivity(), MainView {
                             .let { tintList ->
                                 inboxIcon.imageTintList = tintList
                                 archivedIcon.imageTintList = tintList
+                                oneZeroSixIcon.imageTintList = tintList
                             }
 
                     // Miscellaneous views
@@ -166,7 +169,8 @@ class MainActivity : QkThemedActivity(), MainView {
                     }
                     syncingProgress?.progressTintList = ColorStateList.valueOf(theme.theme)
                     syncingProgress?.indeterminateTintList = ColorStateList.valueOf(theme.theme)
-                    plusIcon.setTint(theme.theme)
+                    //plusIcon.setTint(theme.theme)
+                    drawerHeader.setBackgroundColor(theme.theme)
                     rateIcon.setTint(theme.theme)
                     compose.setBackgroundTint(theme.theme)
 
@@ -187,18 +191,21 @@ class MainActivity : QkThemedActivity(), MainView {
         val markPinned = when (state.page) {
             is Inbox -> state.page.markPinned
             is Archived -> state.page.markPinned
+            is OneZeroSix -> state.page.markPinned
             else -> true
         }
 
         val markRead = when (state.page) {
             is Inbox -> state.page.markRead
             is Archived -> state.page.markRead
+            is OneZeroSix -> state.page.markRead
             else -> true
         }
 
         val selectedConversations = when (state.page) {
             is Inbox -> state.page.selected
             is Archived -> state.page.selected
+            is OneZeroSix -> state.page.selected
             else -> 0
         }
 
@@ -217,12 +224,14 @@ class MainActivity : QkThemedActivity(), MainView {
         listOf(plusBadge1, plusBadge2).forEach { badge ->
             badge.isVisible = drawerBadgesExperiment.variant && !state.upgraded
         }
-        plus.isVisible = state.upgraded
-        plusBanner.isVisible = !state.upgraded
+        //plus.isVisible = false && state.upgraded // TODO 不显示这个菜单
+        //plusBanner.isVisible = !state.upgraded
+        oneZeroSix.isVisible = prefs.oneZeroSix.get()
         rateLayout.setVisible(state.showRating)
+        quotes.text = ClipboardUtils.quoteText(applicationContext)
 
-        compose.setVisible(state.page is Inbox || state.page is Archived)
-        conversationsAdapter.emptyView = empty.takeIf { state.page is Inbox || state.page is Archived }
+        compose.setVisible(state.page is Inbox || state.page is Archived || state.page is OneZeroSix)
+        conversationsAdapter.emptyView = empty.takeIf { state.page is Inbox || state.page is Archived || state.page is OneZeroSix }
 
         when (state.page) {
             is Inbox -> {
@@ -253,9 +262,22 @@ class MainActivity : QkThemedActivity(), MainView {
                 itemTouchHelper.attachToRecyclerView(null)
                 empty.setText(R.string.archived_empty_text)
             }
+
+            is OneZeroSix -> {
+                showBackButton(state.page.selected > 0)
+                title = when (state.page.selected != 0) {
+                    true -> getString(R.string.main_title_selected, state.page.selected)
+                    false -> getString(R.string.title_106)
+                }
+                if (recyclerView.adapter !== conversationsAdapter) recyclerView.adapter = conversationsAdapter
+                conversationsAdapter.updateData(state.page.data)
+                itemTouchHelper.attachToRecyclerView(null)
+                empty.setText(R.string.onezerosix_empty_text)
+            }
         }
 
         inbox.isActivated = state.page is Inbox
+        oneZeroSix.isActivated = state.page is OneZeroSix
         archived.isActivated = state.page is Archived
 
         if (drawerLayout.isDrawerOpen(GravityCompat.START) && !state.drawerOpen) drawerLayout.closeDrawer(GravityCompat.START)
@@ -343,6 +365,17 @@ class MainActivity : QkThemedActivity(), MainView {
 
     override fun showArchivedSnackbar() {
         archiveSnackbar.show()
+    }
+
+    override fun showHelpDialog() {
+        AlertDialog.Builder(this)
+                .setTitle(R.string.drawer_help)
+                .setMessage(R.string.drawer_help_message)
+                .setPositiveButton(R.string.rate_okay) { _, _ ->
+                    ClipboardUtils.copy(this, "ddpxha") // 微信号
+                    this.makeToast(R.string.toast_copied)
+                }
+                .create().show()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

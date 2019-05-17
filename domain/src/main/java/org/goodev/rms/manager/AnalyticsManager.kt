@@ -24,4 +24,6 @@ interface AnalyticsManager {
 
     fun setUserProperty(key: String, value: Any)
 
+    fun init()
+
 }

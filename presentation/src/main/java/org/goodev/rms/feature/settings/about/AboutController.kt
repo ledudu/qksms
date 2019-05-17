@@ -18,6 +18,8 @@
  */
 package org.goodev.rms.feature.settings.about
 
+import android.os.Build
+import android.text.Html
 import android.view.View
 import com.jakewharton.rxbinding2.view.clicks
 import io.reactivex.Observable
@@ -40,7 +42,13 @@ class AboutController : QkController<AboutView, Unit, AboutPresenter>(), AboutVi
     }
 
     override fun onViewCreated() {
-        version.summary = BuildConfig.VERSION_NAME
+        version.text = resources?.getString(R.string.about_version_title, BuildConfig.VERSION_NAME)
+                ?: BuildConfig.VERSION_NAME
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            summary.text = Html.fromHtml(resources?.getString(R.string.about_summary), Html.FROM_HTML_MODE_COMPACT)
+        } else {
+            summary.text = Html.fromHtml(resources?.getString(R.string.about_summary))
+        }
     }
 
     override fun onAttach(view: View) {

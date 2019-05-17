@@ -19,15 +19,15 @@
   ~ along with QKSMS.  If not, see <http://www.gnu.org/licenses/>.
   -->
 <resources>
-    <string name="app_name">簡訊</string>
     <string name="shortcut_compose_long_label">新對話</string>
     <string name="shortcut_compose_short_label">編寫</string>
     <string name="shortcut_compose_disabled_message">快捷方式已禁用</string>
+    <string name="title_106">106簡訊</string>
     <string name="title_archived">封存</string>
     <string name="title_settings">設定</string>
     <string name="title_notification_prefs">通知</string>
     <string name="title_theme">主題</string>
-    <string name="title_conversations">在收件箱中搜索...</string>
+    <string name="title_conversations">在收件箱中搜索…</string>
     <string name="title_compose">編輯</string>
     <string name="setup_skip">跳过</string>
     <string name="setup_next">繼續</string>
@@ -45,34 +45,36 @@
     <string name="main_menu_read">標記為已讀</string>
     <string name="main_menu_unread">標記為未讀</string>
     <string name="main_menu_block">攔截</string>
-    <string name="main_syncing">正在同步...</string>
+    <string name="main_syncing">正在同步…</string>
     <string name="main_sender_you">你：%s</string>
     <string name="main_message_results_title">信息中的結果</string>
     <string name="main_message_results">%d 條信息</string>
     <string name="inbox_empty_text">對話會在這裡顯示</string>
     <string name="inbox_search_empty_text">無結果</string>
     <string name="archived_empty_text">您存檔的對話將出現在這裡</string>
+    <string name="onezerosix_empty_text">您的106簡訊對話將出現在這裡</string>
     <string name="main_fab_cd">開始新對話</string>
     <string name="main_default_sms_title">愛上發訊息</string>
-    <string name="main_default_sms_message">將QKSMS設為預設信息應用程式</string>
+    <string name="main_default_sms_message">將微精靈（簡訊精靈）設為預設信息應用程式</string>
     <string name="main_default_sms_change">更改</string>
     <string name="main_permission_required">需要授權</string>
-    <string name="main_permission_sms">需要允許QKSMS發送和查看SMS訊息</string>
-    <string name="main_permission_contacts">需要允許QKSMS查看您的連絡人</string>
+    <string name="main_permission_sms">需要允許微精靈（簡訊精靈）發送和查看SMS訊息</string>
+    <string name="main_permission_contacts">需要允許微精靈（簡訊精靈）查看您的連絡人</string>
     <string name="main_permission_allow">允許</string>
     <string name="drawer_inbox">收件箱</string>
     <string name="drawer_archived">已存檔</string>
+    <string name="drawer_106">一〇六</string>
     <string name="drawer_scheduled">已計劃</string>
     <string name="drawer_blocking">Blocking</string>
     <string name="drawer_more">更多</string>
     <string name="drawer_settings">設定</string>
-    <string name="drawer_plus">QKSMS+</string>
+    <string name="drawer_plus">高级功能</string>
     <string name="drawer_help">幫助與反饋</string>
     <string name="drawer_invite">邀請朋友</string>
-    <string name="drawer_plus_banner_title">QKSMS +</string>
+    <string name="drawer_plus_banner_title">微精靈（簡訊精靈） +</string>
     <string name="drawer_plus_banner_summary">Unlock amazing new features, and support development</string>
-    <string name="rate_title">喜歡QKSMS？</string>
-    <string name="rate_summary">在Google Play分享你的感受，並給我們評分！</string>
+    <string name="rate_title">喜歡微精靈（簡訊精靈）？</string>
+    <string name="rate_summary">在應用商店分享你的感受，並給我們評分！</string>
     <string name="rate_okay">好！</string>
     <string name="rate_dismiss">放棄</string>
     <string name="dialog_delete_title">刪除</string>
@@ -92,9 +94,9 @@
     <string name="compose_vcard_label">連絡人卡片</string>
     <string name="compose_scheduled_for">Scheduled for</string>
     <string name="compose_scheduled_future">Selected time must be in the future!</string>
-    <string name="compose_scheduled_plus">You must unlock QKSMS+ to use scheduled messaging</string>
+    <string name="compose_scheduled_plus">You must unlock 高级功能 to use scheduled messaging</string>
     <string name="compose_scheduled_toast">Added to scheduled messages</string>
-    <string name="compose_hint">寫一條訊息...</string>
+    <string name="compose_hint">寫一條訊息…</string>
     <string name="compose_menu_copy">複製文本</string>
     <string name="compose_menu_forward">轉寄</string>
     <string name="compose_menu_delete">刪除</string>
@@ -120,7 +122,7 @@
     <string name="compose_contact_error">Error reading contact</string>
     <string name="compose_sim_cd">%s selected, change SIM card</string>
     <string name="compose_send_cd">發送訊息</string>
-    <string name="message_status_sending">正在發送...</string>
+    <string name="message_status_sending">正在發送…</string>
     <string name="message_status_delivered">已傳遞 %s</string>
     <string name="message_status_failed">發送失敗，點擊重試</string>
     <string name="info_title">詳細資訊</string>
@@ -143,7 +145,7 @@
     <string name="backup_never">Never</string>
     <string name="backup_restore_title">Restore</string>
     <string name="backup_restore_summary">Select a backup</string>
-    <string name="backup_restore_error_plus">Please unlock QKSMS+ to use backup and restore</string>
+    <string name="backup_restore_error_plus">Please unlock 高级功能 to use backup and restore</string>
     <string name="backup_restore_error_backup">Backup in progress&#8230;</string>
     <string name="backup_restore_error_restore">Restore in progress&#8230;</string>
     <string name="backup_restore_confirm_title">Restore from backup</string>
@@ -155,7 +157,7 @@
     <plurals name="backup_message_count">
         <item quantity="other">%d messages</item>
     </plurals>
-    <string name="backup_disclaimer">Currently, only SMS is supported by Backup and Restore. MMS support and scheduled backups will be coming soon!</string>
+    <string name="backup_disclaimer">請注意：只有<b>簡訊</b>支持備份和恢復，彩信無法備份！</string>
     <string name="backup_now">Backup now</string>
     <string name="backup_progress_parsing">Parsing backup&#8230;</string>
     <string name="backup_progress_running">%d/%d messages</string>
@@ -200,7 +202,16 @@
     <string name="settings_qkreply_summary">彈出新訊息</string>
     <string name="settings_qkreply_tap_dismiss_title">點擊忽略</string>
     <string name="settings_qkreply_tap_dismiss_summary">在快顯視窗外點擊以關閉它</string>
-    <string name="settings_blocking_title">攔截</string>
+    <string name="keyword_empty_tips">請輸入需要攔截的內容</string>
+    <string name="keyword_add">添加</string>
+    <string name="keyword_hint">輸入需要攔截的關鍵字</string>
+    <string name="block_num_hint">輸入需要攔截的號碼段</string>
+    <string name="settings_blocking_title">攔截關鍵字</string>
+    <string name="settings_blocking_title_summary">配寘攔截簡訊的關鍵字</string>
+    <string name="settings_blocking_num_title">攔截號碼段</string>
+    <string name="settings_blocking_num_title_summary">配寘需要攔截的號碼段</string>
+    <string name="blocked_num_settings_empty">配寘需要攔截的號碼段，如果需要攔截所有173開頭的電話號碼發送的簡訊，則只需要輸入173即可，\n如果需要攔截所有170123開頭的號碼發送的簡訊，則只需要輸入170123即可，\n如果需要攔截170123456789號碼，則輸入170123456789即可。\n\n請在下方添加新的號碼段。</string>
+    <string name="blocked_settings_empty">配寘攔截簡訊的關鍵字，當新收到的短信包含任意的關鍵字時，自動攔截該簡訊。\n請在下方添加新的關鍵字。</string>
     <!-- Do not translate -->
     <string name="settings_should_i_answer_title">Should I Answer?</string>
     <string name="settings_should_i_answer_summary">使用\"Should I Answer\"應用過濾未知號碼的消息</string>
@@ -219,6 +230,10 @@
     </string-array>
     <string name="settings_delivery_title">送達確認</string>
     <string name="settings_delivery_summary">確認訊息已成功送達</string>
+    <string name="settings_106_title">單獨顯示106簡訊</string>
+    <string name="settings_106_summary">勾選該項將不再收件箱顯示106開頭的簡訊</string>
+    <string name="settings_insert_provider_title">寫入系統簡訊資料庫</string>
+    <string name="settings_insert_provider_summary">如果每次會發出兩條簡訊，則不要勾選該項</string>
     <string name="settings_unicode_title">刪除讀音符號</string>
     <string name="settings_unicode_summary">刪除訊息中字母上的讀音符號</string>
     <string name="settings_mobile_title">Mobile numbers only</string>
@@ -226,7 +241,7 @@
     <string name="settings_mms_size_title">自動壓縮MMS附件</string>
     <string name="settings_sync_title">同步消息</string>
     <string name="settings_sync_summary">重新與安卓原生訊息數據庫進行同步</string>
-    <string name="settings_about_title">關於QKSMS</string>
+    <string name="settings_about_title">關於微精靈（簡訊精靈）</string>
     <string name="settings_version">版本 %s</string>
     <string name="settings_logging_enabled">Debug logging enabled</string>
     <string name="settings_logging_disabled">Debug logging disabled</string>
@@ -236,7 +251,7 @@
     <string name="blocked_unblock_dialog_title">取消攔截</string>
     <string name="blocked_unblock_dialog_message">確定不再攔截這個對話嗎？</string>
     <string name="about_title">關於</string>
-    <string name="about_version_title">版本</string>
+    <string name="about_version_title">版本 %1$s</string>
     <string name="about_developer_title">開發者</string>
     <string name="about_source_title">源代碼</string>
     <string name="about_changelog_title">更新日誌</string>
@@ -247,9 +262,9 @@
     <string name="qksms_plus_description_summary">你可以支付%s來拯救一個飢餓的開發者</string>
     <string name="qksms_plus_upgrade">終身升級只需 %1$s %2$s</string>
     <string name="qksms_plus_upgrade_donate">解鎖並捐贈只需 %1$s %2$s</string>
-    <string name="qksms_plus_thanks_title">感謝你對QKSMS的支持！</string>
-    <string name="qksms_plus_thanks_summary">現在你可以使用QKSMS+的全部功能！</string>
-    <string name="qksms_plus_free_title">QKSMS+對F-Droid用戶免費！如果您想支持開發，可以隨意捐款。</string>
+    <string name="qksms_plus_thanks_title">感謝你對微精靈（簡訊精靈）的支持！</string>
+    <string name="qksms_plus_thanks_summary">現在你可以使用高级功能的全部功能！</string>
+    <string name="qksms_plus_free_title">高级功能對F-Droid用戶免費！如果您想支持開發，可以隨意捐款。</string>
     <string name="qksms_plus_donate">使用PayPal捐贈</string>
     <string name="qksms_plus_coming_soon">即將推出</string>
     <string name="qksms_plus_themes_title">高級主題</string>
@@ -271,8 +286,8 @@
     <string name="qksms_plus_respond_title">自動回覆</string>
     <string name="qksms_plus_respond_summary">使用預設回應自動回覆傳入郵件</string>
     <string name="qksms_plus_more_title">更多</string>
-    <string name="qksms_plus_more_summary">QKSMS is under active development, and your purchase will include all future QKSMS+ features!</string>
-    <string name="widget_loading">載入中...</string>
+    <string name="qksms_plus_more_summary">微精靈（簡訊精靈）尚在開發中，現在購買即可享受所有高級功能（包含以後開發的新功能）!</string>
+    <string name="widget_loading">載入中…</string>
     <string name="widget_more">查看更多對話</string>
     <string name="qkreply_menu_read">標記為已讀</string>
     <string name="qkreply_menu_call">致電</string>
@@ -280,8 +295,9 @@
     <string name="qkreply_menu_expand">顯示更多</string>
     <string name="qkreply_menu_collapse">顯示較少</string>
     <string name="qkreply_menu_view">打開對話</string>
-    <string name="theme_material">Material</string>
-    <string name="theme_plus">QKSMS+</string>
+    <string name="qkreply_menu_disable">禁用快速回復彈窗</string>
+    <string name="theme_material">預設主題</string>
+    <string name="theme_plus">自選主題</string>
     <string name="theme_hex">HEX</string>
     <string name="theme_apply">應用</string>
     <string-array name="notification_actions">
@@ -301,7 +317,8 @@
     <string name="button_undo">復原</string>
     <string name="toast_copied">已複製</string>
     <string name="toast_archived">存檔的會話</string>
-    <string name="toast_qksms_plus">您必須解鎖QKSMS+才能使用此功能</string>
+    <string name="toast_qksms_plus">您必須解鎖高级功能才能使用此功能</string>
+    <string name="notification_message_me">我</string>
     <plurals name="notification_new_messages">
         <item quantity="other">%s條新訊息</item>
     </plurals>
@@ -352,4 +369,8 @@
         <item>啊哈哈哈哈</item>
         <item>好的</item>
     </string-array>
+    <string name="verify_code_copy_title">複製驗證碼？</string>
+    <string name="toast_verify_code_copied">驗證碼已複製</string>
+    <string name="quite_warning_message">退出後編輯的短信內容將會遺失，確認退出？</string>
+    <string name="quite_to_enable_106_message">退出應用並重新打開即可生效</string>
 </resources>

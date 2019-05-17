@@ -22,12 +22,10 @@ import android.app.AlertDialog
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.jakewharton.rxbinding2.view.clicks
 import dagger.android.AndroidInjection
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
 import kotlinx.android.synthetic.main.blocked_activity.*
-import kotlinx.android.synthetic.main.settings_switch_widget.view.*
 import org.goodev.rms.R
 import org.goodev.rms.common.base.QkThemedActivity
 import javax.inject.Inject
@@ -39,7 +37,7 @@ class BlockedActivity : QkThemedActivity(), BlockedView {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    override val siaClickedIntent by lazy { shouldIAnswer.clicks() }
+    //override val siaClickedIntent by lazy { shouldIAnswer.clicks() }
     override val unblockIntent by lazy { blockedAdapter.unblock }
     override val confirmUnblockIntent: Subject<Long> = PublishSubject.create()
 
@@ -58,7 +56,7 @@ class BlockedActivity : QkThemedActivity(), BlockedView {
     }
 
     override fun render(state: BlockedState) {
-        shouldIAnswer.checkbox.isChecked = state.siaEnabled
+        //shouldIAnswer.checkbox.isChecked = state.siaEnabled
 
         blockedAdapter.updateData(state.data)
     }

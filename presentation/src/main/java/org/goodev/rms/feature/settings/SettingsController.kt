@@ -146,12 +146,14 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
         sendDelayDialog.adapter.selectedItem = state.sendDelayId
 
         delivery.checkbox.isChecked = state.deliveryEnabled
+        insertProvider.checkbox.isChecked = state.insertToProvider
+        oneZeroSix.checkbox.isChecked = state.oneZeroSix
 
         textSize.summary = state.textSizeSummary
         textSizeDialog.adapter.selectedItem = state.textSizeId
         systemFont.checkbox.isChecked = state.systemFontEnabled
 
-        unicode.checkbox.isChecked = state.stripUnicodeEnabled
+        //unicode.checkbox.isChecked = state.stripUnicodeEnabled
         mobileOnly.checkbox.isChecked = state.mobileOnly
 
         mmsSize.summary = state.maxMmsSizeSummary

@@ -178,9 +178,11 @@ public class PushReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.v(TAG, intent.getAction() + " " + intent.getType());
-        if ((intent.getAction().equals(WAP_PUSH_DELIVER_ACTION) || intent.getAction().equals(WAP_PUSH_RECEIVED_ACTION))
-                && ContentType.MMS_MESSAGE.equals(intent.getType())) {
+        String action = intent.getAction();
+        String type = intent.getType();
+        Log.v(TAG, action + " " + type);
+        if ((WAP_PUSH_DELIVER_ACTION.equals(action) || WAP_PUSH_RECEIVED_ACTION.equals(action))
+                && ContentType.MMS_MESSAGE.equals(type)) {
             Log.v(TAG, "Received PUSH Intent: " + intent);
 
             MmsConfig.init(context);

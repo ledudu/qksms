@@ -18,7 +18,6 @@
   -->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="?android:attr/windowBackground">
@@ -29,57 +28,41 @@
         android:layout_height="wrap_content"
         android:animateLayoutChanges="true"
         android:orientation="vertical"
-        android:paddingBottom="8dp"
-        android:paddingTop="8dp">
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp">
 
-        <org.goodev.rms.common.widget.PreferenceView
+        <org.goodev.rms.common.widget.QkTextView
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:drawablePadding="8dp"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="20sp"/>
+
+        <org.goodev.rms.common.widget.QkTextView
             android:id="@+id/version"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:title="@string/about_version_title"
-            tools:summary="3.0.8"/>
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:textColor="?android:attr/textColorPrimary"
+            app:textSize="primary"/>
 
-        <org.goodev.rms.common.widget.PreferenceView
-            android:id="@+id/developer"
+        <org.goodev.rms.common.widget.QkTextView
+            android:id="@+id/summary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:summary="@string/about_developer"
-            app:title="@string/about_developer_title"/>
-
-        <org.goodev.rms.common.widget.PreferenceView
-            android:id="@+id/source"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:summary="@string/about_source"
-            app:title="@string/about_source_title"/>
-
-        <org.goodev.rms.common.widget.PreferenceView
-            android:id="@+id/changelog"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:summary="@string/about_changelog"
-            app:title="@string/about_changelog_title"/>
-
-        <org.goodev.rms.common.widget.PreferenceView
-            android:id="@+id/contact"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:summary="@string/about_contact"
-            app:title="@string/about_contact_title"/>
-
-        <org.goodev.rms.common.widget.PreferenceView
-            android:id="@+id/license"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:summary="@string/about_license"
-            app:title="@string/about_license_title"/>
-
-        <org.goodev.rms.common.widget.PreferenceView
-            android:id="@+id/copyright"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:summary="@string/about_copyright"
-            app:title="@string/about_copyright_title"/>
+            android:layout_margin="16dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textIsSelectable="true"
+            app:textSize="primary"/>
 
     </LinearLayout>
 

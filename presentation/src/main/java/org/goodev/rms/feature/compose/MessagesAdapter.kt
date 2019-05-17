@@ -258,6 +258,18 @@ class MessagesAdapter @Inject constructor(
                 isMe = message.isMe()))
 
 
+//        if (view.body.text is SpannableString) {
+//            val current: SpannableString = view.body.text as SpannableString
+//            val spans = current.getSpans<URLSpan>(0, current.length, URLSpan::class.java)
+//            spans.forEach {
+//                Log.e("adapter", "onBindViewHolder: ${it.url}" )
+//                val start = current.getSpanStart(it)
+//                val end = current.getSpanEnd(it)
+//                current.removeSpan(it)
+//                current.setSpan(DefensiveURLSpan(it.url, colors, view), start, end, 0)
+//            }
+//        }
+
         // Bind the attachments
         val partsAdapter = view.attachments.adapter as PartsAdapter
         partsAdapter.setData(message, previous, next, view)

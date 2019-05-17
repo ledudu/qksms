@@ -18,6 +18,7 @@
  */
 package org.goodev.rms.feature.blocked
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import io.reactivex.subjects.PublishSubject
@@ -25,10 +26,14 @@ import kotlinx.android.synthetic.main.blocked_list_item.view.*
 import org.goodev.rms.R
 import org.goodev.rms.common.base.QkRealmAdapter
 import org.goodev.rms.common.base.QkViewHolder
+import org.goodev.rms.common.util.DateFormatter
 import org.goodev.rms.model.Conversation
 import javax.inject.Inject
 
-class BlockedAdapter @Inject constructor() : QkRealmAdapter<Conversation>() {
+class BlockedAdapter @Inject constructor(
+        private val context: Context,
+        private val dateFormatter: DateFormatter
+) : QkRealmAdapter<Conversation>() {
 
     val unblock: PublishSubject<Long> = PublishSubject.create()
 
@@ -48,6 +53,12 @@ class BlockedAdapter @Inject constructor() : QkRealmAdapter<Conversation>() {
 
         view.avatars.contacts = conversation.recipients
         view.title.text = conversation.getTitle()
+
+        view.date.text = dateFormatter.getConversationTimestamp(conversation.date)
+        view.snippet.text = when (conversation.me) {
+            true -> context.getString(R.string.main_sender_you, conversation.snippet)
+            false -> conversation.snippet
+        }
     }
 
 }

@@ -21,8 +21,7 @@ package org.goodev.rms.injection.android
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import org.goodev.rms.feature.backup.BackupActivity
-import org.goodev.rms.feature.blocked.BlockedActivity
-import org.goodev.rms.feature.blocked.BlockedActivityModule
+import org.goodev.rms.feature.blocked.*
 import org.goodev.rms.feature.compose.ComposeActivity
 import org.goodev.rms.feature.compose.ComposeActivityModule
 import org.goodev.rms.feature.conversationinfo.ConversationInfoActivity
@@ -87,5 +86,13 @@ abstract class ActivityBuilderModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [BlockedActivityModule::class])
     abstract fun bindBlockedActivity(): BlockedActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [BlockedSettingsActivityModule::class])
+    abstract fun bindBlockedSettingsActivity(): BlockedSettingsActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [BlockedNumberSettingsActivityModule::class])
+    abstract fun bindBlockedNumberSettingsActivity(): BlockedNumberSettingsActivity
 
 }

@@ -21,6 +21,7 @@ package org.goodev.rms.injection
 import android.app.Application
 import android.content.ContentResolver
 import android.content.Context
+import android.content.SharedPreferences
 import android.preference.PreferenceManager
 import androidx.lifecycle.ViewModelProvider
 import com.f2prateek.rx.preferences2.RxSharedPreferences
@@ -56,6 +57,12 @@ class AppModule(private var application: Application) {
     fun provideRxPreferences(context: Context): RxSharedPreferences {
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
         return RxSharedPreferences.create(preferences)
+    }
+
+    @Provides
+    @Singleton
+    fun providePreferences(context: Context): SharedPreferences {
+        return PreferenceManager.getDefaultSharedPreferences(context)
     }
 
     @Provides

@@ -23,7 +23,7 @@ import org.goodev.rms.common.base.QkView
 
 interface BlockedView : QkView<BlockedState> {
 
-    val siaClickedIntent: Observable<*>
+//    val siaClickedIntent: Observable<*>
     val unblockIntent: Observable<Long>
     val confirmUnblockIntent: Observable<Long>
 

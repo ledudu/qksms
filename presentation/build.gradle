@@ -25,22 +25,32 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.3"
-    flavorDimensions "analytics"
+//    flavorDimensions "analytics"
+    flavorDimensions "channel"
 
     defaultConfig {
         applicationId "org.goodev.rms"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 193
-        versionName "3.6.3"
+        versionCode 1404
+        versionName "1.4.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "zh-rCN", "zh-rTW", "en"
 
+        buildConfigField "String", "APP_KEY", "\"1\""
         buildConfigField "String", "BUGSNAG_API_KEY", "\"${System.getenv("BUGSNAG_API_KEY")}\""
+
+        buildConfigField "String", "CHANNEL", "\"coolapk\""
+        buildConfigField "String", "DOWNLOAD_URL", "\"https://www.coolapk.com/apk/org.goodev.rms\""
+        buildConfigField "String", "INVITE_URL", "\"推荐给你一个好用的短信应用，下载地址： https://www.coolapk.com/apk/org.goodev.rms\""
+        resValue("string", "app_name", "短信精灵")
     }
 
     signingConfigs {
-        release
+        release.storeFile = file("../store.jks")
+        release.storePassword = System.getenv("key_password")
+        release.keyAlias = System.getenv("key_alias")
+        release.keyPassword = System.getenv("key_password")
     }
 
     buildTypes {
@@ -48,6 +58,10 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+
+        debug {
             signingConfig signingConfigs.release
         }
     }
@@ -61,49 +75,30 @@ android {
         abortOnError false
     }
 
-    productFlavors {
-        withAnalytics { dimension "analytics" }
-        noAnalytics { dimension "analytics" }
-    }
+//    if (System.getenv("CI") == "true") {
+//        signingConfigs.release.storeFile = file("../keystore")
+//        signingConfigs.release.storePassword = System.getenv("keystore_password")
+//        signingConfigs.release.keyAlias = System.getenv("key_alias")
+//        signingConfigs.release.keyPassword = System.getenv("key_password")
+//    }
 
-    splits {
-        abi {
-            enable true
-            reset()
-            include 'armeabi-v7a', 'arm64-v8a'
-            universalApk true
-        }
-    }
-
-    if (System.getenv("CI") == "true") {
-        signingConfigs.release.storeFile = file("../keystore")
-        signingConfigs.release.storePassword = System.getenv("keystore_password")
-        signingConfigs.release.keyAlias = System.getenv("key_alias")
-        signingConfigs.release.keyPassword = System.getenv("key_password")
+    packagingOptions {
+        exclude 'META-INF/*.version'
+        exclude 'lib/mips/*.so'
     }
 }
 
 androidExtensions {
     experimental = true
 }
-
-import com.android.build.OutputFile
-
 // For each APK output variant, override versionCode with one that is unique
 // https://developer.android.com/studio/build/gradle-tips.html#configure-dynamic-version-codes
-android.applicationVariants.all { variant ->
-    variant.outputs.each { output ->
-        def baseAbiVersionCode = abiCodes.get(output.getFilter(OutputFile.ABI), 0)
-        output.versionCodeOverride = baseAbiVersionCode * 1000 + variant.versionCode
-    }
-}
-
-configurations {
-    noAnalyticsDebug
-    noAnalyticsRelease
-    withAnalyticsDebug
-    withAnalyticsRelease
-}
+//android.applicationVariants.all { variant ->
+//    variant.outputs.each { output ->
+//        def baseAbiVersionCode = abiCodes.get(output.getFilter(OutputFile.ABI), 0)
+//        output.versionCodeOverride = baseAbiVersionCode * 1000 + variant.versionCode
+//    }
+//}
 
 dependencies {
     // lifecycle
@@ -167,6 +162,9 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:$rxjava_version"
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
 
+    implementation 'com.umeng.umsdk:analytics:8.0.2'
+    implementation 'com.umeng.umsdk:common:2.0.2'
+
     // testing
     androidTestImplementation("androidx.test.espresso:espresso-core:$espresso_version", {
         exclude group: "com.android.support", module: "support-annotations"
@@ -176,8 +174,6 @@ dependencies {
     testImplementation "junit:junit:$junit_version"
     testImplementation "org.mockito:mockito-core:$mockito_version"
 
-    implementation "com.android.billingclient:billing:1.0"
-    implementation "com.bugsnag:bugsnag-android:4.1.1"
     implementation "com.github.chrisbanes:PhotoView:2.0.0"
     implementation "com.f2prateek.rx.preferences2:rx-preferences:$rx_preferences_version"
     implementation "com.google.android:flexbox:0.3.1"
@@ -189,8 +185,6 @@ dependencies {
     implementation project(":common")
     implementation project(':data')
     implementation project(':domain')
-    noAnalyticsDebug project(path: ':data', configuration: 'noAnalyticsDebug')
-    noAnalyticsRelease project(path: ':data', configuration: 'noAnalyticsRelease')
-    withAnalyticsDebug project(path: ':data', configuration: 'withAnalyticsDebug')
-    withAnalyticsRelease project(path: ':data', configuration: 'withAnalyticsRelease')
+//    withAnalyticsDebug project(path: ':data', configuration: 'withAnalyticsDebug')
+//    withAnalyticsRelease project(path: ':data', configuration: 'withAnalyticsRelease')
 }

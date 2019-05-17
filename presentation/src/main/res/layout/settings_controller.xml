@@ -111,6 +111,22 @@
             app:title="@string/settings_notifications_title"/>
 
         <org.goodev.rms.common.widget.PreferenceView
+            android:id="@+id/blockedNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_block_number_black_24dp"
+            app:title="@string/settings_blocking_num_title"
+            app:summary="@string/settings_blocking_num_title_summary"/>
+
+        <org.goodev.rms.common.widget.PreferenceView
+            android:id="@+id/blocked"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_block_black_24dp"
+            app:title="@string/settings_blocking_title"
+            app:summary="@string/settings_blocking_title_summary"/>
+
+        <org.goodev.rms.common.widget.PreferenceView
             android:id="@+id/autoEmoji"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -145,12 +161,12 @@
             app:widget="@layout/settings_switch_widget"/>
 
         <org.goodev.rms.common.widget.PreferenceView
-            android:id="@+id/unicode"
+            android:id="@+id/insertProvider"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:icon="@drawable/ic_translate_black_24dp"
-            app:summary="@string/settings_unicode_summary"
-            app:title="@string/settings_unicode_title"
+            app:icon="@drawable/ic_insert_chart_black_24dp"
+            app:summary="@string/settings_insert_provider_summary"
+            app:title="@string/settings_insert_provider_title"
             app:widget="@layout/settings_switch_widget"/>
 
         <org.goodev.rms.common.widget.PreferenceView
@@ -160,6 +176,15 @@
             app:icon="@drawable/ic_smartphone_black_24dp"
             app:summary="@string/settings_mobile_summary"
             app:title="@string/settings_mobile_title"
+            app:widget="@layout/settings_switch_widget"/>
+
+        <org.goodev.rms.common.widget.PreferenceView
+            android:id="@+id/oneZeroSix"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:icon="@drawable/ic_one_black_24dp"
+            app:summary="@string/settings_106_summary"
+            app:title="@string/settings_106_title"
             app:widget="@layout/settings_switch_widget"/>
 
         <org.goodev.rms.common.widget.PreferenceView
