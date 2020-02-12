@@ -29,9 +29,11 @@ import com.moez.QKSMS.R
 import com.moez.QKSMS.common.util.Colors
 import com.moez.QKSMS.common.util.extensions.forEach
 import com.moez.QKSMS.common.util.extensions.resolveThemeColor
+import com.moez.QKSMS.extensions.Optional
 import com.moez.QKSMS.injection.appComponent
+import com.moez.QKSMS.repository.ConversationRepository
 import com.uber.autodispose.android.ViewScopeProvider
-import com.uber.autodispose.kotlin.autoDisposable
+import com.uber.autodispose.autoDisposable
 import io.reactivex.subjects.BehaviorSubject
 import io.reactivex.subjects.Subject
 import kotlinx.android.synthetic.main.tab_view.view.*
@@ -40,8 +42,9 @@ import javax.inject.Inject
 class PagerTitleView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : LinearLayout(context, attrs) {
 
     @Inject lateinit var colors: Colors
+    @Inject lateinit var conversationRepo: ConversationRepository
 
-    private val threadId: Subject<Long> = BehaviorSubject.create()
+    private val recipientId: Subject<Long> = BehaviorSubject.create()
 
     var pager: ViewPager? = null
         set(value) {
@@ -55,8 +58,8 @@ class PagerTitleView @JvmOverloads constructor(context: Context, attrs: Attribut
         if (!isInEditMode) appComponent.inject(this)
     }
 
-    fun setThreadId(id: Long) {
-        threadId.onNext(id)
+    fun setRecipientId(id: Long) {
+        recipientId.onNext(id)
     }
 
     private fun recreate() {
@@ -90,9 +93,10 @@ class PagerTitleView @JvmOverloads constructor(context: Context, attrs: Attribut
                 intArrayOf(android.R.attr.state_activated),
                 intArrayOf(-android.R.attr.state_activated))
 
-        threadId
+        recipientId
                 .distinctUntilChanged()
-                .switchMap { threadId -> colors.themeObservable(threadId) }
+                .map { recipientId -> Optional(conversationRepo.getRecipient(recipientId)) }
+                .switchMap { recipient -> colors.themeObservable(recipient.value) }
                 .map { theme ->
                     val textSecondary = context.resolveThemeColor(android.R.attr.textColorSecondary)
                     ColorStateList(states, intArrayOf(theme.theme, textSecondary))

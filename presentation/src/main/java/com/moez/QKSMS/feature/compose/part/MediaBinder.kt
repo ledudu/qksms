@@ -19,9 +19,9 @@
 package com.moez.QKSMS.feature.compose.part
 
 import android.content.Context
-import android.view.View
 import com.moez.QKSMS.R
-import com.moez.QKSMS.common.Navigator
+import com.moez.QKSMS.common.base.QkViewHolder
+import com.moez.QKSMS.common.util.Colors
 import com.moez.QKSMS.common.util.extensions.setVisible
 import com.moez.QKSMS.common.widget.BubbleImageView
 import com.moez.QKSMS.extensions.isImage
@@ -29,26 +29,34 @@ import com.moez.QKSMS.extensions.isVideo
 import com.moez.QKSMS.model.Message
 import com.moez.QKSMS.model.MmsPart
 import com.moez.QKSMS.util.GlideApp
-import kotlinx.android.synthetic.main.mms_preview_list_item.view.*
+import kotlinx.android.synthetic.main.mms_preview_list_item.*
+import javax.inject.Inject
 
-class MediaBinder(private val context: Context, private val navigator: Navigator) : PartBinder {
+class MediaBinder @Inject constructor(colors: Colors, private val context: Context) : PartBinder() {
 
     override val partLayout = R.layout.mms_preview_list_item
+    override var theme = colors.theme()
 
     override fun canBindPart(part: MmsPart) = part.isImage() || part.isVideo()
 
-    override fun bindPart(view: View, part: MmsPart, message: Message, canGroupWithPrevious: Boolean, canGroupWithNext: Boolean) {
-        view.video.setVisible(part.isVideo())
-        view.setOnClickListener { navigator.showMedia(part.id) }
+    override fun bindPart(
+        holder: QkViewHolder,
+        part: MmsPart,
+        message: Message,
+        canGroupWithPrevious: Boolean,
+        canGroupWithNext: Boolean
+    ) {
+        holder.video.setVisible(part.isVideo())
+        holder.containerView.setOnClickListener { clicks.onNext(part.id) }
 
-        view.thumbnail.bubbleStyle = when {
+        holder.thumbnail.bubbleStyle = when {
             !canGroupWithPrevious && canGroupWithNext -> if (message.isMe()) BubbleImageView.Style.OUT_FIRST else BubbleImageView.Style.IN_FIRST
             canGroupWithPrevious && canGroupWithNext -> if (message.isMe()) BubbleImageView.Style.OUT_MIDDLE else BubbleImageView.Style.IN_MIDDLE
             canGroupWithPrevious && !canGroupWithNext -> if (message.isMe()) BubbleImageView.Style.OUT_LAST else BubbleImageView.Style.IN_LAST
             else -> BubbleImageView.Style.ONLY
         }
 
-        GlideApp.with(context).load(part.getUri()).fitCenter().into(view.thumbnail)
+        GlideApp.with(context).load(part.getUri()).fitCenter().into(holder.thumbnail)
     }
 
 }

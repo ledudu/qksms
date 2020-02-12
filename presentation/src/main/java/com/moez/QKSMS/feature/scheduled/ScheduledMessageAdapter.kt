@@ -18,8 +18,8 @@
  */
 package com.moez.QKSMS.feature.scheduled
 
+import android.content.Context
 import android.net.Uri
-import android.telephony.PhoneNumberUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -32,14 +32,18 @@ import com.moez.QKSMS.model.Contact
 import com.moez.QKSMS.model.Recipient
 import com.moez.QKSMS.model.ScheduledMessage
 import com.moez.QKSMS.repository.ContactRepository
+import com.moez.QKSMS.util.PhoneNumberUtils
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
+import kotlinx.android.synthetic.main.scheduled_message_list_item.*
 import kotlinx.android.synthetic.main.scheduled_message_list_item.view.*
 import javax.inject.Inject
 
 class ScheduledMessageAdapter @Inject constructor(
+    private val context: Context,
     private val contactRepo: ContactRepository,
-    private val dateFormatter: DateFormatter
+    private val dateFormatter: DateFormatter,
+    private val phoneNumberUtils: PhoneNumberUtils
 ) : QkRealmAdapter<ScheduledMessage>() {
 
     private val contacts by lazy { contactRepo.getContacts() }
@@ -51,7 +55,7 @@ class ScheduledMessageAdapter @Inject constructor(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QkViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.scheduled_message_list_item, parent, false)
 
-        view.attachments.adapter = ScheduledMessageAttachmentAdapter()
+        view.attachments.adapter = ScheduledMessageAttachmentAdapter(context)
         view.attachments.setRecycledViewPool(imagesViewPool)
 
         return QkViewHolder(view).apply {
@@ -64,21 +68,20 @@ class ScheduledMessageAdapter @Inject constructor(
 
     override fun onBindViewHolder(holder: QkViewHolder, position: Int) {
         val message = getItem(position) ?: return
-        val view = holder.containerView
 
         // GroupAvatarView only accepts recipients, so map the phone numbers to recipients
-        view.avatars.contacts = message.recipients.map { address -> Recipient(address = address) }
+        holder.avatars.recipients = message.recipients.map { address -> Recipient(address = address) }
 
-        view.recipients.text = message.recipients.joinToString(",") { address ->
+        holder.recipients.text = message.recipients.joinToString(",") { address ->
             contactCache[address]?.name?.takeIf { it.isNotBlank() } ?: address
         }
 
-        view.date.text = dateFormatter.getScheduledTimestamp(message.date)
-        view.body.text = message.body
+        holder.date.text = dateFormatter.getScheduledTimestamp(message.date)
+        holder.body.text = message.body
 
-        val adapter = view.attachments.adapter as ScheduledMessageAttachmentAdapter
+        val adapter = holder.attachments.adapter as ScheduledMessageAttachmentAdapter
         adapter.data = message.attachments.map(Uri::parse)
-        view.attachments.isVisible = message.attachments.isNotEmpty()
+        holder.attachments.isVisible = message.attachments.isNotEmpty()
     }
 
     /**
@@ -91,7 +94,7 @@ class ScheduledMessageAdapter @Inject constructor(
             if (super.get(key)?.isValid != true) {
                 set(key, contacts.firstOrNull { contact ->
                     contact.numbers.any {
-                        PhoneNumberUtils.compare(it.address, key)
+                        phoneNumberUtils.compare(it.address, key)
                     }
                 })
             }

@@ -21,6 +21,7 @@ package com.moez.QKSMS.feature.settings
 import android.animation.ObjectAnimator
 import android.app.TimePickerDialog
 import android.content.Context
+import android.os.Build
 import android.text.format.DateFormat
 import android.view.View
 import androidx.core.view.isVisible
@@ -30,6 +31,7 @@ import com.jakewharton.rxbinding2.view.clicks
 import com.jakewharton.rxbinding2.view.longClicks
 import com.moez.QKSMS.BuildConfig
 import com.moez.QKSMS.R
+import com.moez.QKSMS.common.MenuItem
 import com.moez.QKSMS.common.QkChangeHandler
 import com.moez.QKSMS.common.QkDialog
 import com.moez.QKSMS.common.base.QkController
@@ -37,6 +39,7 @@ import com.moez.QKSMS.common.util.Colors
 import com.moez.QKSMS.common.util.extensions.animateLayoutChanges
 import com.moez.QKSMS.common.util.extensions.setBackgroundTint
 import com.moez.QKSMS.common.util.extensions.setVisible
+import com.moez.QKSMS.common.widget.FieldDialog
 import com.moez.QKSMS.common.widget.PreferenceView
 import com.moez.QKSMS.feature.settings.about.AboutController
 import com.moez.QKSMS.feature.settings.swipe.SwipeActionsController
@@ -44,7 +47,8 @@ import com.moez.QKSMS.feature.themepicker.ThemePickerController
 import com.moez.QKSMS.injection.appComponent
 import com.moez.QKSMS.repository.SyncRepository
 import com.moez.QKSMS.util.Preferences
-import com.uber.autodispose.kotlin.autoDisposable
+import com.uber.autodispose.android.lifecycle.scope
+import com.uber.autodispose.autoDisposable
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import io.reactivex.subjects.Subject
@@ -65,9 +69,14 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
 
     @Inject override lateinit var presenter: SettingsPresenter
 
+    private val signatureDialog: FieldDialog by lazy {
+        FieldDialog(activity!!, context.getString(R.string.settings_signature_title), signatureSubject::onNext)
+    }
+
     private val viewQksmsPlusSubject: Subject<Unit> = PublishSubject.create()
     private val startTimeSelectedSubject: Subject<Pair<Int, Int>> = PublishSubject.create()
     private val endTimeSelectedSubject: Subject<Pair<Int, Int>> = PublishSubject.create()
+    private val signatureSubject: Subject<String> = PublishSubject.create()
 
     private val progressAnimator by lazy { ObjectAnimator.ofInt(syncingProgress, "progress", 0, 0) }
 
@@ -84,7 +93,12 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
     override fun onViewCreated() {
         preferences.postDelayed({ preferences?.animateLayoutChanges = true }, 100)
 
-        nightModeDialog.adapter.setData(R.array.night_modes)
+        when (Build.VERSION.SDK_INT >= 29) {
+            true -> nightModeDialog.adapter.setData(R.array.night_modes)
+            false -> nightModeDialog.adapter.data = context.resources.getStringArray(R.array.night_modes)
+                    .mapIndexed { index, title -> MenuItem(title, index) }
+                    .drop(1)
+        }
         textSizeDialog.adapter.setData(R.array.text_sizes)
         sendDelayDialog.adapter.setData(R.array.delayed_sending_labels)
         mmsSizeDialog.adapter.setData(R.array.mms_sizes, R.array.mms_sizes_ids)
@@ -119,6 +133,8 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
 
     override fun sendDelaySelected(): Observable<Int> = sendDelayDialog.adapter.menuItemClicks
 
+    override fun signatureSet(): Observable<String> = signatureSubject
+
     override fun mmsSizeSelected(): Observable<Int> = mmsSizeDialog.adapter.menuItemClicks
 
     override fun render(state: SettingsState) {
@@ -140,12 +156,19 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
 
         delivery.checkbox.isChecked = state.deliveryEnabled
 
+        signature.summary = state.signature.takeIf { it.isNotBlank() }
+                ?: context.getString(R.string.settings_signature_summary)
+
         textSize.summary = state.textSizeSummary
         textSizeDialog.adapter.selectedItem = state.textSizeId
+
+        autoColor.checkbox.isChecked = state.autoColor
+
         systemFont.checkbox.isChecked = state.systemFontEnabled
 
         unicode.checkbox.isChecked = state.stripUnicodeEnabled
         mobileOnly.checkbox.isChecked = state.mobileOnly
+        longAsMms.checkbox.isChecked = state.longAsMms
 
         mmsSize.summary = state.maxMmsSizeSummary
         mmsSizeDialog.adapter.selectedItem = state.maxMmsSizeId
@@ -166,6 +189,7 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
         view?.run {
             Snackbar.make(contentView, R.string.toast_qksms_plus, Snackbar.LENGTH_LONG).run {
                 setAction(R.string.button_more) { viewQksmsPlusSubject.onNext(Unit) }
+                setActionTextColor(colors.theme().theme)
                 show()
             }
         }
@@ -189,6 +213,8 @@ class SettingsController : QkController<SettingsView, SettingsState, SettingsPre
     override fun showTextSizePicker() = textSizeDialog.show(activity!!)
 
     override fun showDelayDurationDialog() = sendDelayDialog.show(activity!!)
+
+    override fun showSignatureDialog(signature: String) = signatureDialog.setText(signature).show()
 
     override fun showMmsSizePicker() = mmsSizeDialog.show(activity!!)
 

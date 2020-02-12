@@ -38,7 +38,9 @@ import kotlinx.android.synthetic.main.theme_picker_controller.*
 import kotlinx.android.synthetic.main.theme_picker_hsv.*
 import javax.inject.Inject
 
-class ThemePickerController(val threadId: Long = 0L) : QkController<ThemePickerView, ThemePickerState, ThemePickerPresenter>(), ThemePickerView {
+class ThemePickerController(
+    val recipientId: Long = 0L
+) : QkController<ThemePickerView, ThemePickerState, ThemePickerPresenter>(), ThemePickerView {
 
     @Inject override lateinit var presenter: ThemePickerPresenter
 
@@ -91,6 +93,7 @@ class ThemePickerController(val threadId: Long = 0L) : QkController<ThemePickerV
     override fun showQksmsPlusSnackbar() {
         Snackbar.make(contentView, R.string.toast_qksms_plus, Snackbar.LENGTH_LONG).run {
             setAction(R.string.button_more) { viewQksmsPlusSubject.onNext(Unit) }
+            setActionTextColor(colors.theme().theme)
             show()
         }
     }
@@ -106,7 +109,7 @@ class ThemePickerController(val threadId: Long = 0L) : QkController<ThemePickerV
     override fun viewQksmsPlusClicks(): Observable<*> = viewQksmsPlusSubject
 
     override fun render(state: ThemePickerState) {
-        tabs.setThreadId(state.threadId)
+        tabs.setRecipientId(state.recipientId)
 
         hex.setText(Integer.toHexString(state.newColor).takeLast(6))
 

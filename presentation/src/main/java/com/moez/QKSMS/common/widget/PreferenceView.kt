@@ -26,13 +26,14 @@ import android.widget.TextView
 import androidx.appcompat.widget.LinearLayoutCompat
 import com.moez.QKSMS.R
 import com.moez.QKSMS.common.util.extensions.resolveThemeAttribute
-import com.moez.QKSMS.common.util.extensions.resolveThemeColor
-import com.moez.QKSMS.common.util.extensions.setTint
+import com.moez.QKSMS.common.util.extensions.resolveThemeColorStateList
 import com.moez.QKSMS.common.util.extensions.setVisible
 import com.moez.QKSMS.injection.appComponent
 import kotlinx.android.synthetic.main.preference_view.view.*
 
-class PreferenceView @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) : LinearLayoutCompat(context, attrs) {
+class PreferenceView @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet? = null
+) : LinearLayoutCompat(context, attrs) {
 
     var title: String? = null
         set(value) {
@@ -71,10 +72,9 @@ class PreferenceView @JvmOverloads constructor(context: Context, attrs: Attribut
         orientation = HORIZONTAL
         gravity = Gravity.CENTER_VERTICAL
 
-        val textSecondary = context.resolveThemeColor(android.R.attr.textColorSecondary)
-        icon.setTint(textSecondary)
+        icon.imageTintList = context.resolveThemeColorStateList(android.R.attr.textColorSecondary)
 
-        context.obtainStyledAttributes(attrs, R.styleable.PreferenceView)?.run {
+        context.obtainStyledAttributes(attrs, R.styleable.PreferenceView).run {
             title = getString(R.styleable.PreferenceView_title)
             summary = getString(R.styleable.PreferenceView_summary)
 

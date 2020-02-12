@@ -27,19 +27,26 @@ import com.moez.QKSMS.R
 import com.moez.QKSMS.common.Navigator
 import com.moez.QKSMS.common.base.QkRealmAdapter
 import com.moez.QKSMS.common.base.QkViewHolder
+import com.moez.QKSMS.common.util.Colors
 import com.moez.QKSMS.common.util.DateFormatter
 import com.moez.QKSMS.common.util.extensions.resolveThemeColor
+import com.moez.QKSMS.common.util.extensions.setTint
 import com.moez.QKSMS.model.Conversation
+import com.moez.QKSMS.util.PhoneNumberUtils
+import kotlinx.android.synthetic.main.conversation_list_item.*
 import kotlinx.android.synthetic.main.conversation_list_item.view.*
 import javax.inject.Inject
 
 class ConversationsAdapter @Inject constructor(
+    private val colors: Colors,
     private val context: Context,
     private val dateFormatter: DateFormatter,
-    private val navigator: Navigator
+    private val navigator: Navigator,
+    private val phoneNumberUtils: PhoneNumberUtils
 ) : QkRealmAdapter<Conversation>() {
 
     init {
+        // This is how we access the threadId for the swipe actions
         setHasStableIds(true)
     }
 
@@ -55,6 +62,8 @@ class ConversationsAdapter @Inject constructor(
             view.snippet.setTypeface(view.snippet.typeface, Typeface.BOLD)
             view.snippet.setTextColor(textColorPrimary)
             view.snippet.maxLines = 5
+
+            view.unread.isVisible = true
 
             view.date.setTypeface(view.date.typeface, Typeface.BOLD)
             view.date.setTextColor(textColorPrimary)
@@ -77,27 +86,39 @@ class ConversationsAdapter @Inject constructor(
         }
     }
 
-    override fun onBindViewHolder(viewHolder: QkViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: QkViewHolder, position: Int) {
         val conversation = getItem(position) ?: return
-        val view = viewHolder.containerView
 
-        view.isActivated = isSelected(conversation.id)
+        holder.containerView.isActivated = isSelected(conversation.id)
 
-        view.avatars.contacts = conversation.recipients
-        view.title.text = conversation.getTitle()
-        view.date.text = dateFormatter.getConversationTimestamp(conversation.date)
-        view.snippet.text = when (conversation.me) {
-            true -> context.getString(R.string.main_sender_you, conversation.snippet)
-            false -> conversation.snippet
+        holder.avatars.recipients = conversation.recipients
+        holder.title.collapseEnabled = conversation.recipients.size > 1
+        holder.title.text = conversation.getTitle()
+        holder.date.text = conversation.date.takeIf { it > 0 }?.let(dateFormatter::getConversationTimestamp)
+        holder.snippet.text = when {
+            conversation.draft.isNotEmpty() -> context.getString(R.string.main_draft, conversation.draft)
+            conversation.me -> context.getString(R.string.main_sender_you, conversation.snippet)
+            else -> conversation.snippet
         }
-        view.pinned.isVisible = conversation.pinned
+        holder.pinned.isVisible = conversation.pinned
+
+        // If the last message wasn't incoming, then the colour doesn't really matter anyway
+        val lastMessage = conversation.lastMessage
+        val recipient = when {
+            conversation.recipients.size == 1 || lastMessage == null -> conversation.recipients.firstOrNull()
+            else -> conversation.recipients.find { recipient ->
+                phoneNumberUtils.compare(recipient.address, lastMessage.address)
+            }
+        }
+
+        holder.unread.setTint(colors.theme(recipient).theme)
     }
 
-    override fun getItemId(index: Int): Long {
-        return getItem(index)!!.id
+    override fun getItemId(position: Int): Long {
+        return getItem(position)?.id ?: -1
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (getItem(position)?.read == true) 0 else 1
+        return if (getItem(position)?.unread == false) 0 else 1
     }
 }
